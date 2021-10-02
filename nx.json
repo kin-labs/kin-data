@@ -39,6 +39,12 @@
     },
     "api-core-util": {
       "tags": ["scope:api", "type:util"]
+    },
+    "api-tools-data-access": {
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-tools-feature": {
+      "tags": ["scope:api", "type:feature"]
     }
   }
 }

@@ -5,4 +5,5 @@ export const validationSchema = Joi.object({
   HOST: Joi.string().alphanum().default('localhost'),
   PORT: Joi.number().default(4000),
   API_URL: Joi.string().default(`http://${process.env.HOST || 'localhost'}:${process.env.PORT}/api`),
+  ETHERSCAN_API_KEY: Joi.string().required(),
 })
