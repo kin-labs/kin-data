@@ -1,7 +1,7 @@
 {
   "npmScope": "kin-data",
   "affected": {
-    "defaultBase": "master"
+    "defaultBase": "main"
   },
   "implicitDependencies": {
     "package.json": {
@@ -14,12 +14,7 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ],
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "ZWM4NWYzY2EtNDJmMi00NjI4LTk5NDYtMmJkMGE3MTMxYTAxfHJlYWQtd3JpdGU="
       }
     }
@@ -35,6 +30,15 @@
   "projects": {
     "api": {
       "tags": []
+    },
+    "api-core-data-access": {
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-core-feature": {
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-core-util": {
+      "tags": ["scope:api", "type:util"]
     }
   }
 }

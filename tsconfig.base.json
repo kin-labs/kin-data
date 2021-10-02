@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@kin-data/api/core/data-access": ["libs/api/core/data-access/src/index.ts"],
+      "@kin-data/api/core/feature": ["libs/api/core/feature/src/index.ts"],
+      "@kin-data/api/core/util": ["libs/api/core/util/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
