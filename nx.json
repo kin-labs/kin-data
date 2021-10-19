@@ -40,6 +40,12 @@
     "api-core-util": {
       "tags": ["scope:api", "type:util"]
     },
+    "api-stats-data-access": {
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-stats-feature": {
+      "tags": ["scope:api", "type:data-access"]
+    },
     "api-tools-data-access": {
       "tags": ["scope:api", "type:data-access"]
     },

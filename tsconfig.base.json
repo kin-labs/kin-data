@@ -18,6 +18,8 @@
       "@kin-data/api/core/data-access": ["libs/api/core/data-access/src/index.ts"],
       "@kin-data/api/core/feature": ["libs/api/core/feature/src/index.ts"],
       "@kin-data/api/core/util": ["libs/api/core/util/src/index.ts"],
+      "@kin-data/api/stats/data-access": ["libs/api/stats/data-access/src/index.ts"],
+      "@kin-data/api/stats/feature": ["libs/api/stats/feature/src/index.ts"],
       "@kin-data/api/tools/data-access": ["libs/api/tools/data-access/src/index.ts"],
       "@kin-data/api/tools/feature": ["libs/api/tools/feature/src/index.ts"]
     }
