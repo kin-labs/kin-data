@@ -40,6 +40,9 @@
     "api-core-util": {
       "tags": ["scope:api", "type:util"]
     },
+    "api-integration-kin-bi": {
+      "tags": ["scope:api", "type:util"]
+    },
     "api-stats-data-access": {
       "tags": ["scope:api", "type:data-access"]
     },

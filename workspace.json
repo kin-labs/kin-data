@@ -117,6 +117,28 @@
         }
       }
     },
+    "api-integration-kin-bi": {
+      "root": "libs/api/integration/kin-bi",
+      "sourceRoot": "libs/api/integration/kin-bi/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/integration/kin-bi/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/integration/kin-bi"],
+          "options": {
+            "jestConfig": "libs/api/integration/kin-bi/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "api-stats-data-access": {
       "root": "libs/api/stats/data-access",
       "sourceRoot": "libs/api/stats/data-access/src",
