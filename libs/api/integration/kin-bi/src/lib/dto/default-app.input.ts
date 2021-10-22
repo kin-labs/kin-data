@@ -1,6 +1,6 @@
 import { KinBiEnv } from '../models/kin-bi-env.enum'
 
-export class GetTxByAppInput {
-  appIndex: number | string
+export class DefaultAppInput {
+  appIndex?: number | string
   env?: KinBiEnv
 }
