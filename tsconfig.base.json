@@ -18,6 +18,7 @@
       "@kin-data/api/core/data-access": ["libs/api/core/data-access/src/index.ts"],
       "@kin-data/api/core/feature": ["libs/api/core/feature/src/index.ts"],
       "@kin-data/api/core/util": ["libs/api/core/util/src/index.ts"],
+      "@kin-data/api/integration/bigquery": ["libs/api/integration/bigquery/src/index.ts"],
       "@kin-data/api/integration/kin-bi": ["libs/api/integration/kin-bi/src/index.ts"],
       "@kin-data/api/stats/data-access": ["libs/api/stats/data-access/src/index.ts"],
       "@kin-data/api/stats/feature": ["libs/api/stats/feature/src/index.ts"],
