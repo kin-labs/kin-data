@@ -2,6 +2,7 @@ import { Injectable, Logger, OnModuleInit } from '@nestjs/common'
 import { Cron, CronExpression } from '@nestjs/schedule'
 import { groupBy } from 'lodash'
 import * as LRU from 'lru-cache'
+import { kreStatList } from './api-stat-kre-stat-list'
 import { countApps, countTxs, getKreStatsQuery, summarizeKreStats } from './api-stats-data-access.helper'
 import { BigQueryStatsService } from './big-query-stats.service'
 import { KreStatsInput } from './dto/kre-stats.input'
@@ -96,6 +97,10 @@ export class ApiStatsDataAccessService implements OnModuleInit {
 
   kreList() {
     return Object.values(KreStatsType)
+  }
+
+  kreStatList() {
+    return kreStatList
   }
 
   lastTxs(options: FetchStatsOptions = { refresh: false }): Promise<LastTxStat[]> {
