@@ -11,7 +11,7 @@ const rootPath = join(__dirname, '..', 'web', 'exported')
     ApiCoreFeatureModule,
     ServeStaticModule.forRoot({
       rootPath,
-      exclude: ['/api/*'],
+      exclude: ['/api/*', '/graphql'],
     }),
   ],
 })
