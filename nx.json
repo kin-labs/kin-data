@@ -57,6 +57,31 @@
     },
     "api-tools-feature": {
       "tags": ["scope:api", "type:feature"]
+    },
+    "shared-util-sdk": {
+      "tags": ["type:util", "scope:shared"]
+    },
+    "web": {
+      "tags": []
+    },
+    "web-e2e": {
+      "tags": [],
+      "implicitDependencies": ["web"]
+    },
+    "web-ui-app-footer": {
+      "tags": ["type:ui", "scope:web"]
+    },
+    "web-ui-app-header": {
+      "tags": ["type:ui", "scope:web"]
+    },
+    "web-ui-app-layout": {
+      "tags": ["type:ui", "scope:web"]
+    },
+    "web-ui-app-page": {
+      "tags": ["type:ui", "scope:web"]
+    },
+    "web-ui-theme-toggle": {
+      "tags": ["type:ui", "scope:web"]
     }
   },
   "cli": {

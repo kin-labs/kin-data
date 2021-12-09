@@ -249,6 +249,28 @@
         }
       }
     },
+    "shared-util-sdk": {
+      "root": "libs/shared/util/sdk",
+      "sourceRoot": "libs/shared/util/sdk/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/util/sdk/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/util/sdk"],
+          "options": {
+            "jestConfig": "libs/shared/util/sdk/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "web": {
       "root": "apps/web",
       "sourceRoot": "apps/web",
@@ -300,8 +322,7 @@
             "lintFilePatterns": ["apps/web/**/*.{ts,tsx,js,jsx}"]
           }
         }
-      },
-      "tags": []
+      }
     },
     "web-e2e": {
       "root": "apps/web-e2e",
@@ -328,15 +349,12 @@
             "lintFilePatterns": ["apps/web-e2e/**/*.{js,ts}"]
           }
         }
-      },
-      "tags": [],
-      "implicitDependencies": ["web"]
+      }
     },
     "web-ui-app-footer": {
       "root": "libs/web/ui/app-footer",
       "sourceRoot": "libs/web/ui/app-footer/src",
       "projectType": "library",
-      "tags": ["type:ui", "scope:web"],
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
@@ -359,7 +377,6 @@
       "root": "libs/web/ui/app-header",
       "sourceRoot": "libs/web/ui/app-header/src",
       "projectType": "library",
-      "tags": ["type:ui", "scope:web"],
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
@@ -382,7 +399,6 @@
       "root": "libs/web/ui/app-layout",
       "sourceRoot": "libs/web/ui/app-layout/src",
       "projectType": "library",
-      "tags": ["type:ui", "scope:web"],
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
@@ -405,7 +421,6 @@
       "root": "libs/web/ui/app-page",
       "sourceRoot": "libs/web/ui/app-page/src",
       "projectType": "library",
-      "tags": ["type:ui", "scope:web"],
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
@@ -428,7 +443,6 @@
       "root": "libs/web/ui/theme-toggle",
       "sourceRoot": "libs/web/ui/theme-toggle/src",
       "projectType": "library",
-      "tags": ["type:ui", "scope:web"],
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",

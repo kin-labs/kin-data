@@ -28,13 +28,13 @@ export function AppFooter(props: AppFooterProps) {
         </div>
         <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
           {props.groups.map((group) => (
-            <div className="space-y-3">
+            <div className="space-y-3" key={group.title}>
               <h3 className="tracking-wide uppercase dark:text-gray-50">{group.title}</h3>
               <ul className="space-y-1">
                 {group.links.map((link) => (
                   <li key={link.label}>
                     <Link href={link.href} passHref>
-                      <a>{link.label}</a>
+                      <a href={link.href}>{link.label}</a>
                     </Link>
                   </li>
                 ))}

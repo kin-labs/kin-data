@@ -1,0 +1,24 @@
+overwrite: true
+schema: 'api-schema.graphql'
+documents:
+  - 'libs/shared/util/sdk/src/graphql/**/*.graphql'
+generates:
+  libs/shared/util/sdk/src/generated/graphql.tsx:
+    config:
+      useTypeImports: true
+      immutableTypes: true
+      avoidOptionals:
+        inputValue: false
+      noNamespaces: true
+    plugins:
+      - 'typescript-apollo-client-helpers'
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+  ./graphql.schema.json:
+    plugins:
+      - 'introspection'
+
+hooks:
+  afterAllFileWrite:
+    - prettier --write

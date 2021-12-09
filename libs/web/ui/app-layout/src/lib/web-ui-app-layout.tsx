@@ -10,6 +10,7 @@ export const AppLayout: React.FC = (props) => {
   const links: AppHeaderLink[] = [
     // Header Links here
     { label: 'Dashboard', href: '/' },
+    { label: 'KRE', href: '/kre' },
   ]
 
   const linkGroups: AppFooterLinkGroup[] = [

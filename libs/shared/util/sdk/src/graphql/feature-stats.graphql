@@ -1,0 +1,19 @@
+fragment KreStatDetails on KreStat {
+  button
+  dataLabelName
+  dataSetName
+  dataSetValue
+  description
+  displayLegend
+  name
+  table
+  title
+  xAxisLabel
+  yAxisLabel
+}
+
+query KreStatList {
+  stats: kreStatList {
+    ...KreStatDetails
+  }
+}
