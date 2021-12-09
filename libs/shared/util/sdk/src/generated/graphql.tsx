@@ -1,11 +1,8 @@
 import type { FieldPolicy, FieldReadFunction, TypePolicies, TypePolicy } from '@apollo/client/cache'
-import { gql } from '@apollo/client'
-import * as Apollo from '@apollo/client'
 export type Maybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> }
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> }
-const defaultOptions = {}
 export type KreStatKeySpecifier = (
   | 'button'
   | 'dataLabelName'
@@ -122,90 +119,3 @@ export type KreStatListQuery = {
     | null
     | undefined
 }
-
-export const KreStatDetailsFragmentDoc = gql`
-  fragment KreStatDetails on KreStat {
-    button
-    dataLabelName
-    dataSetName
-    dataSetValue
-    description
-    displayLegend
-    name
-    table
-    title
-    xAxisLabel
-    yAxisLabel
-  }
-`
-export const UptimeDocument = gql`
-  query Uptime {
-    uptime
-  }
-`
-
-/**
- * __useUptimeQuery__
- *
- * To run a query within a React component, call `useUptimeQuery` and pass it any options that fit your needs.
- * When your component renders, `useUptimeQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useUptimeQuery({
- *   variables: {
- *   },
- * });
- */
-export function useUptimeQuery(baseOptions?: Apollo.QueryHookOptions<UptimeQuery, UptimeQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<UptimeQuery, UptimeQueryVariables>(UptimeDocument, options)
-}
-export function useUptimeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UptimeQuery, UptimeQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<UptimeQuery, UptimeQueryVariables>(UptimeDocument, options)
-}
-export type UptimeQueryHookResult = ReturnType<typeof useUptimeQuery>
-export type UptimeLazyQueryHookResult = ReturnType<typeof useUptimeLazyQuery>
-export type UptimeQueryResult = Apollo.QueryResult<UptimeQuery, UptimeQueryVariables>
-export const KreStatListDocument = gql`
-  query KreStatList {
-    stats: kreStatList {
-      ...KreStatDetails
-    }
-  }
-  ${KreStatDetailsFragmentDoc}
-`
-
-/**
- * __useKreStatListQuery__
- *
- * To run a query within a React component, call `useKreStatListQuery` and pass it any options that fit your needs.
- * When your component renders, `useKreStatListQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useKreStatListQuery({
- *   variables: {
- *   },
- * });
- */
-export function useKreStatListQuery(
-  baseOptions?: Apollo.QueryHookOptions<KreStatListQuery, KreStatListQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<KreStatListQuery, KreStatListQueryVariables>(KreStatListDocument, options)
-}
-export function useKreStatListLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<KreStatListQuery, KreStatListQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<KreStatListQuery, KreStatListQueryVariables>(KreStatListDocument, options)
-}
-export type KreStatListQueryHookResult = ReturnType<typeof useKreStatListQuery>
-export type KreStatListLazyQueryHookResult = ReturnType<typeof useKreStatListLazyQuery>
-export type KreStatListQueryResult = Apollo.QueryResult<KreStatListQuery, KreStatListQueryVariables>
