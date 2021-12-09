@@ -34,7 +34,7 @@ export function AppFooter(props: AppFooterProps) {
                 {group.links.map((link) => (
                   <li key={link.label}>
                     <Link href={link.href} passHref>
-                      <a>{link.label}</a>
+                      <a href={link.href}>{link.label}</a>
                     </Link>
                   </li>
                 ))}

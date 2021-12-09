@@ -1,4 +1,4 @@
-import { ChartBarIcon, DownloadIcon, DatabaseIcon } from '@heroicons/react/outline'
+import { ChartBarIcon, DatabaseIcon, DownloadIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
 
 const features = [
