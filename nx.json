@@ -15,7 +15,8 @@
       "runner": "@nrwl/nx-cloud",
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"],
-        "accessToken": "ZWM4NWYzY2EtNDJmMi00NjI4LTk5NDYtMmJkMGE3MTMxYTAxfHJlYWQtd3JpdGU="
+        "accessToken": "ZWM4NWYzY2EtNDJmMi00NjI4LTk5NDYtMmJkMGE3MTMxYTAxfHJlYWQtd3JpdGU=",
+        "parallel": 1
       }
     }
   },
@@ -26,41 +27,6 @@
         "projects": "dependencies"
       }
     ]
-  },
-  "projects": {
-    "api": {
-      "tags": []
-    },
-    "api-core-data-access": {
-      "tags": ["scope:api", "type:data-access"]
-    },
-    "api-core-feature": {
-      "tags": ["scope:api", "type:feature"]
-    },
-    "api-core-util": {
-      "tags": ["scope:api", "type:util"]
-    },
-    "api-integration-bigquery": {
-      "tags": ["scope:api", "type:util"]
-    },
-    "api-integration-kin-bi": {
-      "tags": ["scope:api", "type:util"]
-    },
-    "api-stats-data-access": {
-      "tags": ["scope:api", "type:data-access"]
-    },
-    "api-stats-feature": {
-      "tags": ["scope:api", "type:data-access"]
-    },
-    "api-tools-data-access": {
-      "tags": ["scope:api", "type:data-access"]
-    },
-    "api-tools-feature": {
-      "tags": ["scope:api", "type:feature"]
-    },
-    "shared-util-sdk": {
-      "tags": ["type:util", "scope:shared"]
-    }
   },
   "cli": {
     "defaultCollection": "@nrwl/nest"

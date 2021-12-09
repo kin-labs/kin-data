@@ -50,7 +50,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "api-core-data-access": {
       "root": "libs/api/core/data-access",
@@ -71,7 +72,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:data-access"]
     },
     "api-core-feature": {
       "root": "libs/api/core/feature",
@@ -93,7 +95,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:feature"]
     },
     "api-core-util": {
       "root": "libs/api/core/util",
@@ -115,7 +118,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:util"]
     },
     "api-integration-bigquery": {
       "root": "libs/api/integration/bigquery",
@@ -137,7 +141,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:util"]
     },
     "api-integration-kin-bi": {
       "root": "libs/api/integration/kin-bi",
@@ -159,7 +164,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:util"]
     },
     "api-stats-data-access": {
       "root": "libs/api/stats/data-access",
@@ -181,7 +187,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:data-access"]
     },
     "api-stats-feature": {
       "root": "libs/api/stats/feature",
@@ -203,7 +210,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:data-access"]
     },
     "api-tools-data-access": {
       "root": "libs/api/tools/data-access",
@@ -225,7 +233,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:data-access"]
     },
     "api-tools-feature": {
       "root": "libs/api/tools/feature",
@@ -247,7 +256,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:feature"]
     },
     "shared-util-sdk": {
       "root": "libs/shared/util/sdk",
@@ -269,7 +279,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["type:util", "scope:shared"]
     }
   }
 }
