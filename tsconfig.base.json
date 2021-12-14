@@ -24,7 +24,11 @@
       "@kin-data/api/stats/feature": ["libs/api/stats/feature/src/index.ts"],
       "@kin-data/api/tools/data-access": ["libs/api/tools/data-access/src/index.ts"],
       "@kin-data/api/tools/feature": ["libs/api/tools/feature/src/index.ts"],
-      "@kin-data/shared/util/sdk": ["libs/shared/util/sdk/src/index.ts"]
+      "@kin-data/shared/util/sdk": ["libs/shared/util/sdk/src/index.ts"],
+      "@kin-data/web/core/data-access": ["libs/web/core/data-access/src/index.ts"],
+      "@kin-data/web/core/feature": ["libs/web/core/feature/src/index.ts"],
+      "@kin-data/web/layout/feature": ["libs/web/layout/feature/src/index.ts"],
+      "@kin-data/web/shell/feature": ["libs/web/shell/feature/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

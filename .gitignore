@@ -41,3 +41,5 @@ Thumbs.db
 
 google-credentials.json
 package-lock.json
+
+.angular
