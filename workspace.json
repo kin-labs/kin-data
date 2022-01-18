@@ -369,6 +369,29 @@
       },
       "tags": []
     },
+    "web-about-feature": {
+      "projectType": "library",
+      "root": "libs/web/about/feature",
+      "sourceRoot": "libs/web/about/feature/src",
+      "prefix": "about",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/about/feature"],
+          "options": {
+            "jestConfig": "libs/web/about/feature/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/web/about/feature/src/**/*.ts", "libs/web/about/feature/src/**/*.html"]
+          }
+        }
+      },
+      "tags": ["type:feature", "scope:web"]
+    },
     "web-core-data-access": {
       "projectType": "library",
       "root": "libs/web/core/data-access",
@@ -443,6 +466,75 @@
       "tags": [],
       "implicitDependencies": ["web"]
     },
+    "web-explore-feature": {
+      "projectType": "library",
+      "root": "libs/web/explore/feature",
+      "sourceRoot": "libs/web/explore/feature/src",
+      "prefix": "explore",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/explore/feature"],
+          "options": {
+            "jestConfig": "libs/web/explore/feature/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/web/explore/feature/src/**/*.ts", "libs/web/explore/feature/src/**/*.html"]
+          }
+        }
+      },
+      "tags": ["type:feature", "scope:web"]
+    },
+    "web-home-feature": {
+      "projectType": "library",
+      "root": "libs/web/home/feature",
+      "sourceRoot": "libs/web/home/feature/src",
+      "prefix": "home",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/home/feature"],
+          "options": {
+            "jestConfig": "libs/web/home/feature/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/web/home/feature/src/**/*.ts", "libs/web/home/feature/src/**/*.html"]
+          }
+        }
+      },
+      "tags": ["type:feature", "scope:web"]
+    },
+    "web-kre-feature": {
+      "projectType": "library",
+      "root": "libs/web/kre/feature",
+      "sourceRoot": "libs/web/kre/feature/src",
+      "prefix": "kre",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/kre/feature"],
+          "options": {
+            "jestConfig": "libs/web/kre/feature/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/web/kre/feature/src/**/*.ts", "libs/web/kre/feature/src/**/*.html"]
+          }
+        }
+      },
+      "tags": ["type:feature", "scope:web"]
+    },
     "web-layout-feature": {
       "projectType": "library",
       "root": "libs/web/layout/feature",
@@ -461,6 +553,52 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/web/layout/feature/src/**/*.ts", "libs/web/layout/feature/src/**/*.html"]
+          }
+        }
+      },
+      "tags": ["type:feature", "scope:web"]
+    },
+    "web-layout-ui": {
+      "projectType": "library",
+      "root": "libs/web/layout/ui",
+      "sourceRoot": "libs/web/layout/ui/src",
+      "prefix": "layout",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/layout/ui"],
+          "options": {
+            "jestConfig": "libs/web/layout/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/web/layout/ui/src/**/*.ts", "libs/web/layout/ui/src/**/*.html"]
+          }
+        }
+      },
+      "tags": ["type:ui", "scope:web"]
+    },
+    "web-sdks-feature": {
+      "projectType": "library",
+      "root": "libs/web/sdks/feature",
+      "sourceRoot": "libs/web/sdks/feature/src",
+      "prefix": "sdks",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/sdks/feature"],
+          "options": {
+            "jestConfig": "libs/web/sdks/feature/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/web/sdks/feature/src/**/*.ts", "libs/web/sdks/feature/src/**/*.html"]
           }
         }
       },
@@ -488,6 +626,29 @@
         }
       },
       "tags": ["type:feature", "scope:web"]
+    },
+    "web-ui-page": {
+      "projectType": "library",
+      "root": "libs/web/ui/page",
+      "sourceRoot": "libs/web/ui/page/src",
+      "prefix": "ui",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/ui/page"],
+          "options": {
+            "jestConfig": "libs/web/ui/page/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/web/ui/page/src/**/*.ts", "libs/web/ui/page/src/**/*.html"]
+          }
+        }
+      },
+      "tags": ["type:ui", "scope:web"]
     }
   }
 }

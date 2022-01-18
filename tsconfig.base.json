@@ -25,10 +25,17 @@
       "@kin-data/api/tools/data-access": ["libs/api/tools/data-access/src/index.ts"],
       "@kin-data/api/tools/feature": ["libs/api/tools/feature/src/index.ts"],
       "@kin-data/shared/util/sdk": ["libs/shared/util/sdk/src/index.ts"],
+      "@kin-data/web/about/feature": ["libs/web/about/feature/src/index.ts"],
       "@kin-data/web/core/data-access": ["libs/web/core/data-access/src/index.ts"],
       "@kin-data/web/core/feature": ["libs/web/core/feature/src/index.ts"],
+      "@kin-data/web/explore/feature": ["libs/web/explore/feature/src/index.ts"],
+      "@kin-data/web/home/feature": ["libs/web/home/feature/src/index.ts"],
+      "@kin-data/web/kre/feature": ["libs/web/kre/feature/src/index.ts"],
       "@kin-data/web/layout/feature": ["libs/web/layout/feature/src/index.ts"],
-      "@kin-data/web/shell/feature": ["libs/web/shell/feature/src/index.ts"]
+      "@kin-data/web/layout/ui": ["libs/web/layout/ui/src/index.ts"],
+      "@kin-data/web/sdks/feature": ["libs/web/sdks/feature/src/index.ts"],
+      "@kin-data/web/shell/feature": ["libs/web/shell/feature/src/index.ts"],
+      "@kin-data/web/ui/page": ["libs/web/ui/page/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
