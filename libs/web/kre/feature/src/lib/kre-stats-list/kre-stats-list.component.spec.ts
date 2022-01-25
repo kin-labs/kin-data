@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { KreFeatureComponent } from './kre-feature.component'
+import { KreStatsListComponent } from './kre-stats-list.component'
 
-describe('KreFeatureComponent', () => {
-  let component: KreFeatureComponent
-  let fixture: ComponentFixture<KreFeatureComponent>
+describe('KreStatsListComponent', () => {
+  let component: KreStatsListComponent
+  let fixture: ComponentFixture<KreStatsListComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [KreFeatureComponent],
+      declarations: [KreStatsListComponent],
     }).compileComponents()
   })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(KreFeatureComponent)
+    fixture = TestBed.createComponent(KreStatsListComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })
