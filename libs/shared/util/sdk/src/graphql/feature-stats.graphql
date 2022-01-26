@@ -1,4 +1,5 @@
 fragment KreStatDetails on KreStat {
+  id
   button
   dataLabelName
   dataSetName
@@ -6,7 +7,6 @@ fragment KreStatDetails on KreStat {
   description
   displayLegend
   name
-  table
   title
   xAxisLabel
   yAxisLabel
@@ -16,4 +16,18 @@ query KreStatList {
   stats: kreStatList {
     ...KreStatDetails
   }
+}
+
+query KreStat($stat: KreStatsInput!) {
+  stat: kreStat(stat: $stat) {
+    ...KreStatDetails
+  }
+  data: kreData(stat: $stat)
+}
+
+query KreChart($stat: KreStatsInput!) {
+  stat: kreStat(stat: $stat) {
+    ...KreStatDetails
+  }
+  chart: kreChart(stat: $stat)
 }

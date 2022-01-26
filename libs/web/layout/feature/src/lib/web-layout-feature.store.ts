@@ -16,7 +16,7 @@ export class WebLayoutFeatureStore extends ComponentStore<WebLayoutFeatureState>
       footerLinks: [],
       headerLinks: [
         { path: '/home', label: 'Home' },
-        { path: '/about', label: 'About' },
+        { path: '/kre', label: 'KRE' },
       ],
     })
   }

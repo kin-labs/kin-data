@@ -1,18 +1,22 @@
 import { CommonModule } from '@angular/common'
 import { Component, NgModule } from '@angular/core'
 import { RouterModule } from '@angular/router'
-import { UiPageComponentModule } from '@kin-data/web/ui/page'
+import { KreStatListModule } from '@kin-data/web/kre/ui'
+import { KreStatsListStore } from './kre-stats-list.store'
 
 @Component({
-  selector: 'kre-kre-stats-list',
   template: `
-    <ui-page>
-      <p>kre-stats-list works!</p>
-    </ui-page>
+    <ng-container *ngIf="vm$ | async as vm">
+      <kre-stat-list [stats]="vm.stats"></kre-stat-list>
+      <pre>{{ vm | json }}</pre>
+    </ng-container>
   `,
-  styles: [],
+  providers: [KreStatsListStore],
 })
-export class KreStatsListComponent {}
+export class KreStatsListComponent {
+  readonly vm$ = this.store.vm$
+  constructor(private readonly store: KreStatsListStore) {}
+}
 
 @NgModule({
   imports: [
@@ -23,7 +27,7 @@ export class KreStatsListComponent {}
         component: KreStatsListComponent,
       },
     ]),
-    UiPageComponentModule,
+    KreStatListModule,
   ],
   declarations: [KreStatsListComponent],
   exports: [KreStatsListComponent],

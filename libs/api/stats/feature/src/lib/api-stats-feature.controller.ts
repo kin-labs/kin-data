@@ -17,7 +17,7 @@ export class ApiStatsFeatureController {
 
   @Get('kre')
   kre(@Query() query: KreStatsInput) {
-    return this.service.kreStats(query)
+    return this.service.kreData(query)
   }
 
   @Get('kre-list')

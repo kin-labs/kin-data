@@ -3,13 +3,15 @@ import { Cron, CronExpression } from '@nestjs/schedule'
 import { groupBy } from 'lodash'
 import * as LRU from 'lru-cache'
 import { kreStatList } from './api-stat-kre-stat-list'
-import { countApps, countTxs, getKreStatsQuery, summarizeKreStats } from './api-stats-data-access.helper'
+import { countApps, countTxs, getData, getKreStatsQuery, summarizeKreStats } from './api-stats-data-access.helper'
 import { BigQueryStatsService } from './big-query-stats.service'
 import { KreStatsInput } from './dto/kre-stats.input'
 import { ActiveUserBalancesStat } from './models/active-user-balances-stat.model'
 import { DailySpendTransactionsStat } from './models/daily-spend-transactions-stat.model'
 import { FetchStatsOptions } from './models/fetch-stats-options.model'
-import { KreStatsType } from './models/kre-stats.enum'
+import { KreStatTable } from './models/kre-stat-table.enum'
+import { KreStatType } from './models/kre-stat-type.enum'
+import { KreStat } from './models/kre-stat.model'
 import { LastTxStat } from './models/last-tx-stat.model'
 import { MonthlyActiveEarnersStat } from './models/monthly-active-earners-stat.model'
 import { MonthlyActiveSpendersStat } from './models/monthly-active-spenders-stat.model'
@@ -56,8 +58,8 @@ export class ApiStatsDataAccessService implements OnModuleInit {
       this.txPerDaySummary({ refresh: true }),
       this.walletsCreated({ refresh: true }),
     ])
-    for (const type of Object.values(KreStatsType)) {
-      await this.kreStats({ type }, { refresh: true })
+    for (const type of Object.values(KreStatType)) {
+      await this.kreData({ type }, { refresh: true })
     }
     this.logger.log('All stats Cached.')
   }
@@ -91,12 +93,12 @@ export class ApiStatsDataAccessService implements OnModuleInit {
     ) as Promise<DailySpendTransactionsStat[]>
   }
 
-  kreStats(input: KreStatsInput, options: FetchStatsOptions = { refresh: false }) {
+  kreData(input: KreStatsInput, options: FetchStatsOptions = { refresh: false }) {
     return this.getCachedData(input.type, () => this.getStat(input.type), options)
   }
 
   kreList() {
-    return Object.values(KreStatsType)
+    return Object.values(KreStatType)
   }
 
   kreStatList() {
@@ -248,17 +250,25 @@ export class ApiStatsDataAccessService implements OnModuleInit {
     ) as Promise<WalletsCreatedStat[]>
   }
 
+  getStatTable(type: KreStatType): KreStatTable {
+    if ([KreStatType.payoutsDaily, KreStatType.payoutsKin, KreStatType.payoutsUsd].includes(type)) {
+      return KreStatTable.payouts
+    }
+    return type as unknown as KreStatTable
+  }
+
   /**
    *
-   * @param table we want stats from
+   * @param type we want to query
    * @returns stats for selected table
    */
-  async getStat(table: KreStatsType) {
+  async getStat(type: KreStatType) {
+    const table = this.getStatTable(type)
     try {
       const sql = getKreStatsQuery(table)
       const rows = await this.bigQuery.query(sql)
 
-      if ([KreStatsType.MAA, KreStatsType.TDT, KreStatsType.VF].includes(table)) {
+      if ([KreStatTable.MAA, KreStatTable.TDT, KreStatTable.VF].includes(table)) {
         return rows
       }
       return summarizeKreStats(rows, table)
@@ -283,5 +293,15 @@ export class ApiStatsDataAccessService implements OnModuleInit {
 
   private async getCachedQuery(cacheKey: string, query: string, options) {
     return this.getCachedData(cacheKey, () => this.bigQuery.query(query), options)
+  }
+
+  kreStat(stat: KreStatsInput): KreStat {
+    return this.kreStatList().find((item) => item.id === stat.type)
+  }
+
+  async kreChart(input: KreStatsInput) {
+    const stat = this.kreStat(input)
+    const data = await this.kreData(input)
+    return getData(stat, data as unknown[])
   }
 }

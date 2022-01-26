@@ -317,8 +317,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "apps/web/src/environments/environment.ts",
-                  "with": "apps/web/src/environments/environment.prod.ts"
+                  "replace": "libs/web/environment/src/lib/environment.ts",
+                  "with": "libs/web/environment/src/lib/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
@@ -341,7 +341,8 @@
               "browserTarget": "web:build:production"
             },
             "development": {
-              "browserTarget": "web:build:development"
+              "browserTarget": "web:build:development",
+              "proxyConfig": "apps/web/proxy.conf.js"
             }
           },
           "defaultConfiguration": "development"
@@ -466,6 +467,29 @@
       "tags": [],
       "implicitDependencies": ["web"]
     },
+    "web-environment": {
+      "projectType": "library",
+      "root": "libs/web/environment",
+      "sourceRoot": "libs/web/environment/src",
+      "prefix": "environment",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/environment"],
+          "options": {
+            "jestConfig": "libs/web/environment/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/web/environment/src/**/*.ts", "libs/web/environment/src/**/*.html"]
+          }
+        }
+      },
+      "tags": ["type:util", "scope:web"]
+    },
     "web-explore-feature": {
       "projectType": "library",
       "root": "libs/web/explore/feature",
@@ -512,6 +536,29 @@
       },
       "tags": ["type:feature", "scope:web"]
     },
+    "web-kre-data-access": {
+      "projectType": "library",
+      "root": "libs/web/kre/data-access",
+      "sourceRoot": "libs/web/kre/data-access/src",
+      "prefix": "kre",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/kre/data-access"],
+          "options": {
+            "jestConfig": "libs/web/kre/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/web/kre/data-access/src/**/*.ts", "libs/web/kre/data-access/src/**/*.html"]
+          }
+        }
+      },
+      "tags": ["type:data-access", "scope:web"]
+    },
     "web-kre-feature": {
       "projectType": "library",
       "root": "libs/web/kre/feature",
@@ -534,6 +581,29 @@
         }
       },
       "tags": ["type:feature", "scope:web"]
+    },
+    "web-kre-ui": {
+      "projectType": "library",
+      "root": "libs/web/kre/ui",
+      "sourceRoot": "libs/web/kre/ui/src",
+      "prefix": "kre",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/kre/ui"],
+          "options": {
+            "jestConfig": "libs/web/kre/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/web/kre/ui/src/**/*.ts", "libs/web/kre/ui/src/**/*.html"]
+          }
+        }
+      },
+      "tags": ["type:ui", "scope:web"]
     },
     "web-layout-feature": {
       "projectType": "library",
@@ -626,6 +696,29 @@
         }
       },
       "tags": ["type:feature", "scope:web"]
+    },
+    "web-ui-chart": {
+      "projectType": "library",
+      "root": "libs/web/ui/chart",
+      "sourceRoot": "libs/web/ui/chart/src",
+      "prefix": "kin-data",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/ui/chart"],
+          "options": {
+            "jestConfig": "libs/web/ui/chart/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/web/ui/chart/src/**/*.ts", "libs/web/ui/chart/src/**/*.html"]
+          }
+        }
+      },
+      "tags": ["type:ui", "scope:web"]
     },
     "web-ui-page": {
       "projectType": "library",

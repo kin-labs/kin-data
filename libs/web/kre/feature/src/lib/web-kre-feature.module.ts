@@ -1,22 +1,24 @@
 import { NgModule } from '@angular/core'
 import { RouterModule } from '@angular/router'
+import { UiPageComponentModule } from '@kin-data/web/ui/page'
+import { KreStatsPageComponent } from './kre-stats-page/kre-stats-page.component'
+import { WebKreFeatureEmbedModule } from './web-kre-feature-embed.module'
 
 @NgModule({
+  declarations: [KreStatsPageComponent],
   imports: [
+    UiPageComponentModule,
     RouterModule.forChild([
       {
         path: '',
-        loadChildren: () =>
-          import('./kre-stats-list/kre-stats-list.component').then(
-            ({ KreStatsListComponentModule }) => KreStatsListComponentModule,
-          ),
-      },
-      {
-        path: ':stats',
-        loadChildren: () =>
-          import('./kre-stats-detail/kre-stats-detail.component').then(
-            ({ KreStatsDetailComponentModule }) => KreStatsDetailComponentModule,
-          ),
+        component: KreStatsPageComponent,
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('./web-kre-feature-embed.module').then(({ WebKreFeatureEmbedModule }) => WebKreFeatureEmbedModule),
+          },
+        ],
       },
     ]),
   ],

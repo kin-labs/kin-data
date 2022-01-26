@@ -1,7 +1,11 @@
 import { Field, ObjectType } from '@nestjs/graphql'
+import { KreStatType } from './kre-stat-type.enum'
 
 @ObjectType()
 export class KreStat {
+  @Field(() => KreStatType, { nullable: true })
+  id?: KreStatType
+
   @Field({ nullable: true })
   button?: string
 
@@ -22,9 +26,6 @@ export class KreStat {
 
   @Field({ nullable: true })
   name?: string
-
-  @Field({ nullable: true })
-  table?: string
 
   @Field({ nullable: true })
   title?: string
