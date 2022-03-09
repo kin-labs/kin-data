@@ -1,0 +1,23 @@
+{
+  "root": "libs/api/integration/bigquery",
+  "sourceRoot": "libs/api/integration/bigquery/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/api/integration/bigquery/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/integration/bigquery"],
+      "options": {
+        "jestConfig": "libs/api/integration/bigquery/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:api", "type:util"]
+}
