@@ -17,6 +17,10 @@ export class ApiCoreUtilService {
     return this.config.get('api.cors.origin')
   }
 
+  get prefix(): string {
+    return 'api'
+  }
+
   get production(): boolean {
     return this.config.get('environment') === 'production'
   }
