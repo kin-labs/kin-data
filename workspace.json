@@ -11,6 +11,7 @@
     "api-stats-feature": "libs/api/stats/feature",
     "api-tools-data-access": "libs/api/tools/data-access",
     "api-tools-feature": "libs/api/tools/feature",
+    "packages-circulating-supply": "libs/packages/circulating-supply",
     "web": "apps/web",
     "web-e2e": "apps/web-e2e",
     "web-ui-app-footer": "libs/web/ui/app-footer",

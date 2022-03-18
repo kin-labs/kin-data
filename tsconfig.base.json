@@ -24,6 +24,7 @@
       "@kin-data/api/stats/feature": ["libs/api/stats/feature/src/index.ts"],
       "@kin-data/api/tools/data-access": ["libs/api/tools/data-access/src/index.ts"],
       "@kin-data/api/tools/feature": ["libs/api/tools/feature/src/index.ts"],
+      "@kin-data/circulating-supply": ["libs/packages/circulating-supply/src/index.ts"],
       "@kin-data/web/ui/app-footer": ["libs/web/ui/app-footer/src/index.ts"],
       "@kin-data/web/ui/app-header": ["libs/web/ui/app-header/src/index.ts"],
       "@kin-data/web/ui/app-layout": ["libs/web/ui/app-layout/src/index.ts"],
