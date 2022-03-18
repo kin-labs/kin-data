@@ -2481,15 +2481,6 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@kin-tools/circulating-supply@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@kin-tools/circulating-supply/-/circulating-supply-1.2.2.tgz#64e6dc15637c71ce1c69dec7012272141d6c5ee5"
-  integrity sha512-LYTy5tjIAaYq9vTpUCiUrZKxcDpKPDUK/GdW2/RmEf2X5u8zM4cXH39tfUBWdV3TU+xYxmMP8lMws1A+HYoUig==
-  dependencies:
-    "@kinecosystem/kin-sdk-v2" "^0.5.0"
-    etherscan-ts "^0.0.5"
-    tslib "^2.0.0"
-
 "@kinecosystem/agora-api@^0.26.1":
   version "0.26.1"
   resolved "https://registry.yarnpkg.com/@kinecosystem/agora-api/-/agora-api-0.26.1.tgz#2136ed8fa723cf5fba40806ddd97340bd90ad489"
@@ -13029,7 +13020,7 @@ tsconfig-paths@^3.9.0:
     minimist "^1.2.0"
     strip-bom "^3.0.0"
 
-tslib@2.3.1, tslib@^2.0.0, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.2.0, tslib@^2.3.0, tslib@^2.3.1, tslib@~2.3.0:
+tslib@2.3.1, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.2.0, tslib@^2.3.0, tslib@^2.3.1, tslib@~2.3.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
   integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==

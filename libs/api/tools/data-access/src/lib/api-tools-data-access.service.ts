@@ -1,4 +1,4 @@
-import { circulatingSupply } from '@kin-tools/circulating-supply'
+import { circulatingSupply } from '@kin-data/circulating-supply'
 import { Injectable } from '@nestjs/common'
 import * as LRU from 'lru-cache'
 
