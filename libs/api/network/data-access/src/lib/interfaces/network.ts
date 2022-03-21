@@ -3,5 +3,6 @@ export interface Network {
   endpoint: string
   explorerUrl: string
   mint: string
+  mintUrl: string
   name: string
 }
