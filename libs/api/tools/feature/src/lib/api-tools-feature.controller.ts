@@ -9,4 +9,9 @@ export class ApiToolsFeatureController {
   publicCirculation() {
     return this.service.getCirculation()
   }
+
+  @Get('supply')
+  supply() {
+    return this.service.getSupply()
+  }
 }
