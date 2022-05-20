@@ -14,4 +14,9 @@ export class ApiToolsFeatureController {
   supply() {
     return this.service.getSupply()
   }
+
+  @Get('total-supply')
+  totalSupply() {
+    return this.service.getTotalSupply()
+  }
 }

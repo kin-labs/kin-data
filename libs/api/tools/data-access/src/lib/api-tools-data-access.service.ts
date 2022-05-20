@@ -22,7 +22,7 @@ export class ApiToolsDataAccessService {
   async getSupply(): Promise<{ circulation: number, max: number, total: number}> {
     const [circulation, total] = await Promise.all([
       this.getCirculation(),
-      this.getTotal(),
+      this.getTotalSupply(),
     ])
 
     return {
@@ -32,7 +32,7 @@ export class ApiToolsDataAccessService {
     }
   }
 
-  async getTotal(): Promise<number> {
+  async getTotalSupply(): Promise<number> {
     if (!this.totalCache.has(TOTAL_TOKEN)) {
       const total = await totalSupply()
       this.totalCache.set(TOTAL_TOKEN, total)
