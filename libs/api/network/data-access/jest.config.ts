@@ -1,4 +1,5 @@
-module.exports = {
+/* eslint-disable */
+export default {
   displayName: 'api-network-data-access',
   preset: '../../../../jest.preset.js',
   globals: {

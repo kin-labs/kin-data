@@ -1,9 +1,10 @@
-module.exports = {
-  displayName: 'api-core-data-access',
+/* eslint-disable */
+export default {
+  displayName: 'api-integration-kin-bi',
   preset: '../../../../jest.preset.js',
   globals: {
     'ts-jest': {
-      tsConfig: '<rootDir>/tsconfig.spec.json',
+      tsconfig: '<rootDir>/tsconfig.spec.json',
     },
   },
   testEnvironment: 'node',
@@ -11,5 +12,5 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../../coverage/libs/api/core/data-access',
+  coverageDirectory: '../../../../coverage/libs/api/integration/kin-bi',
 }

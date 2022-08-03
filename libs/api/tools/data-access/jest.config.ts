@@ -1,5 +1,6 @@
-module.exports = {
-  displayName: 'api-stats-data-access',
+/* eslint-disable */
+export default {
+  displayName: 'api-tools-data-access',
   preset: '../../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +12,5 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../../coverage/libs/api/stats/data-access',
+  coverageDirectory: '../../../../coverage/libs/api/tools/data-access',
 }

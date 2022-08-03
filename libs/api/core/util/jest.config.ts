@@ -1,5 +1,6 @@
-module.exports = {
-  displayName: 'api-tools-feature',
+/* eslint-disable */
+export default {
+  displayName: 'api-core-util',
   preset: '../../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +12,5 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../../coverage/libs/api/tools/feature',
+  coverageDirectory: '../../../../coverage/libs/api/core/util',
 }

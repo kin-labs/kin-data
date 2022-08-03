@@ -1,5 +1,5 @@
 {
-  "root": "libs/api/stats/data-access",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/stats/data-access/src",
   "projectType": "library",
   "targets": {
@@ -14,7 +14,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/api/stats/data-access"],
       "options": {
-        "jestConfig": "libs/api/stats/data-access/jest.config.js",
+        "jestConfig": "libs/api/stats/data-access/jest.config.ts",
         "passWithNoTests": true
       }
     }

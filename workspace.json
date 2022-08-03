@@ -8,6 +8,7 @@
     "api-integration-bigquery": "libs/api/integration/bigquery",
     "api-integration-kin-bi": "libs/api/integration/kin-bi",
     "api-network-data-access": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/api/network/data-access",
       "sourceRoot": "libs/api/network/data-access/src",
       "targets": {
@@ -22,7 +23,7 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/api/network/data-access"],
           "options": {
-            "jestConfig": "libs/api/network/data-access/jest.config.js",
+            "jestConfig": "libs/api/network/data-access/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -30,6 +31,7 @@
       "tags": ["scope:api", "type:data-access"]
     },
     "api-network-feature": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/api/network/feature",
       "sourceRoot": "libs/api/network/feature/src",
       "targets": {
@@ -44,7 +46,7 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/api/network/feature"],
           "options": {
-            "jestConfig": "libs/api/network/feature/jest.config.js",
+            "jestConfig": "libs/api/network/feature/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -56,5 +58,6 @@
     "api-tools-data-access": "libs/api/tools/data-access",
     "api-tools-feature": "libs/api/tools/feature",
     "packages-circulating-supply": "libs/packages/circulating-supply"
-  }
+  },
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }

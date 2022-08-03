@@ -1,5 +1,6 @@
-module.exports = {
-  displayName: 'api-integration-kin-bi',
+/* eslint-disable */
+export default {
+  displayName: 'api-stats-data-access',
   preset: '../../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +12,5 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../../coverage/libs/api/integration/kin-bi',
+  coverageDirectory: '../../../../coverage/libs/api/stats/data-access',
 }

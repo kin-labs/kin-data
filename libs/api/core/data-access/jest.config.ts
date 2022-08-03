@@ -1,9 +1,10 @@
-module.exports = {
-  displayName: 'api-integration-bigquery',
+/* eslint-disable */
+export default {
+  displayName: 'api-core-data-access',
   preset: '../../../../jest.preset.js',
   globals: {
     'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.spec.json',
+      tsConfig: '<rootDir>/tsconfig.spec.json',
     },
   },
   testEnvironment: 'node',
@@ -11,5 +12,5 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../../coverage/libs/api/integration/bigquery',
+  coverageDirectory: '../../../../coverage/libs/api/core/data-access',
 }

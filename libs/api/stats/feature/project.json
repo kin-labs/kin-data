@@ -1,5 +1,5 @@
 {
-  "root": "libs/api/stats/feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/stats/feature/src",
   "projectType": "library",
   "targets": {
@@ -14,7 +14,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/api/stats/feature"],
       "options": {
-        "jestConfig": "libs/api/stats/feature/jest.config.js",
+        "jestConfig": "libs/api/stats/feature/jest.config.ts",
         "passWithNoTests": true
       }
     }
