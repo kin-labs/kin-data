@@ -1,5 +1,5 @@
 {
-  "root": "libs/api/integration/bigquery",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/integration/bigquery/src",
   "projectType": "library",
   "targets": {
@@ -14,7 +14,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/api/integration/bigquery"],
       "options": {
-        "jestConfig": "libs/api/integration/bigquery/jest.config.js",
+        "jestConfig": "libs/api/integration/bigquery/jest.config.ts",
         "passWithNoTests": true
       }
     }

@@ -1,5 +1,5 @@
 {
-  "root": "libs/api/integration/kin-bi",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/integration/kin-bi/src",
   "projectType": "library",
   "targets": {
@@ -14,7 +14,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/api/integration/kin-bi"],
       "options": {
-        "jestConfig": "libs/api/integration/kin-bi/jest.config.js",
+        "jestConfig": "libs/api/integration/kin-bi/jest.config.ts",
         "passWithNoTests": true
       }
     }

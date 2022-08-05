@@ -8,6 +8,7 @@
     "api-integration-bigquery": "libs/api/integration/bigquery",
     "api-integration-kin-bi": "libs/api/integration/kin-bi",
     "api-network-data-access": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/api/network/data-access",
       "sourceRoot": "libs/api/network/data-access/src",
       "targets": {
@@ -22,7 +23,7 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/api/network/data-access"],
           "options": {
-            "jestConfig": "libs/api/network/data-access/jest.config.js",
+            "jestConfig": "libs/api/network/data-access/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -30,6 +31,7 @@
       "tags": ["scope:api", "type:data-access"]
     },
     "api-network-feature": {
+      "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
       "root": "libs/api/network/feature",
       "sourceRoot": "libs/api/network/feature/src",
       "targets": {
@@ -44,7 +46,7 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/api/network/feature"],
           "options": {
-            "jestConfig": "libs/api/network/feature/jest.config.js",
+            "jestConfig": "libs/api/network/feature/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -56,12 +58,115 @@
     "api-tools-data-access": "libs/api/tools/data-access",
     "api-tools-feature": "libs/api/tools/feature",
     "packages-circulating-supply": "libs/packages/circulating-supply",
-    "web": "apps/web",
-    "web-e2e": "apps/web-e2e",
-    "web-ui-app-footer": "libs/web/ui/app-footer",
-    "web-ui-app-header": "libs/web/ui/app-header",
-    "web-ui-app-layout": "libs/web/ui/app-layout",
-    "web-ui-app-page": "libs/web/ui/app-page",
-    "web-ui-theme-toggle": "libs/web/ui/theme-toggle"
-  }
+    "web": {
+      "root": "apps/web",
+      "sourceRoot": "apps/web/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:webpack",
+          "outputs": ["{options.outputPath}"],
+          "defaultConfiguration": "production",
+          "options": {
+            "compiler": "babel",
+            "outputPath": "dist/apps/web",
+            "index": "apps/web/src/index.html",
+            "baseHref": "/",
+            "main": "apps/web/src/main.tsx",
+            "polyfills": "apps/web/src/polyfills.ts",
+            "tsConfig": "apps/web/tsconfig.app.json",
+            "assets": ["apps/web/src/favicon.ico", "apps/web/src/assets"],
+            "styles": ["apps/web/src/styles.css"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "development": {
+              "extractLicenses": false,
+              "optimization": false,
+              "sourceMap": true,
+              "vendorChunk": true
+            },
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/web/src/environments/environment.ts",
+                  "with": "apps/web/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "defaultConfiguration": "development",
+          "options": {
+            "buildTarget": "web:build",
+            "hmr": true
+          },
+          "configurations": {
+            "development": {
+              "buildTarget": "web:build:development"
+            },
+            "production": {
+              "buildTarget": "web:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/web/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/web"],
+          "options": {
+            "jestConfig": "apps/web/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "web-e2e": {
+      "root": "apps/web-e2e",
+      "sourceRoot": "apps/web-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/web-e2e/cypress.json",
+            "devServerTarget": "web:serve:development",
+            "testingType": "e2e"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "web:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/web-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["web"]
+    }
+  },
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }
