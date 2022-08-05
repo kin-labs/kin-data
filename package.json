@@ -5,7 +5,7 @@
   "scripts": {
     "build": "yarn build:api && yarn build:web",
     "build:api": "nx build api --prod",
-    "build:web": "nx build web && nx export web",
+    "build:web": "nx build web --prod",
     "dev:api": "nx serve api",
     "dev:web": "nx serve web",
     "docker:build": "docker build . -t kin-data/api",
