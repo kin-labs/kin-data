@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model DailyActiveUserBalanceByApp {
+  id        BigInt    @id @map("index")
+  date      DateTime? @map("DATE_KEY") @db.Date
+  appIndex  BigInt?   @map("APP_ID")
+  aub       Float?    @map("AUB")
+  au        Int?      @map("AU")
+  cappedAub Float?    @map("CAPPED_AUB")
+  name      String?   @map("NAME")
+
+  @@index([id], map: "ix_daily_active_user_balance_by_app_index")
+  @@map("daily_active_user_balance_by_app")
+}
+
+model DailyVolatilityFactor {
+  id                    BigInt    @id @map("index")
+  date                  DateTime? @map("DATE_KEY") @db.Date
+  averagePrice          Float?    @map("AVERAGE_PRICE")
+  totalPriceDeviation   Float?    @map("TOTAL_PRICE_DEVIATION")
+  averagePriceDeviation Float?    @map("AVERAGE_PRICE_DEVIATION")
+  volatilityFactor      Float?    @map("VOLATILITY_FACTOR")
+
+  @@index([id], map: "ix_daily_volatility_factor_index")
+  @@map("daily_volatility_factor")
+}

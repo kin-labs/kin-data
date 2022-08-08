@@ -31,6 +31,7 @@
     "@nestjs/platform-express": "9.0.8",
     "@nestjs/schedule": "^2.1.0",
     "@nestjs/serve-static": "^3.0.0",
+    "@prisma/client": "^4.1.1",
     "@saas-ui/react": "^1.2.2",
     "@solana/web3.js": "^1.42.0",
     "apollo-server-core": "^3.6.3",
@@ -92,6 +93,7 @@
     "lint-staged": "^12.3.5",
     "nx": "14.5.2",
     "prettier": "2.7.1",
+    "prisma": "^4.1.1",
     "react-test-renderer": "18.2.0",
     "ts-jest": "27.1.4",
     "ts-morph": "^14.0.0",
@@ -102,5 +104,8 @@
     "*.{js,jsx,json,css,scss,md,ts,tsx,html,graphql,yaml}": [
       "yarn nx format --uncommitted"
     ]
+  },
+  "prisma": {
+    "schema": "libs/api/core/data-access/src/prisma/schema.prisma"
   }
 }
