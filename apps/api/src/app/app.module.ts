@@ -4,7 +4,7 @@ import { ServeStaticModule } from '@nestjs/serve-static'
 import { ensureDirSync, existsSync, writeFileSync } from 'fs-extra'
 import { join } from 'path'
 
-const rootPath = join(__dirname, '..', 'web', 'exported')
+const rootPath = join(__dirname, '..', 'web')
 
 @Module({
   imports: [
