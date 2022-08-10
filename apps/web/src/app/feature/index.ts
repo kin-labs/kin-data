@@ -1,2 +1,6 @@
 export * from './about/about-index'
 export * from './home/home-index'
+export * from './kre/features/kre-detail-feature'
+export * from './kre/features/kre-index-feature'
+export * from './kre/features/kre-list-feature'
+export { stringToColor } from './kre/features/string-to-color'

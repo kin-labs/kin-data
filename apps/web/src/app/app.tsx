@@ -1,6 +1,6 @@
 import { SaasProvider } from '@saas-ui/react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { AboutIndex, HomeIndex } from './feature'
+import { AboutIndex, HomeIndex, KreIndexFeature } from './feature'
 import { UiLayout } from './ui/layout/ui-layout'
 import { UiLinks } from './ui/layout/ui-link'
 
@@ -9,6 +9,7 @@ export function App() {
   const name = 'Kin Data'
   const links: UiLinks = [
     { label: 'Home', path: '/home' },
+    { label: 'KRE', path: '/KRE' },
     { label: 'About', path: '/about' },
   ]
   return (
@@ -18,6 +19,7 @@ export function App() {
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/about" element={<AboutIndex />} />
           <Route path="/home" element={<HomeIndex />} />
+          <Route path="/kre/*" element={<KreIndexFeature />} />
         </Routes>
       </UiLayout>
     </SaasProvider>
