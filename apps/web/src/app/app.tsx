@@ -1,6 +1,6 @@
 import { SaasProvider } from '@saas-ui/react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { AboutIndex, HomeIndex, KreIndexFeature } from './feature'
+import { AboutIndex, DevIndex, HomeIndex, KreIndexFeature } from './feature'
 import { UiLayout } from './ui/layout/ui-layout'
 import { UiLinks } from './ui/layout/ui-link'
 
@@ -16,8 +16,9 @@ export function App() {
     <SaasProvider>
       <UiLayout name={name} copyright={copyright} links={links}>
         <Routes>
-          <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="/about" element={<AboutIndex />} />
+          <Route path="/dev/*" element={<DevIndex />} />
           <Route path="/home" element={<HomeIndex />} />
           <Route path="/kre/*" element={<KreIndexFeature />} />
         </Routes>
