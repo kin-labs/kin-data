@@ -1,5 +1,5 @@
 import { DailyActiveUserBalanceByApp } from '@prisma/client'
-import { DailyActiveUserBalanceEntity } from '../entity/daily-active-user-balance.entity'
+import { DailyActiveUserBalanceEntity } from '../entity'
 
 export function formatDailyActiveUserBalanceEntities(
   items: DailyActiveUserBalanceByApp[],

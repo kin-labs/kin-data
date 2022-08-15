@@ -1,5 +1,5 @@
 import { DailyVolatilityFactor } from '@prisma/client'
-import { DailyVolatilityFactorEntity } from '../entity/daily-volatility-factor.entity'
+import { DailyVolatilityFactorEntity } from '../entity'
 
 export function formatDailyVolatilityFactorEntities(items: DailyVolatilityFactor[]): DailyVolatilityFactorEntity[] {
   return items.map((item) => formatDailyVolatilityFactorEntity(item))
