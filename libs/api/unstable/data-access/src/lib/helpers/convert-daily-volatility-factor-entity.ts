@@ -1,5 +1,6 @@
 import { DailyVolatilityFactor } from '@prisma/client'
 import { DailyVolatilityFactorEntity } from '../entity'
+import { formatDateHelper } from './format-date.helper'
 
 export function convertDailyVolatilityFactor(items: DailyVolatilityFactor[]) {
   return items.map((item) => convertDailyVolatilityFactorEntity(item))
@@ -9,8 +10,7 @@ export function convertDailyVolatilityFactorEntity(item: DailyVolatilityFactor):
   return {
     averagePrice: item.averagePrice?.toString(),
     averagePriceDeviation: item.averagePriceDeviation?.toString(),
-    date: item.date,
-    id: Number(item.id),
+    date: formatDateHelper(item.date),
     totalPriceDeviation: item.totalPriceDeviation?.toString(),
     volatilityFactor: item.volatilityFactor?.toString(),
   }

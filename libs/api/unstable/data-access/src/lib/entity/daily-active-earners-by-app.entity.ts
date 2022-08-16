@@ -1,7 +1,6 @@
 export interface DailyActiveEarnersByAppEntity {
-  id: number
-  date: Date
+  date: string
   appIndex: number
   appName: string
-  walletCount: number
+  count: number
 }

@@ -1,6 +1,5 @@
 export interface DailyKinPayoutEntity {
-  id: number
-  date: Date
+  date: string
   appIndex: number
   appName: string
   preMonopolyShare: number

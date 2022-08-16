@@ -1,9 +1,8 @@
 export interface DailyActiveUserBalanceEntity {
   appIndex: number
+  appName: string
   au: number
   aub: number
   cappedAub: number
-  date: Date
-  id: number
-  name: string
+  date: string
 }

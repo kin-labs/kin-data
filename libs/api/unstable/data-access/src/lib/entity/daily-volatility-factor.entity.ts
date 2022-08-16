@@ -1,8 +1,7 @@
 export interface DailyVolatilityFactorEntity {
   averagePrice: string
   averagePriceDeviation: string
-  date: Date
-  id: number
+  date: string
   totalPriceDeviation: string
   volatilityFactor: string
 }

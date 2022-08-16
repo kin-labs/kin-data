@@ -1,5 +1,4 @@
 export interface MonthlyActiveEarnersEcosystemEntity {
-  id: number
-  date: Date
-  walletCount: number
+  count: number
+  date: string
 }

@@ -5,6 +5,11 @@ import { Controller, Get } from '@nestjs/common'
 export class ApiUnstableFeatureController {
   constructor(private readonly service: ApiUnstableDataAccessService) {}
 
+  @Get('kre-stats')
+  kreStats() {
+    return this.service.kreStats()
+  }
+
   @Get('daily-active-earners-by-app')
   dailyActiveEarnersByApp() {
     return this.service.dailyActiveEarnersByApp()
@@ -50,9 +55,9 @@ export class ApiUnstableFeatureController {
     return this.service.dailyKinTransactions()
   }
 
-  @Get('daily-volatility-factor-x')
-  dailyVolatilityFactorX() {
-    return this.service.dailyVolatilityFactorX()
+  @Get('daily-volatility-factor')
+  dailyVolatilityFactor() {
+    return this.service.dailyVolatilityFactor()
   }
 
   @Get('monthly-active-earners-by-app')
@@ -83,15 +88,5 @@ export class ApiUnstableFeatureController {
   @Get('monthly-active-users-ecosystem')
   monthlyActiveUsersEcosystem() {
     return this.service.monthlyActiveUsersEcosystem()
-  }
-
-  @Get('daily-active-user-balance')
-  dailyActiveUserBalance() {
-    return this.service.dailyActiveUserBalance()
-  }
-
-  @Get('daily-volatility-factor')
-  dailyVolatilityFactor() {
-    return this.service.dailyVolatilityFactor()
   }
 }
