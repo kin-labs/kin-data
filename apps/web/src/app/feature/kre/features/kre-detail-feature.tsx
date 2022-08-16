@@ -1,48 +1,46 @@
-import { Alert, Box, Heading, Stack, Text } from '@chakra-ui/react'
+import { Alert, Box, CircularProgress, Heading, Stack, Text } from '@chakra-ui/react'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { KRE_GRAPHS, KreAubData, KreAubItem } from '../data-access/kre-graphs'
+import { KreAubData, KreAubItem } from '../data-access/kre-graphs'
+import { useKreStats } from '../data-access/kre-stats.provider'
 import { AubChart } from '../ui/aub-chart'
 import { KreDataSet, KreGraph } from '../ui/kre-graph'
+import { KreStatButtons } from './kre-list-feature'
 import { stringToColor } from './string-to-color'
 
-const renderChart = ({ data, graph }: { data: KreDataSet; graph: KreGraph }) => {
-  switch (graph?.id) {
+const renderChart = ({ data, stat }: { data: KreDataSet; stat: KreGraph }) => {
+  switch (stat?.id) {
     case 'aub':
       return <AubChart data={data} />
     default:
-      return <Alert status="warning">Kre graph with id [{graph.id}] not available</Alert>
+      return <Alert status="warning">Kre stat with id [{stat.id}] not available</Alert>
   }
 }
 
 export function KreDetailFeature() {
-  const [loading, setLoading] = useState<boolean>(false)
-  const [data, setData] = useState<KreAubItem[]>([])
-  const { graphId } = useParams<{ graphId: string }>()
-
-  const graph = KRE_GRAPHS.find((item) => item.id === graphId)
+  const [data, setData] = useState<any[]>([])
+  const { statId } = useParams<{ statId: string }>()
+  const { stats, loading } = useKreStats()
+  const stat = stats?.find((item) => item.id === statId)
 
   useEffect(() => {
-    if (!graph || graph.data?.length || loading || data.length) return
-    setLoading(true)
-    fetch('https://data.kin.org/api/unstable/daily-active-user-balance')
+    if (!stat || loading) return
+    setData([])
+    fetch(`/api/unstable/${stat.id}`)
       .then((res) => res.json())
-      .then((res: KreAubItem[]) => {
-        setData(
-          res.map((item) => ({
-            ...item,
-            name: item.name ? item.name : `*App: ${item.appIndex}`,
-          })),
-        )
-        setLoading(false)
+      .then((res: any[]) => {
+        setData(res)
       })
-  }, [graph, loading])
+  }, [stat, loading])
 
-  if (!graph || !graphId) {
-    return <Alert status="error">Kre graph with id {graphId} could not be found :(</Alert>
+  if (loading) {
+    return <CircularProgress isIndeterminate />
+  }
+  if (!stat || !statId) {
+    return <Alert status="error">KRE stat with id {statId} could not be found :(</Alert>
   }
 
-  const { name, description } = graph
+  const { name, description } = stat
 
   return (
     <Box borderWidth="1px" borderRadius="lg" overflow="hidden" rounded="md" p={4}>
@@ -51,15 +49,16 @@ export function KreDetailFeature() {
           {name}
         </Heading>
         <Text>{description}</Text>
+        <KreStatButtons stats={stats} />
         <Stack direction="row" spacing={2}>
-          <Box display="flex" justifyContent="center" px={4} alignItems="center" width="full">
-            {renderChart({ data, graph })}
-          </Box>
+          {/*<Box display="flex" justifyContent="center" px={4} alignItems="center" width="full">*/}
+          {/*  {renderChart({ data, stat })}*/}
+          {/*</Box>*/}
         </Stack>
 
-        <AubSummary data={data} />
+        {/*<AubSummary data={data} />*/}
         <Box as="pre" p="6" borderWidth="1px" borderRadius="lg" overflow="hidden" fontSize="xs">
-          {JSON.stringify(data, null, 2)}
+          {JSON.stringify({ stat, data }, null, 2)}
         </Box>
       </Stack>
     </Box>

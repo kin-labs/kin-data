@@ -17,7 +17,7 @@ export function UiLayout({
   return (
     <Flex direction="column" h="full">
       <UiLayoutHeader name={name} links={links} />
-      <Flex direction="column" grow={1} px={[0, 4]} py={[4, 8]}>
+      <Flex direction="column" grow={1} px={{ base: 0, md: 2, xl: 4 }} py={[4, 8]}>
         <Suspense fallback={<Box>Loading...</Box>}>
           <Container maxW="container.xl" h="full">
             {children}
