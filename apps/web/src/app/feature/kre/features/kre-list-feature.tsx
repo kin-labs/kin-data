@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, Heading, SimpleGrid, Stack } from '@chakra-ui/react'
+import { Box, Button, CircularProgress, Heading, SimpleGrid, Stack, useBreakpointValue } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { KreStat, useKreStats } from '../data-access/kre-stats.provider'
@@ -22,11 +22,16 @@ export function KreListFeature() {
 }
 
 export function KreStatButtons({ stats }: { stats: KreStat[] }) {
+  const size = useBreakpointValue({
+    base: 'xs',
+    md: 'sm',
+    xl: 'lg',
+  })
   return (
     <SimpleGrid gap={{ base: 2, md: 4, xl: 6 }} columns={{ base: 1, md: 2, xl: 4 }}>
-      {stats?.map(({ name: label, id: path }) => (
+      {stats?.map(({ name: label, id: path, type }) => (
         <Link key={path} to={`/kre/${path}`}>
-          <Button size="lg" width="full">
+          <Button size={size} width="full" variant={type === 'count-date' ? 'solid' : 'outline'}>
             {label}
           </Button>
         </Link>

@@ -12,7 +12,7 @@ export function DevIndex() {
     { label: 'KRE', path: 'kre' },
   ]
   return (
-    <Stack spacing={6}>
+    <Stack spacing={{ base: 2, md: 4, xl: 6 }}>
       <Stack direction="row" spacing={2}>
         {pages?.map(({ label, path }) => (
           <Link key={path} className="btn btn-primary" to={path}>

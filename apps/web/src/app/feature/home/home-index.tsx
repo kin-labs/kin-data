@@ -9,7 +9,7 @@ export function HomeIndex() {
   ]
   return (
     <Box borderWidth="1px" borderRadius="lg" overflow="hidden" rounded="md" p={4}>
-      <Stack spacing={6}>
+      <Stack spacing={{ base: 2, md: 4, xl: 6 }}>
         <Heading as="h1" size="lg" fontWeight="bold">
           Hello there! 👋
         </Heading>

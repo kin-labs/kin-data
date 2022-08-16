@@ -4,6 +4,9 @@ export interface KreStat {
   id: string
   name: string
   description?: string
+  type: string
+  ranges: string[]
+  filters?: { gt: Date }
 }
 
 export interface KreStatsProviderContext {

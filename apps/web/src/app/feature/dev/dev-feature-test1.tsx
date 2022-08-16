@@ -95,7 +95,7 @@ export function DevFeatureTest1() {
 
   const filtered = apps.filter((app) => selected.includes(app.name))
   return (
-    <Stack spacing={6}>
+    <Stack spacing={{ base: 2, md: 4, xl: 6 }}>
       <Box borderWidth="1px" borderRadius="lg" overflow="hidden" rounded="md" p={2}>
         <Box p={4}>
           <Button size={'xs'} onClick={() => selectAll()} mr={2} mb={2}>
