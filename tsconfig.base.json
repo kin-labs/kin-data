@@ -22,6 +22,8 @@
       "@kin-data/api/integration/kin-bi": ["libs/api/integration/kin-bi/src/index.ts"],
       "@kin-data/api/network/data-access": ["libs/api/network/data-access/src/index.ts"],
       "@kin-data/api/network/feature": ["libs/api/network/feature/src/index.ts"],
+      "@kin-data/api/snowflake/data-access": ["libs/api/snowflake/data-access/src/index.ts"],
+      "@kin-data/api/snowflake/feature": ["libs/api/snowflake/feature/src/index.ts"],
       "@kin-data/api/stats/data-access": ["libs/api/stats/data-access/src/index.ts"],
       "@kin-data/api/stats/feature": ["libs/api/stats/feature/src/index.ts"],
       "@kin-data/api/tools/data-access": ["libs/api/tools/data-access/src/index.ts"],
