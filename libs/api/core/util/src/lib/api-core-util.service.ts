@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
+import { ConnectionOptions } from 'snowflake-sdk'
 
 @Injectable()
 export class ApiCoreUtilService {
@@ -10,7 +11,7 @@ export class ApiCoreUtilService {
   }
 
   get apiUrl(): string {
-    return this.config.get('apiUrl')
+    return this.config.get('api.url')
   }
 
   get apiCorsOrigins(): string[] {
@@ -23,5 +24,17 @@ export class ApiCoreUtilService {
 
   get production(): boolean {
     return this.config.get('environment') === 'production'
+  }
+
+  get snowflake(): ConnectionOptions {
+    return {
+      account: this.config.get('snowflake.account'),
+      database: this.config.get('snowflake.database'),
+      password: this.config.get('snowflake.password'),
+      role: this.config.get('snowflake.role'),
+      schema: this.config.get('snowflake.schema'),
+      username: this.config.get('snowflake.username'),
+      warehouse: this.config.get('snowflake.warehouse'),
+    }
   }
 }

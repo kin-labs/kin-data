@@ -2,6 +2,7 @@ import { ApiCoreDataAccessModule } from '@kin-data/api/core/data-access'
 import { ApiCoreUtilModule } from '@kin-data/api/core/util'
 import { ApiIntegrationKinBiModule } from '@kin-data/api/integration/kin-bi'
 import { ApiNetworkFeatureModule } from '@kin-data/api/network/feature'
+import { ApiSnowflakeFeatureModule } from '@kin-data/api/snowflake/feature'
 import { ApiStatsFeatureModule } from '@kin-data/api/stats/feature'
 import { ApiToolsFeatureModule } from '@kin-data/api/tools/feature'
 import { ApiUnstableFeatureModule } from '@kin-data/api/unstable/feature'
@@ -31,6 +32,7 @@ import { ApiCoreFeatureResolver } from './api-core-feature.resolver'
     ApiCoreUtilModule,
     ApiIntegrationKinBiModule,
     ApiNetworkFeatureModule,
+    ApiSnowflakeFeatureModule,
     ApiStatsFeatureModule,
     ApiToolsFeatureModule,
     ApiUnstableFeatureModule,
