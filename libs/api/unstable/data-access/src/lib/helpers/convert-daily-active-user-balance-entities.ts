@@ -15,6 +15,6 @@ export function formatDailyActiveUserBalanceEntity(item: DailyActiveUserBalanceB
     au: Number(item.au),
     aub: Number(item.aub),
     cappedAub: Number(item.cappedAub),
-    name: item.appName,
+    name: item.name,
   }
 }
