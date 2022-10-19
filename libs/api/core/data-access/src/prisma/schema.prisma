@@ -8,178 +8,185 @@ datasource db {
 }
 
 model DailyActiveUserBalanceByApp {
-  id        BigInt    @id @map("index")
+  id        Int       @id @default(autoincrement()) @map("index")
   date      DateTime? @map("DATE_KEY") @db.Date
   appIndex  BigInt?   @map("APP_ID")
-  aub       Float?    @map("AUB")
+  aub       BigInt?   @map("AUB")
   au        Int?      @map("AU")
-  cappedAub Float?    @map("CAPPED_AUB")
+  cappedAub BigInt?   @map("CAPPED_AUB")
   appName   String?   @map("NAME")
 
-  @@index([id], map: "ix_daily_active_user_balance_by_app_index")
   @@map("daily_active_user_balance_by_app")
 }
 
 model DailyVolatilityFactor {
-  id                    BigInt    @id @map("index")
+  id                    Int       @id @default(autoincrement()) @map("index")
   date                  DateTime? @map("DATE_KEY") @db.Date
   averagePrice          Float?    @map("AVERAGE_PRICE")
   totalPriceDeviation   Float?    @map("TOTAL_PRICE_DEVIATION")
   averagePriceDeviation Float?    @map("AVERAGE_PRICE_DEVIATION")
   volatilityFactor      Float?    @map("VOLATILITY_FACTOR")
 
-  @@index([id], map: "ix_daily_volatility_factor_index")
   @@map("daily_volatility_factor")
 }
 
 model DailyActiveEarnersByApp {
-  id          BigInt    @id @map("index")
+  id          Int       @id @default(autoincrement()) @map("index")
   date        DateTime? @map("DATE_KEY") @db.Date
   appIndex    BigInt?   @map("APP_ID")
   appName     String?   @map("APP_NAME")
   walletCount Int?      @map("WALLET_COUNT")
 
-  @@index([id], map: "ix_daily_active_earners_by_app_index")
   @@map("daily_active_earners_by_app")
 }
 
 model DailyActiveEarnersEcosystem {
-  id          BigInt    @id @map("index")
+  id          Int       @id @default(autoincrement()) @map("index")
   date        DateTime? @map("DATE_KEY") @db.Date
   walletCount Int?      @map("WALLET_COUNT")
 
-  @@index([id], map: "ix_daily_active_earners_ecosystem_index")
   @@map("daily_active_earners_ecosystem")
 }
 
 model DailyActiveSpendersByApp {
-  id          BigInt    @id @map("index")
+  id          Int       @id @default(autoincrement()) @map("index")
   date        DateTime? @map("DATE_KEY") @db.Date
   appIndex    BigInt?   @map("APP_ID")
   appName     String?   @map("APP_NAME")
   walletCount Int?      @map("WALLET_COUNT")
 
-  @@index([id], map: "ix_daily_active_spenders_by_app_index")
   @@map("daily_active_spenders_by_app")
 }
 
 model DailyActiveSpendersEcosystem {
-  id          BigInt    @id @map("index")
+  id          Int       @id @default(autoincrement()) @map("index")
   date        DateTime? @map("DATE_KEY") @db.Date
   walletCount Int?      @map("WALLET_COUNT")
 
-  @@index([id], map: "ix_daily_active_spenders_ecosystem_index")
   @@map("daily_active_spenders_ecosystem")
 }
 
 model DailyActiveUsersByApp {
-  id          BigInt    @id @map("index")
+  id          Int       @id @default(autoincrement()) @map("index")
   date        DateTime? @map("DATE_KEY") @db.Date
   appIndex    BigInt?   @map("APP_ID")
   appName     String?   @map("APP_NAME")
   walletCount Int?      @map("WALLET_COUNT")
 
-  @@index([id], map: "ix_daily_active_users_by_app_index")
   @@map("daily_active_users_by_app")
 }
 
 model DailyActiveUsersEcosystem {
-  id          BigInt    @id @map("index")
+  id          Int       @id @default(autoincrement()) @map("index")
   date        DateTime? @map("DATE_KEY") @db.Date
   walletCount Int?      @map("WALLET_COUNT")
 
-  @@index([id], map: "ix_daily_active_users_ecosystem_index")
   @@map("daily_active_users_ecosystem")
 }
 
 model DailyKinPayout {
-  id                    BigInt    @id @map("index")
+  id                    Int       @id @default(autoincrement()) @map("index")
   date                  DateTime? @map("DATE_KEY") @db.Date
   appIndex              BigInt?   @map("APP_ID")
   appName               String?   @map("APP_NAME")
   preMonopolyShare      Float?    @map("PRE_MONOPOLY_SHARE")
-  preVfPayout           String?   @map("PRE_VF_PAYOUT")
+  preVfPayout           Float?    @map("PRE_VF_PAYOUT")
   preMonopolyPayout     Float?    @map("PRE_MONOPOLY_PAYOUT")
   postMonopolyAppShare  Float?    @map("POST_MONOPOLY_APP_SHARE")
   postMonopolyPayout    Float?    @map("POST_MONOPOLY_PAYOUT")
   postMonopolyPayoutUsd Float?    @map("POST_MONOPOLY_PAYOUT_USD")
 
-  @@index([id], map: "ix_daily_kin_payout_index")
   @@map("daily_kin_payout")
 }
 
 model DailyKinTransactions {
-  id                     BigInt    @id @map("index")
+  id                     Int       @id @default(autoincrement()) @map("index")
   date                   DateTime? @map("DATE_KEY") @db.Date
   appIndex               BigInt?   @map("APP_ID")
   appName                String?   @map("APP_NAME")
   dailyTotalTransactions Int?      @map("DAILY_TOTAL_TRANSACTIONS")
   dailyTotalAmounts      Float?    @map("DAILY_TOTAL_AMOUNTS")
-  dailyEarnTransactions  Float?    @map("DAILY_EARN_TRANSACTIONS")
+  dailyEarnTransactions  Int?      @map("DAILY_EARN_TRANSACTIONS")
   dailyEarnAmounts       Float?    @map("DAILY_EARN_AMOUNTS")
+  dailyEarnAverage       Float?    @map("DAILY_EARN_AVERAGE")
+  dailyEarnMedian        Float?    @map("DAILY_EARN_MEDIAN")
   dailySpendTransactions Int?      @map("DAILY_SPEND_TRANSACTIONS")
   dailySpendAmounts      Float?    @map("DAILY_SPEND_AMOUNTS")
+  dailySpendAverage      Float?    @map("DAILY_SPEND_AVERAGE")
+  dailySpendMedian       Float?    @map("DAILY_SPEND_MEDIAN")
+  dailyPeerTransactions  Int?      @map("DAILY_PEER_TRANSACTIONS")
+  dailyPeerAmounts       Float?    @map("DAILY_PEER_AMOUNTS")
+  dailyPeerAverage       String?   @map("DAILY_PEER_AVERAGE")
+  dailyPeerMedian        Float?    @map("DAILY_PEER_MEDIAN")
 
-  @@index([id], map: "ix_daily_kin_transactions_index")
   @@map("daily_kin_transactions")
 }
 
+model KreWeeklyPayout {
+  id              Int       @id @default(autoincrement()) @map("index")
+  date            DateTime? @map("DATE_KEY") @db.Date
+  appIndex        BigInt?   @map("APP_ID")
+  appName         String?   @map("APP_NAME")
+  weeklyKinPayout Float?    @map("WEEKLY_KIN_PAYOUT")
+  weeklyUsdPayout Float?    @map("WEEKLY_USD_PAYOUT")
+  runDate         DateTime? @map("RUN_DATE") @db.Date
+  fromDate        DateTime? @map("FROM_DATE") @db.Date
+  toDate          DateTime? @map("TO_DATE") @db.Date
+  wallet          String?   @map("WALLET")
+
+  @@map("kre_weekly_payout")
+}
+
 model MonthlyActiveEarnersByApp {
-  id          BigInt    @id @map("index")
+  id          Int       @id @default(autoincrement()) @map("index")
   date        DateTime? @map("DATE_KEY") @db.Date
   appIndex    BigInt?   @map("APP_ID")
   appName     String?   @map("APP_NAME")
   walletCount Int?      @map("WALLET_COUNT")
 
-  @@index([id], map: "ix_monthly_active_earners_by_app_index")
   @@map("monthly_active_earners_by_app")
 }
 
 model MonthlyActiveEarnersEcosystem {
-  id          BigInt    @id @map("index")
+  id          Int       @id @default(autoincrement()) @map("index")
   date        DateTime? @map("DATE_KEY") @db.Date
   walletCount Int?      @map("WALLET_COUNT")
 
-  @@index([id], map: "ix_monthly_active_earners_ecosystem_index")
   @@map("monthly_active_earners_ecosystem")
 }
 
 model MonthlyActiveSpendersByApp {
-  id          BigInt    @id @map("index")
+  id          Int       @id @default(autoincrement()) @map("index")
   date        DateTime? @map("DATE_KEY") @db.Date
   appIndex    BigInt?   @map("APP_ID")
   appName     String?   @map("APP_NAME")
   walletCount Int?      @map("WALLET_COUNT")
 
-  @@index([id], map: "ix_monthly_active_spenders_by_app_index")
   @@map("monthly_active_spenders_by_app")
 }
 
 model MonthlyActiveSpendersEcosystem {
-  id          BigInt    @id @map("index")
+  id          Int       @id @default(autoincrement()) @map("index")
   date        DateTime? @map("DATE_KEY") @db.Date
   walletCount Int?      @map("WALLET_COUNT")
 
-  @@index([id], map: "ix_monthly_active_spenders_ecosystem_index")
   @@map("monthly_active_spenders_ecosystem")
 }
 
 model MonthlyActiveUsersByApp {
-  id          BigInt    @id @map("index")
+  id          Int       @id @default(autoincrement()) @map("index")
   date        DateTime? @map("DATE_KEY") @db.Date
   appIndex    BigInt?   @map("APP_ID")
   appName     String?   @map("APP_NAME")
   walletCount Int?      @map("WALLET_COUNT")
 
-  @@index([id], map: "ix_monthly_active_users_by_app_index")
   @@map("monthly_active_users_by_app")
 }
 
 model MonthlyActiveUsersEcosystem {
-  id          BigInt    @id @map("index")
+  id          Int       @id @default(autoincrement()) @map("index")
   date        DateTime? @map("DATE_KEY") @db.Date
   walletCount Int?      @map("WALLET_COUNT")
 
-  @@index([id], map: "ix_monthly_active_users_ecosystem_index")
   @@map("monthly_active_users_ecosystem")
 }

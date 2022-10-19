@@ -16,6 +16,6 @@ export function convertDailyKinPayoutEntity(item: DailyKinPayout): DailyKinPayou
     postMonopolyPayoutUsd: Number(item.postMonopolyPayoutUsd),
     preMonopolyPayout: Number(item.preMonopolyPayout),
     preMonopolyShare: Number(item.preMonopolyShare),
-    preVfPayout: item.preVfPayout,
+    preVfPayout: item.preVfPayout?.toString(),
   }
 }
