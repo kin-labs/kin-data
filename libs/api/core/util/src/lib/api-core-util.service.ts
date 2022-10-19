@@ -28,6 +28,7 @@ export class ApiCoreUtilService {
 
   get snowflake(): ConnectionOptions {
     return {
+      clientSessionKeepAlive: true,
       account: this.config.get('snowflake.account'),
       database: this.config.get('snowflake.database'),
       password: this.config.get('snowflake.password'),
