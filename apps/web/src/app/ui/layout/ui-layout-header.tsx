@@ -1,67 +1,110 @@
-import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
-import {
-  Avatar,
-  Box,
-  Collapse,
-  Flex,
-  Heading,
-  IconButton,
-  Stack,
-  useColorModeValue,
-  useDisclosure,
-} from '@chakra-ui/react'
-
-import React from 'react'
-import { Link as RouterLink } from 'react-router-dom'
-import { UiHeaderLinks } from './ui-header-links'
-import { UiHeaderLinksMobile } from './ui-header-links-mobile'
+import { Burger, Container, createStyles, Group, Header, Paper, Text, Transition } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
+import { Link, NavLink } from 'react-router-dom'
 import { UiLayoutThemeToggle } from './ui-layout-theme-toggle'
 import { UiLinks } from './ui-link'
 
+const HEADER_HEIGHT = 60
+
+const useStyles = createStyles((theme) => ({
+  dropdown: {
+    position: 'absolute',
+    top: HEADER_HEIGHT,
+    left: 0,
+    right: 0,
+    zIndex: 0,
+    borderTopRightRadius: 0,
+    borderTopLeftRadius: 0,
+    borderTopWidth: 0,
+    overflow: 'hidden',
+
+    [theme.fn.largerThan('sm')]: {
+      display: 'none',
+    },
+  },
+
+  title: {
+    fontSize: theme.fontSizes.lg,
+    color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+  },
+
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: '100%',
+  },
+
+  links: {
+    [theme.fn.smallerThan('sm')]: {
+      display: 'none',
+    },
+  },
+
+  burger: {
+    [theme.fn.largerThan('sm')]: {
+      display: 'none',
+    },
+  },
+
+  link: {
+    display: 'block',
+    lineHeight: 1,
+    padding: '8px 12px',
+    borderRadius: theme.radius.sm,
+    textDecoration: 'none',
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
+    fontSize: theme.fontSizes.sm,
+    fontWeight: 500,
+
+    '&:hover': {
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+    },
+
+    [theme.fn.smallerThan('sm')]: {
+      borderRadius: 0,
+      padding: theme.spacing.md,
+    },
+  },
+
+  linkActive: {
+    '&, &:hover': {
+      backgroundColor: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).background,
+      color: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).color,
+    },
+  },
+}))
+
 export function UiLayoutHeader({ links, name }: { links: UiLinks; name: string }) {
-  const { isOpen, onToggle } = useDisclosure()
+  const [opened, { toggle }] = useDisclosure(false)
+
+  const { classes, cx } = useStyles()
+
+  const items = links.map((link) => (
+    <NavLink key={link.label} to={link.path}>
+      {({ isActive }) => <Text className={cx(classes.link, { [classes.linkActive]: isActive })}>{link.label}</Text>}
+    </NavLink>
+  ))
 
   return (
-    <Box>
-      <Flex
-        h={16}
-        py={{ base: 2 }}
-        px={{ base: 4 }}
-        borderBottom={1}
-        borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.700')}
-        alignItems={'center'}
-      >
-        <Flex flex={{ base: 1, md: 'auto' }} display={{ base: 'flex', md: 'none' }}>
-          <IconButton
-            onClick={onToggle}
-            icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
-            variant={'ghost'}
-            aria-label={'Toggle Navigation'}
-          />
-        </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }} alignItems="center">
-          <Stack w={'full'} direction="row" alignItems="center" justifyContent={{ base: 'center', md: 'start' }}>
-            <RouterLink to="/">
-              <Avatar name={name} src="/assets/logo.svg" bg="inherit" size="sm" />
-            </RouterLink>
-            <Heading pt={1} size="md" display={{ base: 'none', md: 'inherit' }}>
-              <RouterLink to="/">{name}</RouterLink>
-            </Heading>
-            <Flex pl={4} display={{ base: 'none', md: 'flex' }}>
-              <UiHeaderLinks links={links} />
-            </Flex>
-          </Stack>
-        </Flex>
-
-        <Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={{ base: 2, md: 6 }}>
+    <Header height={HEADER_HEIGHT}>
+      <Container className={classes.header}>
+        <Link to="/" replace>
+          <img src="https://developer.kin.org/branding/kin-logo-violet-sideicon.svg" width={100} alt={'Kin Logo'} />
+        </Link>
+        <Group spacing={5} className={classes.links}>
+          {items}
           <UiLayoutThemeToggle />
-        </Stack>
-      </Flex>
-
-      <Collapse in={isOpen} animateOpacity>
-        <UiHeaderLinksMobile links={links} />
-      </Collapse>
-    </Box>
+        </Group>
+        <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
+        <Transition transition="pop-top-right" duration={200} mounted={opened}>
+          {(styles) => (
+            <Paper className={classes.dropdown} withBorder style={styles}>
+              {items}
+            </Paper>
+          )}
+        </Transition>
+      </Container>
+    </Header>
   )
 }

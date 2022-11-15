@@ -1,4 +1,4 @@
-import { useBreakpointValue, useColorModeValue, useToken } from '@chakra-ui/react'
+import { useMantineTheme } from '@mantine/core'
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -16,13 +16,9 @@ import { Line } from 'react-chartjs-2'
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
 export function KreLineChart({ data }: { data: ChartData<'line'> }) {
-  const [primaryLight, primaryDark] = useToken('colors', ['primary.300', 'primary.500'])
-  console.log({
-    primaryLight,
-    primaryDark,
-  })
-  const [lineLight, lineDark] = useToken('colors', ['gray.300', 'gray.700'])
-  const gridColor = useColorModeValue(lineLight, lineDark)
+  const theme = useMantineTheme()
+  const color = theme.colorScheme === 'dark' ? theme.colors.gray[8] : theme.colors.gray[4]
+
   const options = {
     responsive: true,
     plugins: {
@@ -31,25 +27,12 @@ export function KreLineChart({ data }: { data: ChartData<'line'> }) {
       },
     },
     scales: {
-      x: { grid: { color: gridColor } },
-      y: { grid: { color: gridColor } },
+      x: { grid: { color } },
+      y: { grid: { color } },
     },
     xAxes: [
       {
-        scaleLabel: {
-          display: true,
-        },
-        // ticks: {
-        //
-        //   userCallback: function (value) {
-        //     if (typeof value !== 'string') return value;
-        //     const date = value.split('-');
-        //     if (date.length == 2) { //not full date just week of year
-        //       return getDateOfISOWeek(date[0], date[1]);
-        //     }
-        //     return value
-        //   }
-        // }
+        scaleLabel: { display: true },
       },
     ],
   }

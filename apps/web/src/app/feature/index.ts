@@ -1,4 +1,3 @@
-export * from './about/about-index'
 export * from './dev/dev-index'
 export * from './home/home-index'
 export * from './kre/features/kre-detail-feature'

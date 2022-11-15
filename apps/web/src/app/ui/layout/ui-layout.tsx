@@ -1,5 +1,5 @@
-import { Box, Container, Flex } from '@chakra-ui/react'
-import React, { PropsWithChildren, ReactNode, Suspense } from 'react'
+import { AppShell, useMantineTheme } from '@mantine/core'
+import React, { PropsWithChildren, ReactNode } from 'react'
 import { UiLayoutFooter } from './ui-layout-footer'
 import { UiLayoutHeader } from './ui-layout-header'
 import { UiLinks } from './ui-link'
@@ -14,17 +14,18 @@ export function UiLayout({
   links: UiLinks
   name: string
 }>) {
+  const theme = useMantineTheme()
   return (
-    <Flex direction="column" h="full">
-      <UiLayoutHeader name={name} links={links} />
-      <Flex direction="column" grow={1} px={{ base: 0, md: 2, xl: 4 }} py={[4, 8]}>
-        <Suspense fallback={<Box>Loading...</Box>}>
-          <Container maxW="container.xl" h="full">
-            {children}
-          </Container>
-        </Suspense>
-      </Flex>
-      <UiLayoutFooter copyright={copyright} />
-    </Flex>
+    <AppShell
+      styles={{
+        main: {
+          background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+        },
+      }}
+      footer={<UiLayoutFooter copyright={copyright} />}
+      header={<UiLayoutHeader name={name} links={links} />}
+    >
+      {children}
+    </AppShell>
   )
 }

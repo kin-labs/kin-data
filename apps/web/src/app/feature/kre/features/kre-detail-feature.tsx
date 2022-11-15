@@ -1,22 +1,11 @@
-import { Alert, Box, CircularProgress, Heading, Stack, Text } from '@chakra-ui/react'
-import { Select } from '@saas-ui/react'
+import { Alert, Box, Select, Stack, Text, Title } from '@mantine/core'
 import { ChartData } from 'chart.js'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { UiLoader } from '../../../ui/loader/ui-loader'
 import { useKreStats } from '../data-access/kre-stats.provider'
-import { AubChart } from '../ui/aub-chart'
-import { KreDataSet, KreGraph } from '../ui/kre-graph'
 import { KreLineChart } from '../ui/kre-line-chart'
 import { KreStatButtons } from './kre-list-feature'
-
-const renderChart = ({ data, stat }: { data: KreDataSet; stat: KreGraph }) => {
-  switch (stat?.id) {
-    case 'aub':
-      return <AubChart data={data} />
-    default:
-      return <Alert status="warning">Kre stat with id [{stat.id}] not available</Alert>
-  }
-}
 
 export function KreDetailFeature() {
   const [data, setData] = useState<any | undefined>()
@@ -37,31 +26,27 @@ export function KreDetailFeature() {
   }, [stat, loading, range])
 
   if (loading) {
-    return <CircularProgress isIndeterminate />
+    return <UiLoader />
   }
   if (!stat || !statId) {
-    return <Alert status="error">KRE stat with id {statId} could not be found :(</Alert>
+    return <Alert color="red">KRE stat with id {statId} could not be found :(</Alert>
   }
 
   const { name, description, ranges } = stat
 
   return (
-    <Box borderWidth="1px" borderRadius="lg" overflow="hidden" rounded="md" p={4}>
-      <Stack spacing={{ base: 2, md: 4, xl: 6 }}>
-        <Heading as="h1" size="lg" fontWeight="bold">
-          {name}
-        </Heading>
+    <Box p={4}>
+      <Stack spacing={12}>
+        <Title size="x-large">{name}</Title>
         <Text>{description}</Text>
         <KreStatButtons stats={stats} />
         <Select
           placeholder="Select option"
           value={range}
-          onChange={(res) => {
-            if (!Array.isArray(res)) {
-              setRange(res)
-            }
+          onChange={(res: string) => {
+            setRange(res)
           }}
-          options={ranges.map((range) => ({ label: range.replace('days', ' days'), value: range }))}
+          data={ranges.map((range) => ({ label: range.replace('days', ' days'), value: range }))}
         />
 
         <ShowStats data={data} type={stat.type} />
@@ -81,7 +66,7 @@ function CountDate({ data }: { data: any }) {
   return (
     <Stack>
       <KreLineChart data={chart} />
-      <Box as="pre" p="6" borderWidth="1px" borderRadius="lg" overflow="hidden" fontSize="xs">
+      <Box component="pre" p="6">
         {JSON.stringify(data, null, 2)}
       </Box>
     </Stack>
@@ -90,12 +75,12 @@ function CountDate({ data }: { data: any }) {
 function ShowStats({ data, type }: { data: any; type: string }) {
   switch (type) {
     case 'count-date':
-      return data ? <CountDate data={data} /> : <CircularProgress isIndeterminate />
+      return data ? <CountDate data={data} /> : <UiLoader />
     default:
       return (
         <Stack>
-          <Alert status="warning">Unhandled type [{type}]</Alert>
-          <Box as="pre" p="6" borderWidth="1px" borderRadius="lg" overflow="hidden" fontSize="xs">
+          <Alert color="yellow">Unhandled type [{type}]</Alert>
+          <Box component="pre" p="6">
             {JSON.stringify({ type, data }, null, 2)}
           </Box>
         </Stack>

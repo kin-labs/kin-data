@@ -1,20 +1,18 @@
-import { Box, Button, CircularProgress, Heading, SimpleGrid, Stack, useBreakpointValue } from '@chakra-ui/react'
+import { Box, Button, Grid, Stack, Title } from '@mantine/core'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { UiLoader } from '../../../ui/loader/ui-loader'
 import { KreStat, useKreStats } from '../data-access/kre-stats.provider'
 
 export function KreListFeature() {
   const { stats, loading } = useKreStats()
   if (loading) {
-    return <CircularProgress isIndeterminate />
+    return <UiLoader />
   }
   return (
-    <Box borderWidth="1px" borderRadius="lg" overflow="hidden" rounded="md" p={4}>
-      <Stack spacing={{ base: 2, md: 4, xl: 6 }}>
-        <Heading as="h1" size="lg" fontWeight="bold">
-          KRE
-        </Heading>
-
+    <Box p={4}>
+      <Stack spacing={12}>
+        <Title size="x-large">KRE</Title>
         <KreStatButtons stats={stats} />
       </Stack>
     </Box>
@@ -22,20 +20,17 @@ export function KreListFeature() {
 }
 
 export function KreStatButtons({ stats }: { stats: KreStat[] }) {
-  const size = useBreakpointValue({
-    base: 'xs',
-    md: 'sm',
-    xl: 'lg',
-  })
   return (
-    <SimpleGrid gap={{ base: 2, md: 4, xl: 6 }} columns={{ base: 1, md: 2, xl: 4 }}>
+    <Grid gutter={2}>
       {stats?.map(({ name: label, id: path, type }) => (
-        <Link key={path} to={`/kre/${path}`}>
-          <Button size={size} width="full" variant={type === 'count-date' ? 'solid' : 'outline'}>
-            {label}
-          </Button>
-        </Link>
+        <Grid.Col key={path} md={6} lg={2} p={6}>
+          <Link to={`/kre/${path}`}>
+            <Button size={'sm'} fullWidth color="gray" variant={type === 'count-date' ? 'filled' : 'outline'}>
+              {label}
+            </Button>
+          </Link>
+        </Grid.Col>
       ))}
-    </SimpleGrid>
+    </Grid>
   )
 }

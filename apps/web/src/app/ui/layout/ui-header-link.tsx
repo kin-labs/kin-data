@@ -1,7 +1,0 @@
-import { chakra } from '@chakra-ui/react'
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-
-export const UiLayoutHeaderLink = chakra(NavLink, {
-  baseStyle: { p: 4, rounded: 'md' },
-})
