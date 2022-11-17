@@ -52,10 +52,10 @@ export class ApiStatsDataAccessService implements OnModuleInit {
           },
           orderBy: { date: 'desc' },
         })
-        .then(({ id, date, kinPayout, usdPayout, ...item }) => ({
+        .then(({ id, date, kin, usd, ...item }) => ({
           date: formatDate(date),
-          kin: kinPayout,
-          usd: usdPayout,
+          kin,
+          usd,
           top10: parseJsonString(item.top10 as string),
         })),
     )

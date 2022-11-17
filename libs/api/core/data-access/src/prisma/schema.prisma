@@ -192,12 +192,11 @@ model MonthlyActiveUsersEcosystem {
 }
 
 model krePayoutSummary {
-  date      DateTime? @db.Date
-  kinPayout Float?
-  usdPayout Float?
-  top5      Json?     @db.Json
-  top10     Json?     @db.Json
-  id        Int       @id @default(autoincrement())
+  date  DateTime? @db.Date
+  kin   Float?
+  usd   Float?
+  top10 Json?     @db.Json
+  id    Int       @id @default(autoincrement())
 }
 
 model kreSummary {
@@ -205,8 +204,8 @@ model kreSummary {
   activeApps              Int?
   activeUserBalance       Float?
   activeCappedUserBalance Float?
-  activeUsers             BigInt?
-  dailyTransactions       BigInt?
+  activeUsers             Int?
+  dailyTransactions       Int?
   monthlyActiveEarners    Int?
   monthlyActiveSpenders   Int?
   monthlyActiveUsers      Int?
