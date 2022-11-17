@@ -5,6 +5,16 @@ import { Controller, Get, Query } from '@nestjs/common'
 export class ApiStatsFeatureController {
   constructor(private readonly service: ApiStatsDataAccessService) {}
 
+  @Get('payout-summary')
+  payoutSummary(@Query('date') date?: string) {
+    return this.service.payoutSummary(date)
+  }
+
+  @Get('payout-summary-dates')
+  payoutSummaryDates() {
+    return this.service.payoutSummaryDates()
+  }
+
   @Get('summary')
   summary(@Query('date') date?: string) {
     return this.service.summary(date)

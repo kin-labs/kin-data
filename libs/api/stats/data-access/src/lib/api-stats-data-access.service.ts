@@ -23,8 +23,17 @@ import { TransactionsPerSecondStat } from './models/transactions-per-second-stat
 import { TxPerDayStat } from './models/tx-per-day-stat.model'
 import { WalletsCreatedStat } from './models/wallets-created-stat.model'
 
-function getDate(date: Date) {
+function formatDate(date: Date) {
   return new Date(date).toISOString().split('T')[0]
+}
+
+function parseJsonString(json: string) {
+  return JSON.parse(json).map(({ id, kinPayout, usdPayout, name }) => ({
+    index: id,
+    name: name ? name : `App ${id}`,
+    kin: kinPayout,
+    usd: usdPayout,
+  }))
 }
 
 @Injectable()
@@ -33,6 +42,36 @@ export class ApiStatsDataAccessService implements OnModuleInit {
   private readonly cache = new LRU({ maxAge: 1000 * 60 * 60 })
 
   constructor(private readonly data: ApiCoreDataAccessService, private readonly bigQuery: BigQueryStatsService) {}
+
+  payoutSummary(date?: string) {
+    return this.getCachedData(`payout-summary-${date ?? 'latest'}`, () =>
+      this.data.krePayoutSummary
+        .findFirst({
+          where: {
+            date: date ? new Date(date) : undefined,
+          },
+          orderBy: { date: 'desc' },
+        })
+        .then(({ id, date, kinPayout, usdPayout, ...item }) => ({
+          date: formatDate(date),
+          kin: kinPayout,
+          usd: usdPayout,
+          top10: parseJsonString(item.top10 as string),
+        })),
+    )
+  }
+
+  payoutSummaryDates() {
+    return this.getCachedData(`payout-summary-dates`, () =>
+      this.data.krePayoutSummary
+        .findMany({
+          orderBy: { date: 'desc' },
+          select: { date: true },
+          distinct: ['date'],
+        })
+        .then((items) => items.map((item) => formatDate(item.date))),
+    )
+  }
 
   summary(date?: string) {
     return this.getCachedData(`summary-${date ?? 'latest'}`, () =>
@@ -43,14 +82,12 @@ export class ApiStatsDataAccessService implements OnModuleInit {
           },
           orderBy: { date: 'desc' },
         })
-        .then(({ id, ...item }) => {
-          return {
-            ...item,
-            date: getDate(item.date),
-            activeUsers: Number(item.activeUsers),
-            dailyTransactions: Number(item.dailyTransactions),
-          }
-        }),
+        .then(({ id, ...item }) => ({
+          ...item,
+          date: formatDate(item.date),
+          activeUsers: Number(item.activeUsers),
+          dailyTransactions: Number(item.dailyTransactions),
+        })),
     )
   }
 
@@ -62,7 +99,7 @@ export class ApiStatsDataAccessService implements OnModuleInit {
           select: { date: true },
           distinct: ['date'],
         })
-        .then((items) => items.map((item) => getDate(item.date))),
+        .then((items) => items.map((item) => formatDate(item.date))),
     )
   }
 
@@ -310,7 +347,7 @@ export class ApiStatsDataAccessService implements OnModuleInit {
 
   private async getCachedData(
     cacheKey: string,
-    fn: () => Promise<JsonValue>,
+    fn: () => Promise<any>,
     options: FetchStatsOptions = { refresh: false },
   ) {
     if (!this.cache.has(cacheKey) || options.refresh) {
