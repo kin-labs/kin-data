@@ -3,6 +3,7 @@ import { useHotkeys, useLocalStorage } from '@mantine/hooks'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { DaysIndex, DevIndex, HomeIndex, KreIndexFeature } from './feature'
+import { AppsIndex } from './feature/apps/apps-index'
 import { NotFoundIndex } from './feature/not-found/not-found-index'
 import { UiLayout } from './ui/layout/ui-layout'
 import { UiLinks } from './ui/layout/ui-link'
@@ -32,6 +33,7 @@ export function App() {
           <UiLayout name={name} copyright={copyright} links={links}>
             <Routes>
               <Route path="/" element={<Navigate to="/not-found" replace />} />
+              <Route path="/apps/*" element={<AppsIndex />} />
               <Route path="/dates/*" element={<DaysIndex />} />
               <Route path="/dev/*" element={<DevIndex />} />
               <Route path="/home" element={<HomeIndex />} />
