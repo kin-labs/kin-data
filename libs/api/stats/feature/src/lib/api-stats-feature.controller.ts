@@ -5,6 +5,17 @@ import { Controller, Get, Query } from '@nestjs/common'
 export class ApiStatsFeatureController {
   constructor(private readonly service: ApiStatsDataAccessService) {}
 
+  @Get('summary')
+  summary(@Query('date') date?: string) {
+    return this.service.summary(date)
+  }
+
+  @Get('summary-dates')
+  summaryDates() {
+    return this.service.summaryDates()
+  }
+
+  // The methods below are from the old stats service and should be deprecated
   @Get('active-user-balances')
   activeUserBalances() {
     return this.service.activeUserBalances()

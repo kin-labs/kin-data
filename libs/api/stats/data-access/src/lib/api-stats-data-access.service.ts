@@ -1,7 +1,9 @@
+import { ApiCoreDataAccessService } from '@kin-data/api/core/data-access'
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common'
 import { Cron, CronExpression } from '@nestjs/schedule'
 import { groupBy } from 'lodash'
 import * as LRU from 'lru-cache'
+import type { JsonValue } from 'type-fest'
 import { kreStatList } from './api-stat-kre-stat-list'
 import { countApps, countTxs, getKreStatsQuery, summarizeKreStats } from './api-stats-data-access.helper'
 import { BigQueryStatsService } from './big-query-stats.service'
@@ -21,12 +23,50 @@ import { TransactionsPerSecondStat } from './models/transactions-per-second-stat
 import { TxPerDayStat } from './models/tx-per-day-stat.model'
 import { WalletsCreatedStat } from './models/wallets-created-stat.model'
 
+function getDate(date: Date) {
+  return new Date(date).toISOString().split('T')[0]
+}
+
 @Injectable()
 export class ApiStatsDataAccessService implements OnModuleInit {
   private readonly logger = new Logger('ApiStatsDataAccessService')
   private readonly cache = new LRU({ maxAge: 1000 * 60 * 60 })
 
-  constructor(private readonly bigQuery: BigQueryStatsService) {}
+  constructor(private readonly data: ApiCoreDataAccessService, private readonly bigQuery: BigQueryStatsService) {}
+
+  summary(date?: string) {
+    return this.getCachedData(`summary-${date ?? 'latest'}`, () =>
+      this.data.kreSummary
+        .findFirst({
+          where: {
+            date: date ? new Date(date) : undefined,
+          },
+          orderBy: { date: 'desc' },
+        })
+        .then(({ id, ...item }) => {
+          return {
+            ...item,
+            date: getDate(item.date),
+            activeUsers: Number(item.activeUsers),
+            dailyTransactions: Number(item.dailyTransactions),
+          }
+        }),
+    )
+  }
+
+  summaryDates() {
+    return this.getCachedData(`summary-dates`, () =>
+      this.data.kreSummary
+        .findMany({
+          orderBy: { date: 'desc' },
+          select: { date: true },
+          distinct: ['date'],
+        })
+        .then((items) => items.map((item) => getDate(item.date))),
+    )
+  }
+
+  // The methods below are from the old stats service and should be deprecated
 
   onModuleInit() {
     // Only in production we want to cache on each server start
@@ -270,7 +310,7 @@ export class ApiStatsDataAccessService implements OnModuleInit {
 
   private async getCachedData(
     cacheKey: string,
-    fn: () => Promise<any>,
+    fn: () => Promise<JsonValue>,
     options: FetchStatsOptions = { refresh: false },
   ) {
     if (!this.cache.has(cacheKey) || options.refresh) {
