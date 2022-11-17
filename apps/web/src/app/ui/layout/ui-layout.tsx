@@ -22,7 +22,7 @@ export function UiLayout({
           background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
         },
       }}
-      footer={<UiLayoutFooter copyright={copyright} />}
+      // footer={<UiLayoutFooter copyright={copyright} />}
       header={<UiLayoutHeader name={name} links={links} />}
     >
       {children}
