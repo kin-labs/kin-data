@@ -5,6 +5,8 @@
     "api-core-data-access": "libs/api/core/data-access",
     "api-core-feature": "libs/api/core/feature",
     "api-core-util": "libs/api/core/util",
+    "api-ecosystem-data-access": "libs/api/ecosystem/data-access",
+    "api-ecosystem-feature": "libs/api/ecosystem/feature",
     "api-integration-bigquery": "libs/api/integration/bigquery",
     "api-integration-kin-bi": "libs/api/integration/kin-bi",
     "api-network-data-access": "libs/api/network/data-access",

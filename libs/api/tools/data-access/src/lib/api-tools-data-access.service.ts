@@ -1,6 +1,6 @@
-import { circulatingSupply, KIN_MAX_SUPPLY, totalSupply } from "@kin-data/circulating-supply";
-import { Injectable } from "@nestjs/common";
-import * as LRU from "lru-cache";
+import { circulatingSupply, KIN_MAX_SUPPLY, totalSupply } from '@kin-data/circulating-supply'
+import { Injectable } from '@nestjs/common'
+import * as LRU from 'lru-cache'
 
 const CIRCULATING_TOKEN = 'CIRCULATING_TOKEN'
 const TOTAL_TOKEN = 'TOTAL_TOKEN'
@@ -19,11 +19,8 @@ export class ApiToolsDataAccessService {
     return this.circulatingCache.get(CIRCULATING_TOKEN)
   }
 
-  async getSupply(): Promise<{ circulation: number, max: number, total: number}> {
-    const [circulation, total] = await Promise.all([
-      this.getCirculation(),
-      this.getTotalSupply(),
-    ])
+  async getSupply(): Promise<{ circulation: number; max: number; total: number }> {
+    const [circulation, total] = await Promise.all([this.getCirculation(), this.getTotalSupply()])
 
     return {
       circulation,
@@ -40,5 +37,4 @@ export class ApiToolsDataAccessService {
 
     return this.totalCache.get(TOTAL_TOKEN)
   }
-
 }

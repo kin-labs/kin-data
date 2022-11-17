@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/ecosystem/feature/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/api/ecosystem/feature/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/ecosystem/feature"],
+      "options": {
+        "jestConfig": "libs/api/ecosystem/feature/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["type:feature", "scope:api"]
+}
