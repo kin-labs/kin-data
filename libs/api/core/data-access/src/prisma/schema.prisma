@@ -7,190 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model DailyActiveUserBalanceByApp {
-  date      DateTime? @map("DATE_KEY") @db.Date
-  appIndex  BigInt?   @map("APP_ID")
-  aub       BigInt?   @map("AUB")
-  au        Int?      @map("AU")
-  cappedAub BigInt?   @map("CAPPED_AUB")
-  appName   String?   @map("NAME")
-  id        Int       @id @default(autoincrement())
-
-  @@map("daily_active_user_balance_by_app")
-}
-
-model DailyVolatilityFactor {
-  date                  DateTime? @map("DATE_KEY") @db.Date
-  averagePrice          Float?    @map("AVERAGE_PRICE")
-  totalPriceDeviation   Float?    @map("TOTAL_PRICE_DEVIATION")
-  averagePriceDeviation Float?    @map("AVERAGE_PRICE_DEVIATION")
-  volatilityFactor      Float?    @map("VOLATILITY_FACTOR")
-  id                    Int       @id @default(autoincrement())
-
-  @@map("daily_volatility_factor")
-}
-
-model DailyActiveEarnersByApp {
-  date        DateTime? @map("DATE_KEY") @db.Date
-  appIndex    BigInt?   @map("APP_ID")
-  walletCount Int?      @map("WALLET_COUNT")
-  appName     String?   @map("APP_NAME")
-  id          Int       @id @default(autoincrement())
-
-  @@map("daily_active_earners_by_app")
-}
-
-model DailyActiveEarnersEcosystem {
-  date        DateTime? @map("DATE_KEY") @db.Date
-  walletCount Int?      @map("WALLET_COUNT")
-  id          Int       @id @default(autoincrement())
-
-  @@map("daily_active_earners_ecosystem")
-}
-
-model DailyActiveSpendersByApp {
-  date        DateTime? @map("DATE_KEY") @db.Date
-  appIndex    BigInt?   @map("APP_ID")
-  walletCount Int?      @map("WALLET_COUNT")
-  appName     String?   @map("APP_NAME")
-  id          Int       @id @default(autoincrement())
-
-  @@map("daily_active_spenders_by_app")
-}
-
-model DailyActiveSpendersEcosystem {
-  date        DateTime? @map("DATE_KEY") @db.Date
-  walletCount Int?      @map("WALLET_COUNT")
-  id          Int       @id @default(autoincrement())
-
-  @@map("daily_active_spenders_ecosystem")
-}
-
-model DailyActiveUsersByApp {
-  date        DateTime? @map("DATE_KEY") @db.Date
-  appIndex    BigInt?   @map("APP_ID")
-  walletCount Int?      @map("WALLET_COUNT")
-  appName     String?   @map("APP_NAME")
-  id          Int       @id @default(autoincrement())
-
-  @@map("daily_active_users_by_app")
-}
-
-model DailyActiveUsersEcosystem {
-  date        DateTime? @map("DATE_KEY") @db.Date
-  walletCount Int?      @map("WALLET_COUNT")
-  id          Int       @id @default(autoincrement())
-
-  @@map("daily_active_users_ecosystem")
-}
-
-model DailyKinPayout {
-  date                  DateTime? @map("DATE_KEY") @db.Date
-  appIndex              BigInt?   @map("APP_ID")
-  appName               String?   @map("APP_NAME")
-  preMonopolyShare      Float?    @map("PRE_MONOPOLY_SHARE")
-  preVfPayout           String?   @map("PRE_VF_PAYOUT")
-  preMonopolyPayout     Float?    @map("PRE_MONOPOLY_PAYOUT")
-  postMonopolyAppShare  Float?    @map("POST_MONOPOLY_APP_SHARE")
-  postMonopolyPayout    Float?    @map("POST_MONOPOLY_PAYOUT")
-  postMonopolyPayoutUsd Float?    @map("POST_MONOPOLY_PAYOUT_USD")
-  id                    Int       @id @default(autoincrement())
-
-  @@map("daily_kin_payout")
-}
-
-model DailyKinTransactions {
-  date                   DateTime? @map("DATE_KEY") @db.Date
-  appIndex               BigInt?   @map("APP_ID")
-  dailyTotalTransactions Int?      @map("DAILY_TOTAL_TRANSACTIONS")
-  dailyTotalAmounts      Float?    @map("DAILY_TOTAL_AMOUNTS")
-  dailyEarnTransactions  Int?      @map("DAILY_EARN_TRANSACTIONS")
-  dailyEarnAmounts       Float?    @map("DAILY_EARN_AMOUNTS")
-  dailyEarnAverage       Float?    @map("DAILY_EARN_AVERAGE")
-  dailyEarnMedian        Float?    @map("DAILY_EARN_MEDIAN")
-  dailySpendTransactions Int?      @map("DAILY_SPEND_TRANSACTIONS")
-  dailySpendAmounts      Float?    @map("DAILY_SPEND_AMOUNTS")
-  dailySpendAverage      String?   @map("DAILY_SPEND_AVERAGE")
-  dailySpendMedian       Float?    @map("DAILY_SPEND_MEDIAN")
-  dailyPeerTransactions  Int?      @map("DAILY_PEER_TRANSACTIONS")
-  dailyPeerAmounts       Float?    @map("DAILY_PEER_AMOUNTS")
-  dailyPeerAverage       String?   @map("DAILY_PEER_AVERAGE")
-  dailyPeerMedian        Float?    @map("DAILY_PEER_MEDIAN")
-  appName                String?   @map("APP_NAME")
-  id                     Int       @id @default(autoincrement())
-
-  @@map("daily_kin_transactions")
-}
-
-model KreWeeklyPayout {
-  date            DateTime? @map("DATE_KEY") @db.Date
-  appIndex        BigInt?   @map("APP_ID")
-  weeklyKinPayout Float?    @map("WEEKLY_KIN_PAYOUT")
-  weeklyUsdPayout Float?    @map("WEEKLY_USD_PAYOUT")
-  runDate         DateTime? @map("RUN_DATE") @db.Date
-  fromDate        DateTime? @map("FROM_DATE") @db.Date
-  toDate          DateTime? @map("TO_DATE") @db.Date
-  appName         String?   @map("APP_NAME")
-  wallet          String?   @map("WALLET")
-  id              Int       @id @default(autoincrement())
-
-  @@map("kre_weekly_payout")
-}
-
-model MonthlyActiveEarnersByApp {
-  date        DateTime? @map("DATE_KEY") @db.Date
-  appIndex    BigInt?   @map("APP_ID")
-  walletCount Int?      @map("WALLET_COUNT")
-  appName     String?   @map("APP_NAME")
-  id          Int       @id @default(autoincrement())
-
-  @@map("monthly_active_earners_by_app")
-}
-
-model MonthlyActiveEarnersEcosystem {
-  date        DateTime? @map("DATE_KEY") @db.Date
-  walletCount Int?      @map("WALLET_COUNT")
-  id          Int       @id @default(autoincrement())
-
-  @@map("monthly_active_earners_ecosystem")
-}
-
-model MonthlyActiveSpendersByApp {
-  date        DateTime? @map("DATE_KEY") @db.Date
-  appIndex    BigInt?   @map("APP_ID")
-  walletCount Int?      @map("WALLET_COUNT")
-  appName     String?   @map("APP_NAME")
-  id          Int       @id @default(autoincrement())
-
-  @@map("monthly_active_spenders_by_app")
-}
-
-model MonthlyActiveSpendersEcosystem {
-  date        DateTime? @map("DATE_KEY") @db.Date
-  walletCount Int?      @map("WALLET_COUNT")
-  id          Int       @id @default(autoincrement())
-
-  @@map("monthly_active_spenders_ecosystem")
-}
-
-model MonthlyActiveUsersByApp {
-  date        DateTime? @map("DATE_KEY") @db.Date
-  appIndex    BigInt?   @map("APP_ID")
-  walletCount Int?      @map("WALLET_COUNT")
-  appName     String?   @map("APP_NAME")
-  id          Int       @id @default(autoincrement())
-
-  @@map("monthly_active_users_by_app")
-}
-
-model MonthlyActiveUsersEcosystem {
-  date        DateTime? @map("DATE_KEY") @db.Date
-  walletCount Int?      @map("WALLET_COUNT")
-  id          Int       @id @default(autoincrement())
-
-  @@map("monthly_active_users_ecosystem")
-}
-
 model krePayoutSummary {
   date  DateTime? @db.Date
   kin   Float?
@@ -205,9 +21,43 @@ model kreSummary {
   activeUserBalance       Float?
   activeCappedUserBalance Float?
   activeUsers             Int?
+  dailyVolatilityFactor   Float?
   dailyTransactions       Int?
   monthlyActiveEarners    Int?
   monthlyActiveSpenders   Int?
   monthlyActiveUsers      Int?
   id                      Int       @id @default(autoincrement())
+}
+
+model dailySummaryApps {
+  date                   DateTime? @db.Date
+  index                  Int?
+  name                   String?
+  totalDailyTransactions Int?
+  dailyEarnTransactions  Int?
+  dailySpendTransactions Int?
+  dailyPeerTransactions  Int?
+  dailyActiveUsers       Int?
+  dailyActiveEarners     Int?
+  dailyActiveSpenders    Int?
+  monthlyActiveUsers     Int?
+  monthlyActiveEarners   Int?
+  monthlyActiveSpenders  Int?
+  id                     Int       @id @default(autoincrement())
+}
+
+model dailySummaryEcosystem {
+  date                   DateTime? @db.Date
+  monthlyActiveApps      Int?
+  totalDailyTransactions Int?
+  dailyEarnTransactions  Int?
+  dailySpendTransactions Int?
+  dailyPeerTransactions  Int?
+  dailyActiveUsers       Int?
+  dailyActiveEarners     Int?
+  dailyActiveSpenders    Int?
+  monthlyActiveUsers     Int?
+  monthlyActiveEarners   Int?
+  monthlyActiveSpenders  Int?
+  id                     Int       @id @default(autoincrement())
 }

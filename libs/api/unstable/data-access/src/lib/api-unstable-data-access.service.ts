@@ -1,14 +1,6 @@
 import { ApiCoreDataAccessService } from '@kin-data/api/core/data-access'
 import { Injectable, Logger, NotFoundException } from '@nestjs/common'
 import * as LRU from 'lru-cache'
-import {
-  convertDailyActiveUsersBalance,
-  convertDailyKinPayout,
-  convertDailyKinTransactions,
-  convertDailyVolatilityFactor,
-  formatAppCountDates,
-  formatCountDates,
-} from './helpers'
 
 function createDataSet(label: string, data: any, borderColor = '#b795ec', backgroundColor = '#8952e0') {
   return {
@@ -71,7 +63,7 @@ function daysAgo(days: number) {
   return new Date(now.getFullYear(), now.getMonth(), now.getDate() - days)
 }
 
-function getDateRange(range: KreStatRange = KreStatRange['30days']) {
+export function getDateRange(range: KreStatRange = KreStatRange['30days']) {
   switch (range) {
     case KreStatRange['120days']:
       return daysAgo(120)
@@ -112,7 +104,7 @@ export class ApiUnstableDataAccessService {
     const gt = getDateRange(range)
     const cacheKey = getCacheKey(stat.id, { gt })
 
-    return this.getCachedData(cacheKey, () => this.getKreStat(stat, gt))
+    return this.getCachedData(cacheKey, () => Promise.resolve({ stat, gt }))
   }
 
   private async getKreStat(stat: KreStat, gt: Date) {
@@ -149,260 +141,115 @@ export class ApiUnstableDataAccessService {
         id: 'daily-active-earners-by-app',
         name: 'Daily Active Earners By App',
         type: 'app-count-date',
-        fn: ({ gt }) => this.dailyActiveEarnersByApp({ gt }),
+        fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
       },
       {
         id: 'daily-active-earners-ecosystem',
         name: 'Daily Active Earners Ecosystem',
         type: 'count-date',
-        fn: ({ gt }) => this.dailyActiveEarnersEcosystem({ gt }),
+        fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
       },
       {
         id: 'daily-active-spenders-by-app',
         name: 'Daily Active Spenders By App',
         type: 'app-count-date',
-        fn: ({ gt }) => this.dailyActiveSpendersByApp({ gt }),
+        fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
       },
       {
         id: 'daily-active-spenders-ecosystem',
         name: 'Daily Active Spenders Ecosystem',
         type: 'count-date',
-        fn: ({ gt }) => this.dailyActiveSpendersEcosystem({ gt }),
+        fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
       },
       {
         id: 'daily-active-user-balance-by-app',
         name: 'Daily Active User Balance By App',
         type: 'app-dau',
-        fn: ({ gt }) => this.dailyActiveUserBalanceByApp({ gt }),
+        fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
       },
       {
         id: 'daily-active-users-by-app',
         name: 'Daily Active Users By App',
         type: 'app-count-date',
-        fn: ({ gt }) => this.dailyActiveUsersByApp({ gt }),
+        fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
       },
       {
         id: 'daily-active-users-ecosystem',
         name: 'Daily Active Users Ecosystem',
         type: 'count-date',
-        fn: ({ gt }) => this.dailyActiveUsersEcosystem({ gt }),
+        fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
       },
       {
         id: 'daily-kin-payout',
         name: 'Daily Kin Payout',
         type: 'daily-kin-payout',
-        fn: ({ gt }) => this.dailyKinPayout({ gt }),
+        fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
       },
       {
         id: 'daily-kin-transactions',
         name: 'Daily Kin Transactions',
         type: 'daily-kin-transactions',
-        fn: ({ gt }) => this.dailyKinTransactions({ gt }),
+        fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
       },
       {
         id: 'daily-volatility-factor',
         name: 'Daily Volatility Factor',
         type: 'daily-volatility-factor',
-        fn: ({ gt }) => this.dailyVolatilityFactor({ gt }),
+        fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
       },
       {
         id: 'monthly-active-earners-by-app',
         name: 'Monthly Active Earners By App',
         type: 'app-count-date',
-        fn: ({ gt }) => this.monthlyActiveEarnersByApp({ gt }),
+        fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
       },
       {
         id: 'monthly-active-earners-ecosystem',
         name: 'Monthly Active Earners Ecosystem',
         type: 'count-date',
-        fn: ({ gt }) => this.monthlyActiveEarnersEcosystem({ gt }),
+        fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
       },
       {
         id: 'monthly-active-spenders-by-app',
         name: 'Monthly Active Spenders By App',
         type: 'app-count-date',
-        fn: ({ gt }) => this.monthlyActiveSpendersByApp({ gt }),
+        fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
       },
       {
         id: 'monthly-active-spenders-ecosystem',
         name: 'Monthly Active Spenders Ecosystem',
         type: 'count-date',
-        fn: ({ gt }) => this.monthlyActiveSpendersEcosystem({ gt }),
+        fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
       },
       {
         id: 'monthly-active-users-by-app',
         name: 'Monthly Active Users By App',
         type: 'app-count-date',
-        fn: ({ gt }) => this.monthlyActiveUsersByApp({ gt }),
+        fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
       },
       {
         id: 'monthly-active-users-ecosystem',
         name: 'Monthly Active Users Ecosystem',
         type: 'count-date',
-        fn: ({ gt }) => this.monthlyActiveUsersEcosystem({ gt }),
+        fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
       },
     ]
-  }
-
-  dailyActiveEarnersByApp({ gt }: { gt: Date }) {
-    const cacheKey = getCacheKey('dailyActiveEarnersByApp', { gt })
-    return this.getCachedData(cacheKey, () =>
-      this.data.dailyActiveEarnersByApp
-        .findMany({ where: { date: { gt } } })
-        .then((entities) => formatAppCountDates(entities))
-        .then((data) => createAppCountDatesGraph(data)),
-    )
-  }
-
-  dailyActiveEarnersEcosystem({ gt }: { gt: Date }) {
-    const cacheKey = getCacheKey('dailyActiveEarnersEcosystem', { gt })
-    return this.getCachedData(cacheKey, () =>
-      this.data.dailyActiveEarnersEcosystem
-        .findMany({ where: { date: { gt } } })
-        .then((entities) => formatCountDates(entities)),
-    )
-  }
-
-  dailyActiveSpendersByApp({ gt }: { gt: Date }) {
-    const cacheKey = getCacheKey('dailyActiveSpendersByApp', { gt })
-    return this.getCachedData(cacheKey, () =>
-      this.data.dailyActiveSpendersByApp
-        .findMany({ where: { date: { gt } } })
-        .then((entities) => formatAppCountDates(entities)),
-    )
-  }
-
-  dailyActiveSpendersEcosystem({ gt }: { gt: Date }) {
-    const cacheKey = getCacheKey('dailyActiveSpendersEcosystem', { gt })
-    return this.getCachedData(cacheKey, () =>
-      this.data.dailyActiveSpendersEcosystem
-        .findMany({ where: { date: { gt } } })
-        .then((entities) => formatCountDates(entities)),
-    )
-  }
-
-  dailyActiveUserBalanceByApp({ gt }: { gt: Date }) {
-    const cacheKey = getCacheKey('dailyActiveUserBalanceByApp', { gt })
-    return this.getCachedData(cacheKey, () =>
-      this.data.dailyActiveUserBalanceByApp
-        .findMany({ where: { date: { gt } } })
-        .then((entities) => convertDailyActiveUsersBalance(entities)),
-    )
-  }
-
-  dailyActiveUsersByApp({ gt }: { gt: Date }) {
-    const cacheKey = getCacheKey('dailyActiveUsersByApp', { gt })
-    return this.getCachedData(cacheKey, () =>
-      this.data.dailyActiveUsersByApp
-        .findMany({ where: { date: { gt } } })
-        .then((entities) => formatAppCountDates(entities)),
-    )
-  }
-
-  dailyActiveUsersEcosystem({ gt }: { gt: Date }) {
-    const cacheKey = getCacheKey('dailyActiveUsersEcosystem', { gt })
-    return this.getCachedData(cacheKey, () =>
-      this.data.dailyActiveUsersEcosystem
-        .findMany({ where: { date: { gt } } })
-        .then((entities) => formatCountDates(entities)),
-    )
-  }
-
-  dailyKinPayout({ gt }: { gt: Date }) {
-    const cacheKey = getCacheKey('dailyKinPayout', { gt })
-    return this.getCachedData(cacheKey, () =>
-      this.data.dailyKinPayout
-        .findMany({ where: { date: { gt } } })
-        .then((entities) => convertDailyKinPayout(entities)),
-    )
-  }
-
-  dailyKinTransactions({ gt }: { gt: Date }) {
-    const cacheKey = getCacheKey('dailyKinTransactions', { gt })
-    return this.getCachedData(cacheKey, () =>
-      this.data.dailyKinTransactions
-        .findMany({ where: { date: { gt } } })
-        .then((entities) => convertDailyKinTransactions(entities)),
-    )
-  }
-
-  dailyVolatilityFactor({ gt }: { gt: Date }) {
-    const cacheKey = getCacheKey('dailyVolatilityFactor', { gt })
-    return this.getCachedData(cacheKey, () =>
-      this.data.dailyVolatilityFactor
-        .findMany({ where: { date: { gt } } })
-        .then((entities) => convertDailyVolatilityFactor(entities)),
-    )
-  }
-
-  monthlyActiveEarnersByApp({ gt }: { gt: Date }) {
-    const cacheKey = getCacheKey('monthlyActiveEarnersByApp', { gt })
-    return this.getCachedData(cacheKey, () =>
-      this.data.monthlyActiveEarnersByApp
-        .findMany({ where: { date: { gt } } })
-        .then((entities) => formatAppCountDates(entities)),
-    )
-  }
-
-  monthlyActiveEarnersEcosystem({ gt }: { gt: Date }) {
-    const cacheKey = getCacheKey('monthlyActiveEarnersEcosystem', { gt })
-    return this.getCachedData(cacheKey, () =>
-      this.data.monthlyActiveEarnersEcosystem
-        .findMany({ where: { date: { gt } } })
-        .then((entities) => formatCountDates(entities)),
-    )
-  }
-
-  monthlyActiveSpendersByApp({ gt }: { gt: Date }) {
-    const cacheKey = getCacheKey('monthlyActiveSpendersByApp', { gt })
-    return this.getCachedData(cacheKey, () =>
-      this.data.monthlyActiveSpendersByApp
-        .findMany({ where: { date: { gt } } })
-        .then((entities) => formatAppCountDates(entities)),
-    )
-  }
-
-  monthlyActiveSpendersEcosystem({ gt }: { gt: Date }) {
-    const cacheKey = getCacheKey('monthlyActiveSpendersEcosystem', { gt })
-    return this.getCachedData(cacheKey, () =>
-      this.data.monthlyActiveSpendersEcosystem
-        .findMany({ where: { date: { gt } } })
-        .then((entities) => formatCountDates(entities)),
-    )
-  }
-
-  monthlyActiveUsersByApp({ gt }: { gt: Date }) {
-    const cacheKey = getCacheKey('monthlyActiveUsersByApp', { gt })
-    return this.getCachedData(cacheKey, () =>
-      this.data.monthlyActiveUsersByApp
-        .findMany({ where: { date: { gt } } })
-        .then((entities) => formatAppCountDates(entities)),
-    )
-  }
-
-  monthlyActiveUsersEcosystem({ gt }: { gt: Date }) {
-    const cacheKey = getCacheKey('monthlyActiveUsersEcosystem', { gt })
-    return this.getCachedData(cacheKey, () =>
-      this.data.monthlyActiveUsersEcosystem
-        .findMany({ where: { date: { gt } } })
-        .then((entities) => formatCountDates(entities)),
-    )
   }
 
   private async getCachedData(cacheKey: string, fn: () => Promise<any>) {

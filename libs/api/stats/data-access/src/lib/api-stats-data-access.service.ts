@@ -1,4 +1,5 @@
 import { ApiCoreDataAccessService } from '@kin-data/api/core/data-access'
+import { getDateRange, KreStatRange } from '@kin-data/api/unstable/data-access'
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common'
 import { Cron, CronExpression } from '@nestjs/schedule'
 import { groupBy } from 'lodash'
@@ -35,12 +36,49 @@ function parseJsonString(json: string) {
   }))
 }
 
+function getCacheKey(key: string, { gt }: { gt: Date }) {
+  return [key, gt?.getTime() ?? 'default-key'].join('-')
+}
+
 @Injectable()
 export class ApiStatsDataAccessService implements OnModuleInit {
   private readonly logger = new Logger('ApiStatsDataAccessService')
   private readonly cache = new LRU({ maxAge: 1000 * 60 * 60 })
 
   constructor(private readonly data: ApiCoreDataAccessService, private readonly bigQuery: BigQueryStatsService) {}
+
+  dailySummaryApps({ range }: { range: KreStatRange }) {
+    const gt = getDateRange(range)
+    const cachedKey = getCacheKey('daily-summary-apps', { gt })
+
+    return this.getCachedData(cachedKey, () =>
+      this.data.dailySummaryApps
+        .findMany({
+          where: {
+            date: { gt },
+          },
+          orderBy: { date: 'asc' },
+        })
+        .then((items) => {
+          // Get unique dates from items
+          const dates = [...new Set(items.map((item) => formatDate(item.date)))]
+
+          return dates.map((date) => {
+            // Get all items for the current date
+            const data = items.filter((item) => formatDate(item.date) === date)
+
+            // Get unique app ids from items
+            const apps = [...new Set(data.map((item) => ({ index: item.index, name: item.name })))]
+
+            return {
+              date,
+              apps,
+              data,
+            }
+          })
+        }),
+    )
+  }
 
   payoutSummary(date?: string) {
     return this.getCachedData(`payout-summary-${date ?? 'latest'}`, () =>
