@@ -10,13 +10,13 @@ export function StatsDetailFeature() {
   const [data, setData] = useState<any | undefined>()
   const [range, setRange] = useState<string>('90days')
   const { statId } = useParams<{ statId: string }>()
-  const { dailySummaryAppResult, dailySummaryEcosystem, loading } = useStats()
+  const { dailySummaryAppResult, loading } = useStats()
 
   if (loading) {
     return <UiLoader />
   }
 
-  if (!dailySummaryAppResult || !dailySummaryEcosystem) {
+  if (!dailySummaryAppResult) {
     return <Alert color="red">KRE stat with id {statId} could not be found :(</Alert>
   }
 
@@ -24,7 +24,7 @@ export function StatsDetailFeature() {
     <Box p={4}>
       <Stack spacing={12}>
         <Box component="pre" p="2">
-          {JSON.stringify({ dailySummaryAppResult, dailySummaryEcosystem }, null, 2)}
+          {JSON.stringify({ dailySummaryAppResult }, null, 2)}
         </Box>
         {/*<Title size="x-large">{name}</Title>*/}
         {/*<Text>{description}</Text>*/}
@@ -54,7 +54,9 @@ function CountDate({ data }: { data: any }) {
   }
   return (
     <Stack>
-      <LineChart data={chart} />
+      <Box>
+        <LineChart data={chart} />
+      </Box>
       <Box component="pre" p="6">
         {JSON.stringify(data, null, 2)}
       </Box>

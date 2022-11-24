@@ -26,7 +26,7 @@ export function getDateRange(range: StatRange = StatRange['90days']) {
   function daysAgo(days: number) {
     const now = new Date()
 
-    return new Date(now.getFullYear(), now.getMonth(), now.getDate() - days)
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate() - days - 1)
   }
 
   switch (range) {

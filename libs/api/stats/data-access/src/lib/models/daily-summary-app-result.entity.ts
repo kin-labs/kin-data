@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql'
+import { Field, Int, ObjectType } from '@nestjs/graphql'
 import { App } from './app.entity'
 
 @ObjectType()
@@ -7,4 +7,6 @@ export class DailySummaryAppResult {
   dates: string[]
   @Field(() => [App], { nullable: true })
   apps: App[]
+  @Field(() => Int, { nullable: true })
+  total?: number
 }

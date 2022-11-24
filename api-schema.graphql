@@ -4,13 +4,16 @@
 
 type App {
   data: [Int!]
+  hidden: Boolean
   index: Int
   name: String
+  total: Int
 }
 
 type DailySummaryAppResult {
   apps: [App!]
   dates: [String!]
+  total: Int
 }
 
 type DailySummaryEcosystem {

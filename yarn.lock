@@ -3633,6 +3633,11 @@
     tweetnacl "^1.0.3"
     uuid "^8.3.2"
 
+"@kurkle/color@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@kurkle/color/-/color-0.2.1.tgz#19ddeb9a06f27d0e62452adda17683f8426a7232"
+  integrity sha512-zkMiuMMMQ92x16uBC2nkqTYDynCY9vhAxF0TH1vSMWKD0hnTGxnYtV1v+NEuVYuwYeA40jD4iuyz0ApcDJQstw==
+
 "@leichtgewicht/ip-codec@^2.0.1":
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
@@ -7311,6 +7316,11 @@ chart.js@^3.9.1:
   version "3.9.1"
   resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-3.9.1.tgz#3abf2c775169c4c71217a107163ac708515924b8"
   integrity sha512-Ro2JbLmvg83gXF5F4sniaQ+lTbSv18E+TIf2cOeiH1Iqd2PGFOtem+DUufMZsCJwFE7ywPOpfXFBwRTGq7dh6w==
+
+chartjs-plugin-autocolors@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/chartjs-plugin-autocolors/-/chartjs-plugin-autocolors-0.0.7.tgz#841675e258272481bbc40ee1b2787619c8132f6f"
+  integrity sha512-yAraaHD30d8/bXsFN/k8/Xq2cd2j8pctyd8v+mef58mEBr5RtTs1m5/3EJgB6RE+nxEOPMnZ8170siB4mmDP7g==
 
 check-more-types@^2.24.0:
   version "2.24.0"

@@ -21,14 +21,17 @@ export type Scalars = {
 export type App = {
   __typename?: 'App'
   data?: Maybe<Array<Scalars['Int']>>
+  hidden?: Maybe<Scalars['Boolean']>
   index?: Maybe<Scalars['Int']>
   name?: Maybe<Scalars['String']>
+  total?: Maybe<Scalars['Int']>
 }
 
 export type DailySummaryAppResult = {
   __typename?: 'DailySummaryAppResult'
   apps?: Maybe<Array<App>>
   dates?: Maybe<Array<Scalars['String']>>
+  total?: Maybe<Scalars['Int']>
 }
 
 export type DailySummaryEcosystem = {
@@ -144,15 +147,25 @@ export type StatDetailsFragment = {
 
 export type AppDetailsFragment = {
   __typename?: 'App'
+  data?: Array<number> | null
+  hidden?: boolean | null
   index?: number | null
   name?: string | null
-  data?: Array<number> | null
+  total?: number | null
 }
 
 export type DailySummaryAppResultDetailsFragment = {
   __typename?: 'DailySummaryAppResult'
   dates?: Array<string> | null
-  apps?: Array<{ __typename?: 'App'; index?: number | null; name?: string | null; data?: Array<number> | null }> | null
+  total?: number | null
+  apps?: Array<{
+    __typename?: 'App'
+    data?: Array<number> | null
+    hidden?: boolean | null
+    index?: number | null
+    name?: string | null
+    total?: number | null
+  }> | null
 }
 
 export type DailySummaryEcosystemDetailsFragment = {
@@ -203,11 +216,14 @@ export type DailySummaryAppsQuery = {
   items: {
     __typename?: 'DailySummaryAppResult'
     dates?: Array<string> | null
+    total?: number | null
     apps?: Array<{
       __typename?: 'App'
+      data?: Array<number> | null
+      hidden?: boolean | null
       index?: number | null
       name?: string | null
-      data?: Array<number> | null
+      total?: number | null
     }> | null
   }
 }
@@ -293,9 +309,11 @@ export const StatDetailsFragmentDoc = gql`
 `
 export const AppDetailsFragmentDoc = gql`
   fragment AppDetails on App {
+    data
+    hidden
     index
     name
-    data
+    total
   }
 `
 export const DailySummaryAppResultDetailsFragmentDoc = gql`
@@ -304,6 +322,7 @@ export const DailySummaryAppResultDetailsFragmentDoc = gql`
     apps {
       ...AppDetails
     }
+    total
   }
   ${AppDetailsFragmentDoc}
 `

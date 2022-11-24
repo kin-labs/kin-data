@@ -8,4 +8,8 @@ export class App {
   name: string
   @Field(() => [Int], { nullable: true })
   data?: number[]
+  @Field(() => Int, { nullable: true })
+  total?: number
+  @Field({ nullable: true })
+  hidden?: boolean
 }

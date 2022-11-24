@@ -38,12 +38,88 @@ function parseJsonString(json: string) {
   }))
 }
 
+function reduceLabels(labels, counter = 1): string[] {
+  const labelCount = labels.length
+
+  if (labelCount <= 25) {
+    console.log('No need to reduce labels', { counter, labels: labels.length })
+    return [...labels]
+  }
+
+  let result = []
+
+  for (let i = labelCount - 2; i--; i >= 0) {
+    console.log('reduceLabels', { i, labelCount })
+    //-2 get last datapoint always
+    if (i % 4 === 0) {
+      console.log('reduceLabels', { counter, i, labelCount, labels: labels.length })
+
+      result = [...labels[i]]
+
+      labels.splice(i, 1)
+
+      console.log('reduceLabels', { counter, i, labelCount, labels: labels.length })
+    }
+  }
+
+  if (labels.length > 25) {
+    console.log('Run Another Label Reduction', { counter, labels: labels.length })
+    return reduceLabels(labels, counter + 1)
+  }
+
+  console.log('Reduced Data Labels', { counter, labels: labels.length })
+  return [...result]
+}
+
+// function reduceDataPoints(labels, data): { labels: string[]; data: number[] } {
+//   const labelCount = labels.length
+//
+//   if (labelCount <= 25) {
+//     console.log('No need to reduce data points', { labels: labels.length, data: data.length })
+//     return { labels, data }
+//   }
+//
+//   const result = { labels: [], data: [] }
+//
+//   for (let i = labelCount - 2; i--; i >= 0) {
+//     console.log('reduceDataPoints', { i, labelCount })
+//     //-2 get last datapoint always
+//     if (i % 4 === 0) {
+//       console.log('reduceDataPoints', { i, labelCount, labels: labels.length, data: data.length })
+//
+//       result.labels.push(labels.slice(i, i + 1)[0])
+//       result.data.push(data.slice(i, i + 1)[0])
+//       labels.splice(i, 1)
+//       data?.forEach((point, ii) => {
+//         //loop for each data point
+//         data[ii].data.splice(i, 1) //delete corresponding index
+//       })
+//     }
+//   }
+//
+//   if (labels.length > 25) {
+//     console.log('Run Another Reduction', { labels: labels.length, data: data.length })
+//     return reduceDataPoints(labels, data)
+//   }
+//
+//   console.log('Reduced Data Points', { labels: labels.length, data: data.length })
+//   return result
+// }
+
 function getCacheKey(key: string, { gt, type }: { gt: Date; type?: StatType }) {
   return [key, gt?.getTime() ?? 'default-key', type ? type : 'none'].join('-')
 }
 
 @Injectable()
 export class ApiStatsDataAccessService implements OnModuleInit {
+  static filtered: Record<string, number> = {
+    APP_0: 0,
+    APP_1: 1,
+    KIK: 32,
+    MY_KIN_WALLET: 385,
+    KIN_NODE_DEMO: 360,
+  }
+
   private readonly logger = new Logger('ApiStatsDataAccessService')
   private readonly cache = new LRU({ maxAge: 1000 * 60 * 60 })
 
@@ -72,6 +148,9 @@ export class ApiStatsDataAccessService implements OnModuleInit {
         )
         .then((summary) => {
           const dates = [...new Set(summary?.map((d) => d.date) ?? [])]
+          // .filter(
+          //   (d) => !['2022-10-25', '2022-10-26'].includes(d),
+          // )
           const indexes = [...new Set(summary?.map((d) => d.index) ?? [])]
           const apps: App[] = indexes
             .map((index) => summary.find((item) => item.index === index))
@@ -87,11 +166,26 @@ export class ApiStatsDataAccessService implements OnModuleInit {
                 }),
               }
             })
-            .sort((a, b) => (a.name > b.name ? 1 : -1))
+            // Remove apps with no data
+            .filter((app) => app.data.reduce((a, b) => a + b, 0) > 0)
+            // Get the total value for each app
+            .map((app) => ({ ...app, total: app.data.reduce((a, b) => a + b, 0) }))
+            // Order by total value
+            .sort((a, b) => (a.total < b.total ? 1 : -1))
+            // Hide all apps besides the top 10
+            .map((app, index) => ({ ...app, hidden: index > 9 }))
 
           return {
             dates,
             apps,
+          }
+        })
+        .then(({ dates, apps }) => {
+          const total = apps.map((app) => app.total).reduce((a, b) => a + b, 0)
+          return {
+            dates,
+            apps,
+            total,
           }
         }),
     )
@@ -183,10 +277,15 @@ export class ApiStatsDataAccessService implements OnModuleInit {
   }
 
   private filterItem(index: number) {
-    const MY_KIN_WALLET = 385
-    const filtered = [0, 1, MY_KIN_WALLET]
+    const filtered = {
+      APP_0: 0,
+      APP_1: 1,
+      KIK: 32,
+      MY_KIN_WALLET: 385,
+      KIN_NODE_DEMO: 360,
+    }
 
-    return filtered.includes(index)
+    return Object.values(filtered).includes(index)
   }
 
   // The methods below are from the old stats service and should be deprecated

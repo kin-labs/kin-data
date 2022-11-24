@@ -6,15 +6,18 @@ fragment StatDetails on Stat {
 }
 
 fragment AppDetails on App {
+  data
+  hidden
   index
   name
-  data
+  total
 }
 fragment DailySummaryAppResultDetails on DailySummaryAppResult {
   dates
   apps {
     ...AppDetails
   }
+  total
 }
 
 fragment DailySummaryEcosystemDetails on DailySummaryEcosystem {
