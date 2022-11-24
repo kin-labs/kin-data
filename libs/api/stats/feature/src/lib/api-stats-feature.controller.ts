@@ -13,22 +13,22 @@ export class ApiStatsFeatureController {
 
   @Get('payout-summary')
   payoutSummary(@Query('date') date?: string) {
-    return this.service.payoutSummary(date)
+    return this.service.krePayoutSummary(date)
   }
 
   @Get('payout-summary-dates')
   payoutSummaryDates() {
-    return this.service.payoutSummaryDates()
+    return this.service.krePayoutSummaryDates()
   }
 
   @Get('summary')
   summary(@Query('date') date?: string) {
-    return this.service.summary(date)
+    return this.service.kreSummary(date)
   }
 
   @Get('summary-dates')
   summaryDates() {
-    return this.service.summaryDates()
+    return this.service.kreSummaryDates()
   }
 
   // The methods below are from the old stats service and should be deprecated

@@ -1,5 +1,4 @@
 import { ApiCoreDataAccessService } from '@kin-data/api/core/data-access'
-import { getDateRange, KreStatRange } from '@kin-data/api/unstable/data-access'
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common'
 import { Cron, CronExpression } from '@nestjs/schedule'
 import { groupBy } from 'lodash'
@@ -16,6 +15,7 @@ import { LastTxStat } from './models/last-tx-stat.model'
 import { MonthlyActiveEarnersStat } from './models/monthly-active-earners-stat.model'
 import { MonthlyActiveSpendersStat } from './models/monthly-active-spenders-stat.model'
 import { PayoutsStat } from './models/payouts-stat.model'
+import { getDateRange, StatRange } from './models/stat-range.enum'
 import { TotalActiveEarnersStat } from './models/total-active-earners-stat.model'
 import { TotalActiveSpendersStat } from './models/total-active-spenders-stat.model'
 import { TotalWalletsStat } from './models/total-wallets-stat.model'
@@ -47,41 +47,36 @@ export class ApiStatsDataAccessService implements OnModuleInit {
 
   constructor(private readonly data: ApiCoreDataAccessService, private readonly bigQuery: BigQueryStatsService) {}
 
-  dailySummaryApps({ range }: { range: KreStatRange }) {
+  dailySummaryApps({ range }: { range: StatRange }) {
     const gt = getDateRange(range)
     const cachedKey = getCacheKey('daily-summary-apps', { gt })
 
     return this.getCachedData(cachedKey, () =>
-      this.data.dailySummaryApps
-        .findMany({
-          where: {
-            date: { gt },
-          },
-          orderBy: { date: 'asc' },
-        })
-        .then((items) => {
-          // Get unique dates from items
-          const dates = [...new Set(items.map((item) => formatDate(item.date)))]
-
-          return dates.map((date) => {
-            // Get all items for the current date
-            const data = items.filter((item) => formatDate(item.date) === date)
-
-            // Get unique app ids from items
-            const apps = [...new Set(data.map((item) => ({ index: item.index, name: item.name })))]
-
-            return {
-              date,
-              apps,
-              data,
-            }
-          })
-        }),
+      this.data.dailySummaryApps.findMany({
+        where: {
+          date: { gt },
+        },
+        orderBy: { date: 'asc' },
+      }),
     )
   }
 
-  payoutSummary(date?: string) {
-    return this.getCachedData(`payout-summary-${date ?? 'latest'}`, () =>
+  dailySummaryEcosystem({ range }: { range: StatRange }) {
+    const gt = getDateRange(range)
+    const cachedKey = getCacheKey('daily-summary-ecosystem', { gt })
+
+    return this.getCachedData(cachedKey, () =>
+      this.data.dailySummaryEcosystem.findMany({
+        where: {
+          date: { gt },
+        },
+        orderBy: { date: 'asc' },
+      }),
+    )
+  }
+
+  krePayoutSummary(date?: string) {
+    return this.getCachedData(`kre-payout-summary-${date ?? 'latest'}`, () =>
       this.data.krePayoutSummary
         .findFirst({
           where: {
@@ -98,8 +93,8 @@ export class ApiStatsDataAccessService implements OnModuleInit {
     )
   }
 
-  payoutSummaryDates() {
-    return this.getCachedData(`payout-summary-dates`, () =>
+  krePayoutSummaryDates() {
+    return this.getCachedData(`kre-payout-summary-dates`, () =>
       this.data.krePayoutSummary
         .findMany({
           orderBy: { date: 'desc' },
@@ -110,8 +105,8 @@ export class ApiStatsDataAccessService implements OnModuleInit {
     )
   }
 
-  summary(date?: string) {
-    return this.getCachedData(`summary-${date ?? 'latest'}`, () =>
+  kreSummary(date?: string) {
+    return this.getCachedData(`kre-summary-${date ?? 'latest'}`, () =>
       this.data.kreSummary
         .findFirst({
           where: {
@@ -128,8 +123,8 @@ export class ApiStatsDataAccessService implements OnModuleInit {
     )
   }
 
-  summaryDates() {
-    return this.getCachedData(`summary-dates`, () =>
+  kreSummaryDates() {
+    return this.getCachedData(`kre-summary-dates`, () =>
       this.data.kreSummary
         .findMany({
           orderBy: { date: 'desc' },
