@@ -139,7 +139,7 @@ export class ApiUnstableDataAccessService {
     return [
       {
         id: 'daily-active-earners-by-app',
-        name: 'Daily Active Earners By App',
+        name: 'Daily Active Earners By AppEntity',
         type: 'app-count-date',
         fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
@@ -153,7 +153,7 @@ export class ApiUnstableDataAccessService {
       },
       {
         id: 'daily-active-spenders-by-app',
-        name: 'Daily Active Spenders By App',
+        name: 'Daily Active Spenders By AppEntity',
         type: 'app-count-date',
         fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
@@ -167,14 +167,14 @@ export class ApiUnstableDataAccessService {
       },
       {
         id: 'daily-active-user-balance-by-app',
-        name: 'Daily Active User Balance By App',
+        name: 'Daily Active User Balance By AppEntity',
         type: 'app-dau',
         fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
       },
       {
         id: 'daily-active-users-by-app',
-        name: 'Daily Active Users By App',
+        name: 'Daily Active Users By AppEntity',
         type: 'app-count-date',
         fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
@@ -209,7 +209,7 @@ export class ApiUnstableDataAccessService {
       },
       {
         id: 'monthly-active-earners-by-app',
-        name: 'Monthly Active Earners By App',
+        name: 'Monthly Active Earners By AppEntity',
         type: 'app-count-date',
         fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
@@ -223,7 +223,7 @@ export class ApiUnstableDataAccessService {
       },
       {
         id: 'monthly-active-spenders-by-app',
-        name: 'Monthly Active Spenders By App',
+        name: 'Monthly Active Spenders By AppEntity',
         type: 'app-count-date',
         fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),
@@ -237,7 +237,7 @@ export class ApiUnstableDataAccessService {
       },
       {
         id: 'monthly-active-users-by-app',
-        name: 'Monthly Active Users By App',
+        name: 'Monthly Active Users By AppEntity',
         type: 'app-count-date',
         fn: ({ gt }) => Promise.resolve({ gt }),
         ranges: Object.keys(KreStatRange),

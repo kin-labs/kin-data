@@ -2,21 +2,15 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type DailySummaryApps {
-  dailyActiveEarners: Int
-  dailyActiveSpenders: Int
-  dailyActiveUsers: Int
-  dailyEarnTransactions: Int
-  dailyPeerTransactions: Int
-  dailySpendTransactions: Int
-  date: DateTime!
-  id: String!
+type App {
+  data: [Int!]
   index: Int
-  monthlyActiveEarners: Int
-  monthlyActiveSpenders: Int
-  monthlyActiveUsers: Int
-  name: String!
-  totalDailyTransactions: Int
+  name: String
+}
+
+type DailySummaryAppResult {
+  apps: [App!]
+  dates: [String!]
 }
 
 type DailySummaryEcosystem {
@@ -26,7 +20,7 @@ type DailySummaryEcosystem {
   dailyEarnTransactions: Int
   dailyPeerTransactions: Int
   dailySpendTransactions: Int
-  date: DateTime!
+  date: String!
   id: String!
   monthlyActiveApps: Int
   monthlyActiveEarners: Int
@@ -36,17 +30,12 @@ type DailySummaryEcosystem {
 }
 
 """
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
-"""
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
 scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
 
 type KrePayoutSummary {
-  date: DateTime!
+  date: String!
   id: String!
   kin: Float
   top10: JSON
@@ -73,7 +62,7 @@ type KreSummary {
   activeUserBalance: Float
   dailyTransactions: Int
   dailyVolatilityFactor: Float
-  date: DateTime!
+  date: String!
   id: String!
   monthlyActiveEarners: Int
   monthlyActiveSpenders: Int
@@ -81,13 +70,39 @@ type KreSummary {
 }
 
 type Query {
-  dailySummaryApps: [DailySummaryApps!]!
-  dailySummaryEcosystem: [DailySummaryEcosystem!]!
+  dailySummaryApps(input: StatInput!): DailySummaryAppResult!
+  dailySummaryEcosystem(input: StatInput!): [DailySummaryEcosystem!]!
   kreList: [String!]
   krePayoutSummary: [KrePayoutSummary!]!
   krePayoutSummaryDates: [String!]!
   kreStatList: [KreStat!]
   kreSummary: [KreSummary!]!
   kreSummaryDates: [String!]!
+  stats: [Stat!]!
   uptime: Float
+}
+
+type Stat {
+  description: [String!]!
+  id: String!
+  name: String!
+  type: StatType!
+}
+
+input StatInput {
+  range: String
+  type: StatType
+}
+
+enum StatType {
+  dailyActiveEarners
+  dailyActiveSpenders
+  dailyActiveUsers
+  dailyEarnTransactions
+  dailyPeerTransactions
+  dailySpendTransactions
+  monthlyActiveEarners
+  monthlyActiveSpenders
+  monthlyActiveUsers
+  totalDailyTransactions
 }

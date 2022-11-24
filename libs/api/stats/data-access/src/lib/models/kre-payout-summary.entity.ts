@@ -6,7 +6,7 @@ export class KrePayoutSummary {
   @Field()
   id: string
   @Field()
-  date: Date
+  date: string
   @Field(() => Float, { nullable: true })
   kin?: number
   @Field(() => Float, { nullable: true })

@@ -29,7 +29,7 @@ model kreSummary {
   id                      Int       @id @default(autoincrement())
 }
 
-model dailySummaryApps {
+model dailySummaryApp {
   date                   DateTime? @db.Date
   index                  Int?
   name                   String?
@@ -44,6 +44,8 @@ model dailySummaryApps {
   monthlyActiveEarners   Int?
   monthlyActiveSpenders  Int?
   id                     Int       @id @default(autoincrement())
+
+  @@map("dailySummaryApps")
 }
 
 model dailySummaryEcosystem {

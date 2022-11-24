@@ -5,7 +5,7 @@ export class KreSummary {
   @Field()
   id: string
   @Field()
-  date: Date
+  date: string
   @Field(() => Int, { nullable: true })
   activeApps?: number
   @Field(() => Float, { nullable: true })

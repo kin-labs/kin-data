@@ -1,4 +1,6 @@
-import { registerEnumType } from '@nestjs/graphql'
+import { Field, InputType, registerEnumType } from '@nestjs/graphql'
+import { StatType } from './stat-type.enum'
+
 export enum StatRange {
   '7days' = '7days',
   '30days' = '30days',
@@ -12,7 +14,15 @@ export enum StatRange {
 
 registerEnumType(StatRange, { name: 'StatRange' })
 
-export function getDateRange(range: StatRange = StatRange['30days']) {
+@InputType()
+export class StatInput {
+  @Field({ nullable: true })
+  range?: string
+  @Field(() => StatType, { nullable: true })
+  type?: StatType
+}
+
+export function getDateRange(range: StatRange = StatRange['90days']) {
   function daysAgo(days: number) {
     const now = new Date()
 
@@ -37,6 +47,6 @@ export function getDateRange(range: StatRange = StatRange['30days']) {
     case StatRange.all:
       return undefined
     default:
-      return daysAgo(30)
+      return daysAgo(90)
   }
 }

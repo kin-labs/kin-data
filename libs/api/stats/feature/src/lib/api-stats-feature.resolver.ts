@@ -1,27 +1,27 @@
 import {
   ApiStatsDataAccessService,
-  DailySummaryApps,
+  DailySummaryAppResult,
   DailySummaryEcosystem,
   KrePayoutSummary,
   KreStat,
   KreSummary,
+  Stat,
+  StatInput,
 } from '@kin-data/api/stats/data-access'
-import { KreStatRange } from '@kin-data/api/unstable/data-access'
-import { Param } from '@nestjs/common'
-import { Query, Resolver } from '@nestjs/graphql'
+import { Args, Query, Resolver } from '@nestjs/graphql'
 
 @Resolver()
 export class ApiStatsFeatureResolver {
   constructor(private readonly service: ApiStatsDataAccessService) {}
 
-  @Query(() => [DailySummaryApps])
-  dailySummaryApps(@Param('range') range: KreStatRange) {
-    return this.service.dailySummaryApps({ range })
+  @Query(() => DailySummaryAppResult)
+  dailySummaryApps(@Args('input') input: StatInput) {
+    return this.service.dailySummaryApps(input)
   }
 
   @Query(() => [DailySummaryEcosystem])
-  dailySummaryEcosystem(@Param('range') range: KreStatRange) {
-    return this.service.dailySummaryEcosystem({ range })
+  dailySummaryEcosystem(@Args('input') input: StatInput) {
+    return this.service.dailySummaryEcosystem(input)
   }
 
   @Query(() => [KrePayoutSummary])
@@ -43,6 +43,12 @@ export class ApiStatsFeatureResolver {
   kreSummaryDates() {
     return this.service.kreSummaryDates()
   }
+
+  @Query(() => [Stat])
+  stats() {
+    return this.service.stats()
+  }
+
   // The methods below are from the old stats service and should be deprecated
 
   @Query(() => [String], { nullable: true })

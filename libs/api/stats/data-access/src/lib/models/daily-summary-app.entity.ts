@@ -1,11 +1,11 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
 
 @ObjectType()
-export class DailySummaryApps {
+export class DailySummaryApp {
   @Field()
   id: string
   @Field()
-  date: Date
+  date: string
   @Field(() => Int, { nullable: true })
   index?: number
   @Field()

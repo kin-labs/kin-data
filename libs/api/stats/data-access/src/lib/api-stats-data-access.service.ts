@@ -8,6 +8,7 @@ import { countApps, countTxs, getKreStatsQuery, summarizeKreStats } from './api-
 import { BigQueryStatsService } from './big-query-stats.service'
 import { KreStatsInput } from './dto/kre-stats.input'
 import { ActiveUserBalancesStat } from './models/active-user-balances-stat.model'
+import { App } from './models/app.entity'
 import { DailySpendTransactionsStat } from './models/daily-spend-transactions-stat.model'
 import { FetchStatsOptions } from './models/fetch-stats-options.model'
 import { KreStatsType } from './models/kre-stats.enum'
@@ -15,7 +16,8 @@ import { LastTxStat } from './models/last-tx-stat.model'
 import { MonthlyActiveEarnersStat } from './models/monthly-active-earners-stat.model'
 import { MonthlyActiveSpendersStat } from './models/monthly-active-spenders-stat.model'
 import { PayoutsStat } from './models/payouts-stat.model'
-import { getDateRange, StatRange } from './models/stat-range.enum'
+import { getDateRange, StatInput, StatRange } from './models/stat-range.enum'
+import { Stat, STATS, StatType } from './models/stat-type.enum'
 import { TotalActiveEarnersStat } from './models/total-active-earners-stat.model'
 import { TotalActiveSpendersStat } from './models/total-active-spenders-stat.model'
 import { TotalWalletsStat } from './models/total-wallets-stat.model'
@@ -36,8 +38,8 @@ function parseJsonString(json: string) {
   }))
 }
 
-function getCacheKey(key: string, { gt }: { gt: Date }) {
-  return [key, gt?.getTime() ?? 'default-key'].join('-')
+function getCacheKey(key: string, { gt, type }: { gt: Date; type?: StatType }) {
+  return [key, gt?.getTime() ?? 'default-key', type ? type : 'none'].join('-')
 }
 
 @Injectable()
@@ -47,31 +49,72 @@ export class ApiStatsDataAccessService implements OnModuleInit {
 
   constructor(private readonly data: ApiCoreDataAccessService, private readonly bigQuery: BigQueryStatsService) {}
 
-  dailySummaryApps({ range }: { range: StatRange }) {
-    const gt = getDateRange(range)
-    const cachedKey = getCacheKey('daily-summary-apps', { gt })
+  dailySummaryApps({ range, type }: StatInput) {
+    const gt = getDateRange(range as StatRange)
+    type = type ?? StatType.totalDailyTransactions
+    const cachedKey = getCacheKey('daily-summary-apps', { gt, type })
 
     return this.getCachedData(cachedKey, () =>
-      this.data.dailySummaryApps.findMany({
-        where: {
-          date: { gt },
-        },
-        orderBy: { date: 'asc' },
-      }),
+      this.data.dailySummaryApp
+        .findMany({
+          where: {
+            date: { gt },
+          },
+          orderBy: { date: 'asc' },
+        })
+        .then((items) =>
+          items
+            .filter((item) => !this.filterItem(item.index))
+            .map((item) => ({
+              ...item,
+              date: formatDate(item.date),
+            })),
+        )
+        .then((summary) => {
+          const dates = [...new Set(summary?.map((d) => d.date) ?? [])]
+          const indexes = [...new Set(summary?.map((d) => d.index) ?? [])]
+          const apps: App[] = indexes
+            .map((index) => summary.find((item) => item.index === index))
+            .map(({ index, name }) => {
+              return {
+                index,
+                name,
+                data: dates.map((date) => {
+                  const found = summary.find((item) => {
+                    return item.date === date && item.index === index
+                  })
+                  return found ? found[type] : 0
+                }),
+              }
+            })
+            .sort((a, b) => (a.name > b.name ? 1 : -1))
+
+          return {
+            dates,
+            apps,
+          }
+        }),
     )
   }
 
-  dailySummaryEcosystem({ range }: { range: StatRange }) {
-    const gt = getDateRange(range)
+  dailySummaryEcosystem({ range }: StatInput) {
+    const gt = getDateRange(range as StatRange)
     const cachedKey = getCacheKey('daily-summary-ecosystem', { gt })
 
     return this.getCachedData(cachedKey, () =>
-      this.data.dailySummaryEcosystem.findMany({
-        where: {
-          date: { gt },
-        },
-        orderBy: { date: 'asc' },
-      }),
+      this.data.dailySummaryEcosystem
+        .findMany({
+          where: {
+            date: { gt },
+          },
+          orderBy: { date: 'asc' },
+        })
+        .then((items) =>
+          items.map((item) => ({
+            ...item,
+            date: formatDate(item.date),
+          })),
+        ),
     )
   }
 
@@ -133,6 +176,17 @@ export class ApiStatsDataAccessService implements OnModuleInit {
         })
         .then((items) => items.map((item) => formatDate(item.date))),
     )
+  }
+
+  stats(): Stat[] {
+    return STATS
+  }
+
+  private filterItem(index: number) {
+    const MY_KIN_WALLET = 385
+    const filtered = [0, 1, MY_KIN_WALLET]
+
+    return filtered.includes(index)
   }
 
   // The methods below are from the old stats service and should be deprecated

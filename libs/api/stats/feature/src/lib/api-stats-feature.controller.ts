@@ -1,5 +1,4 @@
-import { ApiStatsDataAccessService, KreStatsInput } from '@kin-data/api/stats/data-access'
-import { KreStatRange } from '@kin-data/api/unstable/data-access'
+import { ApiStatsDataAccessService, KreStatsInput, StatRange } from '@kin-data/api/stats/data-access'
 import { Controller, Get, Query } from '@nestjs/common'
 
 @Controller('stats')
@@ -7,7 +6,7 @@ export class ApiStatsFeatureController {
   constructor(private readonly service: ApiStatsDataAccessService) {}
 
   @Get('daily-summary-apps')
-  dailySummaryApps(@Query('range') range: KreStatRange) {
+  dailySummaryApps(@Query('range') range: StatRange) {
     return this.service.dailySummaryApps({ range })
   }
 

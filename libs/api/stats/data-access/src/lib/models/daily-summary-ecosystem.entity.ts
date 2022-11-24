@@ -5,7 +5,7 @@ export class DailySummaryEcosystem {
   @Field()
   id: string
   @Field()
-  date: Date
+  date: string
   @Field(() => Int, { nullable: true })
   monthlyActiveApps?: number
   @Field(() => Int, { nullable: true })
