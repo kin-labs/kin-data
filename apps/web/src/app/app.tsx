@@ -5,6 +5,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { DaysIndex, DevIndex, HomeIndex, KreIndexFeature } from './feature'
 import { AppsIndex } from './feature/apps/apps-index'
 import { NotFoundIndex } from './feature/not-found/not-found-index'
+import { StatsIndexFeature } from './feature/stats/features/stats-index-feature'
 import { UiLayout } from './ui/layout/ui-layout'
 import { UiLinks } from './ui/layout/ui-link'
 
@@ -39,6 +40,7 @@ export function App() {
               <Route path="/home" element={<HomeIndex />} />
               <Route path="/not-found" element={<NotFoundIndex />} />
               <Route path="/kre/*" element={<KreIndexFeature />} />
+              <Route path="/stats/*" element={<StatsIndexFeature />} />
             </Routes>
           </UiLayout>
         </QueryClientProvider>

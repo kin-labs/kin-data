@@ -14,28 +14,21 @@ export type Scalars = {
   Boolean: boolean
   Int: number
   Float: number
-  /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
-  DateTime: any
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any
 }
 
-export type DailySummaryApps = {
-  __typename?: 'DailySummaryApps'
-  dailyActiveEarners?: Maybe<Scalars['Int']>
-  dailyActiveSpenders?: Maybe<Scalars['Int']>
-  dailyActiveUsers?: Maybe<Scalars['Int']>
-  dailyEarnTransactions?: Maybe<Scalars['Int']>
-  dailyPeerTransactions?: Maybe<Scalars['Int']>
-  dailySpendTransactions?: Maybe<Scalars['Int']>
-  date: Scalars['DateTime']
-  id: Scalars['String']
+export type App = {
+  __typename?: 'App'
+  data?: Maybe<Array<Scalars['Int']>>
   index?: Maybe<Scalars['Int']>
-  monthlyActiveEarners?: Maybe<Scalars['Int']>
-  monthlyActiveSpenders?: Maybe<Scalars['Int']>
-  monthlyActiveUsers?: Maybe<Scalars['Int']>
-  name: Scalars['String']
-  totalDailyTransactions?: Maybe<Scalars['Int']>
+  name?: Maybe<Scalars['String']>
+}
+
+export type DailySummaryAppResult = {
+  __typename?: 'DailySummaryAppResult'
+  apps?: Maybe<Array<App>>
+  dates?: Maybe<Array<Scalars['String']>>
 }
 
 export type DailySummaryEcosystem = {
@@ -46,7 +39,7 @@ export type DailySummaryEcosystem = {
   dailyEarnTransactions?: Maybe<Scalars['Int']>
   dailyPeerTransactions?: Maybe<Scalars['Int']>
   dailySpendTransactions?: Maybe<Scalars['Int']>
-  date: Scalars['DateTime']
+  date: Scalars['String']
   id: Scalars['String']
   monthlyActiveApps?: Maybe<Scalars['Int']>
   monthlyActiveEarners?: Maybe<Scalars['Int']>
@@ -57,7 +50,7 @@ export type DailySummaryEcosystem = {
 
 export type KrePayoutSummary = {
   __typename?: 'KrePayoutSummary'
-  date: Scalars['DateTime']
+  date: Scalars['String']
   id: Scalars['String']
   kin?: Maybe<Scalars['Float']>
   top10?: Maybe<Scalars['JSON']>
@@ -86,7 +79,7 @@ export type KreSummary = {
   activeUserBalance?: Maybe<Scalars['Float']>
   dailyTransactions?: Maybe<Scalars['Int']>
   dailyVolatilityFactor?: Maybe<Scalars['Float']>
-  date: Scalars['DateTime']
+  date: Scalars['String']
   id: Scalars['String']
   monthlyActiveEarners?: Maybe<Scalars['Int']>
   monthlyActiveSpenders?: Maybe<Scalars['Int']>
@@ -95,7 +88,7 @@ export type KreSummary = {
 
 export type Query = {
   __typename?: 'Query'
-  dailySummaryApps: Array<DailySummaryApps>
+  dailySummaryApps: DailySummaryAppResult
   dailySummaryEcosystem: Array<DailySummaryEcosystem>
   kreList?: Maybe<Array<Scalars['String']>>
   krePayoutSummary: Array<KrePayoutSummary>
@@ -103,25 +96,63 @@ export type Query = {
   kreStatList?: Maybe<Array<KreStat>>
   kreSummary: Array<KreSummary>
   kreSummaryDates: Array<Scalars['String']>
+  stats: Array<Stat>
   uptime?: Maybe<Scalars['Float']>
 }
 
-export type DailySummaryAppsDetailsFragment = {
-  __typename?: 'DailySummaryApps'
-  dailyActiveEarners?: number | null
-  dailyActiveSpenders?: number | null
-  dailyActiveUsers?: number | null
-  dailyEarnTransactions?: number | null
-  dailyPeerTransactions?: number | null
-  dailySpendTransactions?: number | null
-  date: any
+export type QueryDailySummaryAppsArgs = {
+  input: StatInput
+}
+
+export type QueryDailySummaryEcosystemArgs = {
+  input: StatInput
+}
+
+export type Stat = {
+  __typename?: 'Stat'
+  description: Array<Scalars['String']>
+  id: Scalars['String']
+  name: Scalars['String']
+  type: StatType
+}
+
+export type StatInput = {
+  range?: InputMaybe<Scalars['String']>
+  type?: InputMaybe<StatType>
+}
+
+export enum StatType {
+  DailyActiveEarners = 'dailyActiveEarners',
+  DailyActiveSpenders = 'dailyActiveSpenders',
+  DailyActiveUsers = 'dailyActiveUsers',
+  DailyEarnTransactions = 'dailyEarnTransactions',
+  DailyPeerTransactions = 'dailyPeerTransactions',
+  DailySpendTransactions = 'dailySpendTransactions',
+  MonthlyActiveEarners = 'monthlyActiveEarners',
+  MonthlyActiveSpenders = 'monthlyActiveSpenders',
+  MonthlyActiveUsers = 'monthlyActiveUsers',
+  TotalDailyTransactions = 'totalDailyTransactions',
+}
+
+export type StatDetailsFragment = {
+  __typename?: 'Stat'
   id: string
-  index?: number | null
-  monthlyActiveEarners?: number | null
-  monthlyActiveSpenders?: number | null
-  monthlyActiveUsers?: number | null
+  description: Array<string>
   name: string
-  totalDailyTransactions?: number | null
+  type: StatType
+}
+
+export type AppDetailsFragment = {
+  __typename?: 'App'
+  index?: number | null
+  name?: string | null
+  data?: Array<number> | null
+}
+
+export type DailySummaryAppResultDetailsFragment = {
+  __typename?: 'DailySummaryAppResult'
+  dates?: Array<string> | null
+  apps?: Array<{ __typename?: 'App'; index?: number | null; name?: string | null; data?: Array<number> | null }> | null
 }
 
 export type DailySummaryEcosystemDetailsFragment = {
@@ -132,7 +163,7 @@ export type DailySummaryEcosystemDetailsFragment = {
   dailyEarnTransactions?: number | null
   dailyPeerTransactions?: number | null
   dailySpendTransactions?: number | null
-  date: any
+  date: string
   id: string
   monthlyActiveEarners?: number | null
   monthlyActiveSpenders?: number | null
@@ -142,7 +173,7 @@ export type DailySummaryEcosystemDetailsFragment = {
 
 export type KrePayoutSummaryDetailsFragment = {
   __typename?: 'KrePayoutSummary'
-  date: any
+  date: string
   id: string
   kin?: number | null
   top10?: any | null
@@ -156,37 +187,34 @@ export type KreSummaryDetailsFragment = {
   activeUserBalance?: number | null
   dailyTransactions?: number | null
   dailyVolatilityFactor?: number | null
-  date: any
+  date: string
   id: string
   monthlyActiveEarners?: number | null
   monthlyActiveSpenders?: number | null
   monthlyActiveUsers?: number | null
 }
 
-export type DailySummaryAppsQueryVariables = Exact<{ [key: string]: never }>
+export type DailySummaryAppsQueryVariables = Exact<{
+  input: StatInput
+}>
 
 export type DailySummaryAppsQuery = {
   __typename?: 'Query'
-  items: Array<{
-    __typename?: 'DailySummaryApps'
-    dailyActiveEarners?: number | null
-    dailyActiveSpenders?: number | null
-    dailyActiveUsers?: number | null
-    dailyEarnTransactions?: number | null
-    dailyPeerTransactions?: number | null
-    dailySpendTransactions?: number | null
-    date: any
-    id: string
-    index?: number | null
-    monthlyActiveEarners?: number | null
-    monthlyActiveSpenders?: number | null
-    monthlyActiveUsers?: number | null
-    name: string
-    totalDailyTransactions?: number | null
-  }>
+  items: {
+    __typename?: 'DailySummaryAppResult'
+    dates?: Array<string> | null
+    apps?: Array<{
+      __typename?: 'App'
+      index?: number | null
+      name?: string | null
+      data?: Array<number> | null
+    }> | null
+  }
 }
 
-export type DailySummaryEcosystemQueryVariables = Exact<{ [key: string]: never }>
+export type DailySummaryEcosystemQueryVariables = Exact<{
+  input: StatInput
+}>
 
 export type DailySummaryEcosystemQuery = {
   __typename?: 'Query'
@@ -198,7 +226,7 @@ export type DailySummaryEcosystemQuery = {
     dailyEarnTransactions?: number | null
     dailyPeerTransactions?: number | null
     dailySpendTransactions?: number | null
-    date: any
+    date: string
     id: string
     monthlyActiveEarners?: number | null
     monthlyActiveSpenders?: number | null
@@ -213,7 +241,7 @@ export type KrePayoutSummaryQuery = {
   __typename?: 'Query'
   items: Array<{
     __typename?: 'KrePayoutSummary'
-    date: any
+    date: string
     id: string
     kin?: number | null
     top10?: any | null
@@ -236,7 +264,7 @@ export type KreSummaryQuery = {
     activeUserBalance?: number | null
     dailyTransactions?: number | null
     dailyVolatilityFactor?: number | null
-    date: any
+    date: string
     id: string
     monthlyActiveEarners?: number | null
     monthlyActiveSpenders?: number | null
@@ -248,23 +276,36 @@ export type KreSummaryDatesQueryVariables = Exact<{ [key: string]: never }>
 
 export type KreSummaryDatesQuery = { __typename?: 'Query'; items: Array<string> }
 
-export const DailySummaryAppsDetailsFragmentDoc = gql`
-  fragment DailySummaryAppsDetails on DailySummaryApps {
-    dailyActiveEarners
-    dailyActiveSpenders
-    dailyActiveUsers
-    dailyEarnTransactions
-    dailyPeerTransactions
-    dailySpendTransactions
-    date
+export type StatsQueryVariables = Exact<{ [key: string]: never }>
+
+export type StatsQuery = {
+  __typename?: 'Query'
+  items: Array<{ __typename?: 'Stat'; id: string; description: Array<string>; name: string; type: StatType }>
+}
+
+export const StatDetailsFragmentDoc = gql`
+  fragment StatDetails on Stat {
     id
-    index
-    monthlyActiveEarners
-    monthlyActiveSpenders
-    monthlyActiveUsers
+    description
     name
-    totalDailyTransactions
+    type
   }
+`
+export const AppDetailsFragmentDoc = gql`
+  fragment AppDetails on App {
+    index
+    name
+    data
+  }
+`
+export const DailySummaryAppResultDetailsFragmentDoc = gql`
+  fragment DailySummaryAppResultDetails on DailySummaryAppResult {
+    dates
+    apps {
+      ...AppDetails
+    }
+  }
+  ${AppDetailsFragmentDoc}
 `
 export const DailySummaryEcosystemDetailsFragmentDoc = gql`
   fragment DailySummaryEcosystemDetails on DailySummaryEcosystem {
@@ -306,23 +347,23 @@ export const KreSummaryDetailsFragmentDoc = gql`
   }
 `
 export const DailySummaryAppsDocument = gql`
-  query dailySummaryApps {
-    items: dailySummaryApps {
-      ...DailySummaryAppsDetails
+  query dailySummaryApps($input: StatInput!) {
+    items: dailySummaryApps(input: $input) {
+      ...DailySummaryAppResultDetails
     }
   }
-  ${DailySummaryAppsDetailsFragmentDoc}
+  ${DailySummaryAppResultDetailsFragmentDoc}
 `
 
-export function useDailySummaryAppsQuery(options?: Omit<Urql.UseQueryArgs<DailySummaryAppsQueryVariables>, 'query'>) {
+export function useDailySummaryAppsQuery(options: Omit<Urql.UseQueryArgs<DailySummaryAppsQueryVariables>, 'query'>) {
   return Urql.useQuery<DailySummaryAppsQuery, DailySummaryAppsQueryVariables>({
     query: DailySummaryAppsDocument,
     ...options,
   })
 }
 export const DailySummaryEcosystemDocument = gql`
-  query dailySummaryEcosystem {
-    items: dailySummaryEcosystem {
+  query dailySummaryEcosystem($input: StatInput!) {
+    items: dailySummaryEcosystem(input: $input) {
       ...DailySummaryEcosystemDetails
     }
   }
@@ -330,7 +371,7 @@ export const DailySummaryEcosystemDocument = gql`
 `
 
 export function useDailySummaryEcosystemQuery(
-  options?: Omit<Urql.UseQueryArgs<DailySummaryEcosystemQueryVariables>, 'query'>,
+  options: Omit<Urql.UseQueryArgs<DailySummaryEcosystemQueryVariables>, 'query'>,
 ) {
   return Urql.useQuery<DailySummaryEcosystemQuery, DailySummaryEcosystemQueryVariables>({
     query: DailySummaryEcosystemDocument,
@@ -389,4 +430,16 @@ export function useKreSummaryDatesQuery(options?: Omit<Urql.UseQueryArgs<KreSumm
     query: KreSummaryDatesDocument,
     ...options,
   })
+}
+export const StatsDocument = gql`
+  query Stats {
+    items: stats {
+      ...StatDetails
+    }
+  }
+  ${StatDetailsFragmentDoc}
+`
+
+export function useStatsQuery(options?: Omit<Urql.UseQueryArgs<StatsQueryVariables>, 'query'>) {
+  return Urql.useQuery<StatsQuery, StatsQueryVariables>({ query: StatsDocument, ...options })
 }

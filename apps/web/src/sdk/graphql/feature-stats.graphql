@@ -1,18 +1,20 @@
-fragment DailySummaryAppsDetails on DailySummaryApps {
-  dailyActiveEarners
-  dailyActiveSpenders
-  dailyActiveUsers
-  dailyEarnTransactions
-  dailyPeerTransactions
-  dailySpendTransactions
-  date
+fragment StatDetails on Stat {
   id
-  index
-  monthlyActiveEarners
-  monthlyActiveSpenders
-  monthlyActiveUsers
+  description
   name
-  totalDailyTransactions
+  type
+}
+
+fragment AppDetails on App {
+  index
+  name
+  data
+}
+fragment DailySummaryAppResultDetails on DailySummaryAppResult {
+  dates
+  apps {
+    ...AppDetails
+  }
 }
 
 fragment DailySummaryEcosystemDetails on DailySummaryEcosystem {
@@ -51,14 +53,14 @@ fragment KreSummaryDetails on KreSummary {
   monthlyActiveUsers
 }
 
-query dailySummaryApps {
-  items: dailySummaryApps {
-    ...DailySummaryAppsDetails
+query dailySummaryApps($input: StatInput!) {
+  items: dailySummaryApps(input: $input) {
+    ...DailySummaryAppResultDetails
   }
 }
 
-query dailySummaryEcosystem {
-  items: dailySummaryEcosystem {
+query dailySummaryEcosystem($input: StatInput!) {
+  items: dailySummaryEcosystem(input: $input) {
     ...DailySummaryEcosystemDetails
   }
 }
@@ -81,4 +83,10 @@ query KreSummary {
 
 query KreSummaryDates {
   items: kreSummaryDates
+}
+
+query Stats {
+  items: stats {
+    ...StatDetails
+  }
 }

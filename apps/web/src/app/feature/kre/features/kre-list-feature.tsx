@@ -2,7 +2,7 @@ import { Box, Button, Grid, Stack, Title } from '@mantine/core'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { UiLoader } from '../../../ui/loader/ui-loader'
-import { KreStat, useKreStats } from '../data-access/kre-stats.provider'
+import { useKreStats } from '../data-access/kre-stats.provider'
 
 export function KreListFeature() {
   const { stats, loading } = useKreStats()
@@ -13,13 +13,13 @@ export function KreListFeature() {
     <Box p={4}>
       <Stack spacing={12}>
         <Title size="x-large">KRE</Title>
-        <KreStatButtons stats={stats} />
+        {/*<KreStatButtons stats={stats} />*/}
       </Stack>
     </Box>
   )
 }
 
-export function KreStatButtons({ stats }: { stats: KreStat[] }) {
+export function KreStatButtons({ stats }: { stats: any[] }) {
   return (
     <Grid gutter={2}>
       {stats?.map(({ name: label, id: path, type }) => (
