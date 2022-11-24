@@ -1,0 +1,84 @@
+fragment DailySummaryAppsDetails on DailySummaryApps {
+  dailyActiveEarners
+  dailyActiveSpenders
+  dailyActiveUsers
+  dailyEarnTransactions
+  dailyPeerTransactions
+  dailySpendTransactions
+  date
+  id
+  index
+  monthlyActiveEarners
+  monthlyActiveSpenders
+  monthlyActiveUsers
+  name
+  totalDailyTransactions
+}
+
+fragment DailySummaryEcosystemDetails on DailySummaryEcosystem {
+  dailyActiveEarners
+  dailyActiveSpenders
+  dailyActiveUsers
+  dailyEarnTransactions
+  dailyPeerTransactions
+  dailySpendTransactions
+  date
+  id
+  monthlyActiveEarners
+  monthlyActiveSpenders
+  monthlyActiveUsers
+  totalDailyTransactions
+}
+
+fragment KrePayoutSummaryDetails on KrePayoutSummary {
+  date
+  id
+  kin
+  top10
+  usd
+}
+
+fragment KreSummaryDetails on KreSummary {
+  activeApps
+  activeCappedUserBalance
+  activeUserBalance
+  dailyTransactions
+  dailyVolatilityFactor
+  date
+  id
+  monthlyActiveEarners
+  monthlyActiveSpenders
+  monthlyActiveUsers
+}
+
+query dailySummaryApps {
+  items: dailySummaryApps {
+    ...DailySummaryAppsDetails
+  }
+}
+
+query dailySummaryEcosystem {
+  items: dailySummaryEcosystem {
+    ...DailySummaryEcosystemDetails
+  }
+}
+
+query KrePayoutSummary {
+  items: krePayoutSummary {
+    ...KrePayoutSummaryDetails
+  }
+}
+
+query KrePayoutSummaryDates {
+  items: krePayoutSummaryDates
+}
+
+query KreSummary {
+  items: kreSummary {
+    ...KreSummaryDetails
+  }
+}
+
+query KreSummaryDates {
+  items: kreSummaryDates
+}
