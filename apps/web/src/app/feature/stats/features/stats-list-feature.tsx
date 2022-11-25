@@ -55,7 +55,7 @@ export function StatsListFeature() {
 
   const topApps = dailySummaryAppResult?.apps?.slice(0, 10) ?? []
 
-  const labels = [...topApps.map((app) => app.name), 'Rest']
+  const pieLabels = [...topApps.map((app) => app.name), 'Rest']
 
   const percentages = [
     ...topApps.map((app) => {
@@ -67,12 +67,10 @@ export function StatsListFeature() {
   const rest = 100 - sum
 
   const pieData = {
-    labels,
+    labels: pieLabels,
     datasets: [
       {
         data: [...percentages, rest],
-        backgroundColor: labels.map((label) => stringToColor(`${label}`, 25)),
-        borderColor: labels.map((label) => stringToColor(`${label}`)),
       },
     ],
   }

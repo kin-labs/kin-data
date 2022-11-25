@@ -92,11 +92,13 @@ export function UiLayoutHeader({ links, name }: { links: UiLinks; name: string }
         <Link to="/" replace>
           <img src="/assets/logo.svg" height={36} alt={'Kin Logo'} />
         </Link>
-        <Group spacing={5} className={classes.links}>
-          {items}
+        <Group>
+          <Group spacing={5} className={classes.links}>
+            {items}
+          </Group>
           <UiLayoutThemeToggle />
         </Group>
-        <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
+        {/*<Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />*/}
         <Transition transition="pop-top-right" duration={200} mounted={opened}>
           {(styles) => (
             <Paper className={classes.dropdown} withBorder style={styles}>

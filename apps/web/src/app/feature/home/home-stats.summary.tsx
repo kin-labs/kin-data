@@ -1,17 +1,29 @@
-import { Box, Card, Container, Flex, Grid, Group, Skeleton, Stack, Text } from '@mantine/core'
+import { Box, Card, Container, createStyles, Flex, Grid, Skeleton, Stack, Text } from '@mantine/core'
 import { useKrePayoutSummaryQuery, useKreSummaryQuery } from '../../../sdk'
 import { formatNumber } from '../days/days-api'
 import { DaysBox, DaysStatBox } from '../days/days-detail'
 import { stringToColor } from '../stats/features/string-to-color'
 import { PieChart } from '../stats/ui/pie-chart'
 
+const useStyles = createStyles((theme) => ({
+  container: {
+    padding: theme.spacing.md,
+    [theme.fn.smallerThan('md')]: {
+      padding: 0,
+      paddingTop: theme.spacing.xs,
+      paddingBottom: theme.spacing.xs,
+    },
+  },
+}))
+
 export function HomeStatsSummary() {
+  const { classes } = useStyles()
   const [{ data, fetching: loading }] = useKreSummaryQuery()
 
   const last = data?.item
 
   return (
-    <Container my="md">
+    <Container className={classes.container}>
       <Box px={4} py={12}>
         <Text size={28}>Ecosystem Statistics</Text>
       </Box>
@@ -86,6 +98,7 @@ export function HomeStatsSummary() {
 }
 
 export function HomeStatsPayoutSummary() {
+  const { classes } = useStyles()
   const [{ data, fetching: loading }] = useKrePayoutSummaryQuery()
 
   const item = data?.item
@@ -106,7 +119,7 @@ export function HomeStatsPayoutSummary() {
   }
 
   return (
-    <Container my="md">
+    <Container className={classes.container}>
       <Box px={4} py={12}>
         <Text size={28}>KRE Payouts</Text>
       </Box>

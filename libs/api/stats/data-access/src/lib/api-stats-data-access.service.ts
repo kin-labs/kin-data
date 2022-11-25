@@ -226,11 +226,7 @@ export class ApiStatsDataAccessService implements OnModuleInit {
           kin,
           usd,
           top10: parseJsonString(item.top10 as string),
-        }))
-        .then((res) => {
-          console.log('res', res)
-          return res
-        }),
+        })),
     )
   }
 

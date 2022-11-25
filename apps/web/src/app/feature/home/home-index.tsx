@@ -8,9 +8,11 @@ const useStyles = createStyles((theme) => ({
     paddingTop: 120,
     paddingBottom: 80,
 
-    '@media (max-width: 755px)': {
+    [theme.fn.smallerThan('md')]: {
       paddingTop: 80,
       paddingBottom: 60,
+      paddingLeft: 0,
+      paddingRight: 0,
     },
   },
 
@@ -44,7 +46,7 @@ const useStyles = createStyles((theme) => ({
 
     '@media (max-width: 520px)': {
       fontSize: 28,
-      textAlign: 'left',
+      // textAlign: 'left',
     },
   },
 
@@ -112,10 +114,6 @@ export function HomeIndex() {
             Get all the data, right from the source.
           </Text>
         </Container>
-        <Box>
-          <HomeStatsSummary />
-          <HomeStatsPayoutSummary />
-        </Box>
         <div className={classes.controls}>
           <Button
             component={Link}
@@ -128,6 +126,10 @@ export function HomeIndex() {
             Explore the Kin Ecosystem
           </Button>
         </div>
+        <Box>
+          <HomeStatsSummary />
+          <HomeStatsPayoutSummary />
+        </Box>
       </Stack>
     </Container>
   )

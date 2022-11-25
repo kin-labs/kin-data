@@ -3,10 +3,9 @@ import {
   CategoryScale,
   Chart as ChartJS,
   ChartData,
-  ChartEvent,
+  ChartOptions,
+  Colors,
   Legend,
-  LegendElement,
-  LegendItem,
   LinearScale,
   LineElement,
   PointElement,
@@ -16,58 +15,34 @@ import {
 import React from 'react'
 import { Line } from 'react-chartjs-2'
 
-import { getAutoColors } from './get-auto-colors.plugin'
-
-const autocolors = getAutoColors()
-
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, autocolors)
-
-const handler = ChartJS.defaults.plugins.legend.onClick as (
-  e: ChartEvent,
-  legendItem: LegendItem,
-  legend: LegendElement<any>,
-) => void
+ChartJS.register(CategoryScale, Colors, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
 export function LineChart({ data }: { data: ChartData<'line'> }) {
   const theme = useMantineTheme()
   const color = theme.colorScheme === 'dark' ? theme.colors.gray[8] : theme.colors.gray[4]
 
-  const options = {
+  const options: ChartOptions<'line'> = {
     maintainAspectRatio: false,
     responsive: true,
     plugins: {
-      autocolors,
       legend: {
         position: 'bottom' as const,
-        onClick: (e: ChartEvent, legendItem: LegendItem, legend: LegendElement<any>) => {
-          console.log({
-            e,
-            legendItem,
-            legend,
-          })
-          handler(e, legendItem, legend)
-        },
+      },
+      decimation: {
+        enabled: true,
+        algorithm: 'lttb',
+      },
+    },
+    datasets: {
+      line: {
+        indexAxis: 'x',
       },
     },
     scales: {
       x: { grid: { color } },
       y: { grid: { color } },
     },
-    xAxes: [
-      {
-        scaleLabel: { display: true },
-      },
-    ],
   }
 
-  return (
-    <Line
-      height={600}
-      options={options}
-      data={data}
-      onSelect={(e) => {
-        console.log('click', e)
-      }}
-    />
-  )
+  return <Line height={600} options={options} data={data} />
 }
