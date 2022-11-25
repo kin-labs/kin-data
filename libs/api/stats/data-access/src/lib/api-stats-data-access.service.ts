@@ -254,8 +254,6 @@ export class ApiStatsDataAccessService implements OnModuleInit {
         .then(({ id, ...item }) => ({
           ...item,
           date: formatDate(item.date),
-          activeUsers: Number(item.activeUsers),
-          dailyTransactions: Number(item.dailyTransactions),
         })),
     )
   }

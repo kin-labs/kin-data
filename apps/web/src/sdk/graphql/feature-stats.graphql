@@ -79,7 +79,7 @@ query KrePayoutSummaryDates {
 }
 
 query KreSummary {
-  items: kreSummary {
+  item: kreSummary {
     ...KreSummaryDetails
   }
 }

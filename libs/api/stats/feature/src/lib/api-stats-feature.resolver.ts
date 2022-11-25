@@ -34,7 +34,7 @@ export class ApiStatsFeatureResolver {
     return this.service.krePayoutSummaryDates()
   }
 
-  @Query(() => [KreSummary])
+  @Query(() => KreSummary)
   kreSummary() {
     return this.service.kreSummary()
   }

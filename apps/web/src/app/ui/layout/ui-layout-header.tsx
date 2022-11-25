@@ -1,4 +1,4 @@
-import { Burger, Container, createStyles, Group, Header, Paper, Text, Transition } from '@mantine/core'
+import { Box, Burger, Container, createStyles, Group, Header, Paper, Text, Transition } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { Link, NavLink } from 'react-router-dom'
 import { UiLayoutThemeToggle } from './ui-layout-theme-toggle'
@@ -88,9 +88,9 @@ export function UiLayoutHeader({ links, name }: { links: UiLinks; name: string }
 
   return (
     <Header height={HEADER_HEIGHT}>
-      <Container className={classes.header}>
+      <Container size="xl" className={classes.header}>
         <Link to="/" replace>
-          <img src="https://developer.kin.org/branding/kin-logo-violet-sideicon.svg" width={100} alt={'Kin Logo'} />
+          <img src="/assets/logo.svg" height={36} alt={'Kin Logo'} />
         </Link>
         <Group spacing={5} className={classes.links}>
           {items}

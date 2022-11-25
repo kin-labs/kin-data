@@ -48,7 +48,7 @@ export function DaysStatBox({ amount, label }: { amount: number; label: string }
         {label}
       </Text>
       <Tooltip label={amount}>
-        <Text size="xl">{formatNumber(amount ?? 0)}</Text>
+        <Text size={32}>{formatNumber(amount ?? 0)}</Text>
       </Tooltip>
     </Stack>
   )

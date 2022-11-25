@@ -65,8 +65,8 @@ type KreSummary {
   activeUserBalance: Float
   dailyTransactions: Int
   dailyVolatilityFactor: Float
-  date: String!
-  id: String!
+  date: String
+  id: String
   monthlyActiveEarners: Int
   monthlyActiveSpenders: Int
   monthlyActiveUsers: Int
@@ -79,7 +79,7 @@ type Query {
   krePayoutSummary: [KrePayoutSummary!]!
   krePayoutSummaryDates: [String!]!
   kreStatList: [KreStat!]
-  kreSummary: [KreSummary!]!
+  kreSummary: KreSummary!
   kreSummaryDates: [String!]!
   stats: [Stat!]!
   uptime: Float

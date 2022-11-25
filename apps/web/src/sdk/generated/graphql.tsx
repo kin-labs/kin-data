@@ -82,8 +82,8 @@ export type KreSummary = {
   activeUserBalance?: Maybe<Scalars['Float']>
   dailyTransactions?: Maybe<Scalars['Int']>
   dailyVolatilityFactor?: Maybe<Scalars['Float']>
-  date: Scalars['String']
-  id: Scalars['String']
+  date?: Maybe<Scalars['String']>
+  id?: Maybe<Scalars['String']>
   monthlyActiveEarners?: Maybe<Scalars['Int']>
   monthlyActiveSpenders?: Maybe<Scalars['Int']>
   monthlyActiveUsers?: Maybe<Scalars['Int']>
@@ -97,7 +97,7 @@ export type Query = {
   krePayoutSummary: Array<KrePayoutSummary>
   krePayoutSummaryDates: Array<Scalars['String']>
   kreStatList?: Maybe<Array<KreStat>>
-  kreSummary: Array<KreSummary>
+  kreSummary: KreSummary
   kreSummaryDates: Array<Scalars['String']>
   stats: Array<Stat>
   uptime?: Maybe<Scalars['Float']>
@@ -200,8 +200,8 @@ export type KreSummaryDetailsFragment = {
   activeUserBalance?: number | null
   dailyTransactions?: number | null
   dailyVolatilityFactor?: number | null
-  date: string
-  id: string
+  date?: string | null
+  id?: string | null
   monthlyActiveEarners?: number | null
   monthlyActiveSpenders?: number | null
   monthlyActiveUsers?: number | null
@@ -273,19 +273,19 @@ export type KreSummaryQueryVariables = Exact<{ [key: string]: never }>
 
 export type KreSummaryQuery = {
   __typename?: 'Query'
-  items: Array<{
+  item: {
     __typename?: 'KreSummary'
     activeApps?: number | null
     activeCappedUserBalance?: number | null
     activeUserBalance?: number | null
     dailyTransactions?: number | null
     dailyVolatilityFactor?: number | null
-    date: string
-    id: string
+    date?: string | null
+    id?: string | null
     monthlyActiveEarners?: number | null
     monthlyActiveSpenders?: number | null
     monthlyActiveUsers?: number | null
-  }>
+  }
 }
 
 export type KreSummaryDatesQueryVariables = Exact<{ [key: string]: never }>
@@ -428,7 +428,7 @@ export function useKrePayoutSummaryDatesQuery(
 }
 export const KreSummaryDocument = gql`
   query KreSummary {
-    items: kreSummary {
+    item: kreSummary {
       ...KreSummaryDetails
     }
   }

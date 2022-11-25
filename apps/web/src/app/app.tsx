@@ -33,7 +33,7 @@ export function App() {
         <QueryClientProvider client={queryClient}>
           <UiLayout name={name} copyright={copyright} links={links}>
             <Routes>
-              <Route path="/" element={<Navigate to="/not-found" replace />} />
+              <Route path="/" element={<Navigate to="/home" replace />} />
               <Route path="/apps/*" element={<AppsIndex />} />
               <Route path="/dates/*" element={<DaysIndex />} />
               <Route path="/dev/*" element={<DevIndex />} />

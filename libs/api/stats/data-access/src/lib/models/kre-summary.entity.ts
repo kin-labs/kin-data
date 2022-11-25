@@ -2,10 +2,10 @@ import { Field, Float, Int, ObjectType } from '@nestjs/graphql'
 
 @ObjectType()
 export class KreSummary {
-  @Field()
-  id: string
-  @Field()
-  date: string
+  @Field({ nullable: true })
+  id?: string
+  @Field({ nullable: true })
+  date?: string
   @Field(() => Int, { nullable: true })
   activeApps?: number
   @Field(() => Float, { nullable: true })
