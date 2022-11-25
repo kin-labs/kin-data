@@ -24,7 +24,7 @@ export class ApiStatsFeatureResolver {
     return this.service.dailySummaryEcosystem(input)
   }
 
-  @Query(() => [KrePayoutSummary])
+  @Query(() => KrePayoutSummary)
   krePayoutSummary() {
     return this.service.krePayoutSummary()
   }

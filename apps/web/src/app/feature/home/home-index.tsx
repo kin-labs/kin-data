@@ -1,7 +1,6 @@
-import { Box, Button, Card, Container, createStyles, Grid, Skeleton, Stack, Text, Title } from '@mantine/core'
+import { Box, Button, Container, createStyles, Stack, Text, Title } from '@mantine/core'
 import { Link } from 'react-router-dom'
-import { useKreSummaryQuery } from '../../../sdk'
-import { DaysStatBox } from '../days/days-detail'
+import { HomeStatsPayoutSummary, HomeStatsSummary } from './home-stats.summary'
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -114,7 +113,8 @@ export function HomeIndex() {
           </Text>
         </Container>
         <Box>
-          <GridAsymmetrical />
+          <HomeStatsSummary />
+          <HomeStatsPayoutSummary />
         </Box>
         <div className={classes.controls}>
           <Button
@@ -125,87 +125,10 @@ export function HomeIndex() {
             variant="gradient"
             gradient={{ from: '#7546f6', to: '#c8aff8' }}
           >
-            Explore Ecosystem Stats
+            Explore the Kin Ecosystem
           </Button>
         </div>
       </Stack>
-    </Container>
-  )
-}
-
-export function GridAsymmetrical() {
-  const [{ data, fetching: loading }] = useKreSummaryQuery()
-
-  const last = data?.item
-
-  return (
-    <Container my="md">
-      <Grid>
-        <Grid.Col xs={4}>
-          <Card>
-            {loading ? (
-              <Skeleton height={140} radius="md" />
-            ) : (
-              <Stack>
-                <DaysStatBox amount={last?.activeApps ?? 0} label={'Active Apps'} />
-              </Stack>
-            )}
-          </Card>
-        </Grid.Col>
-        <Grid.Col xs={4}>
-          <Card>
-            {loading ? (
-              <Skeleton height={140} radius="md" />
-            ) : (
-              <DaysStatBox label="Daily Transactions" amount={last?.dailyTransactions ?? 0} />
-            )}
-          </Card>
-        </Grid.Col>
-        <Grid.Col xs={4}>
-          <Card>
-            {loading ? (
-              <Skeleton height={140} radius="md" />
-            ) : (
-              <Stack>
-                <DaysStatBox amount={last?.activeUserBalance ?? 0} label={'Active User Balance'} />
-              </Stack>
-            )}
-          </Card>
-        </Grid.Col>
-        <Grid.Col xs={4}>
-          <Card>
-            {loading ? (
-              <Skeleton height={140} radius="md" />
-            ) : (
-              <Stack>
-                <DaysStatBox amount={last?.monthlyActiveUsers ?? 0} label={'Monthly Active Users'} />
-              </Stack>
-            )}
-          </Card>
-        </Grid.Col>
-        <Grid.Col xs={4}>
-          <Card>
-            {loading ? (
-              <Skeleton height={140} radius="md" />
-            ) : (
-              <Stack>
-                <DaysStatBox amount={last?.monthlyActiveSpenders ?? 0} label="Monthly Active Spenders" />
-              </Stack>
-            )}
-          </Card>
-        </Grid.Col>
-        <Grid.Col xs={4}>
-          <Card>
-            {loading ? (
-              <Skeleton height={140} radius="md" />
-            ) : (
-              <Stack>
-                <DaysStatBox amount={last?.monthlyActiveEarners ?? 0} label={'Monthly Active Earners'} />
-              </Stack>
-            )}
-          </Card>
-        </Grid.Col>
-      </Grid>
     </Container>
   )
 }

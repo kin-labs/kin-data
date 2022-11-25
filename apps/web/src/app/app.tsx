@@ -2,7 +2,7 @@ import { ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core
 import { useHotkeys, useLocalStorage } from '@mantine/hooks'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { DaysIndex, DevIndex, HomeIndex, KreIndexFeature } from './feature'
+import { DaysIndex, DevIndex, HomeIndex } from './feature'
 import { AppsIndex } from './feature/apps/apps-index'
 import { NotFoundIndex } from './feature/not-found/not-found-index'
 import { StatsIndexFeature } from './feature/stats/features/stats-index-feature'
@@ -39,7 +39,6 @@ export function App() {
               <Route path="/dev/*" element={<DevIndex />} />
               <Route path="/home" element={<HomeIndex />} />
               <Route path="/not-found" element={<NotFoundIndex />} />
-              <Route path="/kre/*" element={<KreIndexFeature />} />
               <Route path="/stats/*" element={<StatsIndexFeature />} />
             </Routes>
           </UiLayout>

@@ -1,7 +1,6 @@
 import { Button, Group, Stack, Text } from '@mantine/core'
 import React from 'react'
 import { Link, Navigate, Route, Routes } from 'react-router-dom'
-import { KreStatsProvider } from '../kre/data-access/kre-stats.provider'
 
 export function DevIndex() {
   const pages = [
@@ -17,13 +16,11 @@ export function DevIndex() {
           </Link>
         ))}
       </Group>
-      <KreStatsProvider>
-        <Routes>
-          <Route index element={<Navigate to="dev1" replace />} />
-          <Route path="dev1" element={<Dev1 />} />
-          <Route path="dev2" element={<Dev2 />} />
-        </Routes>
-      </KreStatsProvider>
+      <Routes>
+        <Route index element={<Navigate to="dev1" replace />} />
+        <Route path="dev1" element={<Dev1 />} />
+        <Route path="dev2" element={<Dev2 />} />
+      </Routes>
     </Stack>
   )
 }

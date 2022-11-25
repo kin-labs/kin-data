@@ -6,7 +6,6 @@ import { ApiNetworkFeatureModule } from '@kin-data/api/network/feature'
 import { ApiSnowflakeFeatureModule } from '@kin-data/api/snowflake/feature'
 import { ApiStatsFeatureModule } from '@kin-data/api/stats/feature'
 import { ApiToolsFeatureModule } from '@kin-data/api/tools/feature'
-import { ApiUnstableFeatureModule } from '@kin-data/api/unstable/feature'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { Module } from '@nestjs/common'
 import { GraphQLModule } from '@nestjs/graphql'
@@ -37,7 +36,6 @@ import { ApiCoreFeatureResolver } from './api-core-feature.resolver'
     ApiSnowflakeFeatureModule,
     ApiStatsFeatureModule,
     ApiToolsFeatureModule,
-    ApiUnstableFeatureModule,
   ],
 })
 export class ApiCoreFeatureModule {}

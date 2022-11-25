@@ -1,6 +1,6 @@
 import { Anchor, Card, Container, Flex, SimpleGrid, Stack, Text, Tooltip } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
-import React, { useEffect } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { UiLoader } from '../../ui/loader/ui-loader'
 import { DaysApi, formatNumber } from './days-api'
@@ -38,6 +38,17 @@ export function DaysDetail() {
         </Stack>
       </Card>
     </Container>
+  )
+}
+
+export function DaysBox({ content, label }: { content: ReactNode; label: string }) {
+  return (
+    <Stack>
+      <Text size="lg" color="dimmed">
+        {label}
+      </Text>
+      {content}
+    </Stack>
   )
 }
 

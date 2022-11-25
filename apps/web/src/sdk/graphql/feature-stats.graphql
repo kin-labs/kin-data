@@ -39,7 +39,16 @@ fragment KrePayoutSummaryDetails on KrePayoutSummary {
   date
   id
   kin
-  top10
+  top10 {
+    ...KrePayoutSummaryAppDetails
+  }
+  usd
+}
+
+fragment KrePayoutSummaryAppDetails on KrePayoutSummaryApp {
+  index
+  name
+  kin
   usd
 }
 
@@ -69,7 +78,7 @@ query dailySummaryEcosystem($input: StatInput!) {
 }
 
 query KrePayoutSummary {
-  items: krePayoutSummary {
+  item: krePayoutSummary {
     ...KrePayoutSummaryDetails
   }
 }

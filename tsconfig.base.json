@@ -30,8 +30,6 @@
       "@kin-data/api/stats/feature": ["libs/api/stats/feature/src/index.ts"],
       "@kin-data/api/tools/data-access": ["libs/api/tools/data-access/src/index.ts"],
       "@kin-data/api/tools/feature": ["libs/api/tools/feature/src/index.ts"],
-      "@kin-data/api/unstable/data-access": ["libs/api/unstable/data-access/src/index.ts"],
-      "@kin-data/api/unstable/feature": ["libs/api/unstable/feature/src/index.ts"],
       "@kin-data/circulating-supply": ["libs/packages/circulating-supply/src/index.ts"]
     }
   },

@@ -14,8 +14,6 @@ export type Scalars = {
   Boolean: boolean
   Int: number
   Float: number
-  /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
-  JSON: any
 }
 
 export type App = {
@@ -53,10 +51,18 @@ export type DailySummaryEcosystem = {
 
 export type KrePayoutSummary = {
   __typename?: 'KrePayoutSummary'
-  date: Scalars['String']
-  id: Scalars['String']
+  date?: Maybe<Scalars['String']>
+  id?: Maybe<Scalars['String']>
   kin?: Maybe<Scalars['Float']>
-  top10?: Maybe<Scalars['JSON']>
+  top10?: Maybe<Array<KrePayoutSummaryApp>>
+  usd?: Maybe<Scalars['Float']>
+}
+
+export type KrePayoutSummaryApp = {
+  __typename?: 'KrePayoutSummaryApp'
+  index?: Maybe<Scalars['Int']>
+  kin?: Maybe<Scalars['Float']>
+  name?: Maybe<Scalars['String']>
   usd?: Maybe<Scalars['Float']>
 }
 
@@ -94,7 +100,7 @@ export type Query = {
   dailySummaryApps: DailySummaryAppResult
   dailySummaryEcosystem: Array<DailySummaryEcosystem>
   kreList?: Maybe<Array<Scalars['String']>>
-  krePayoutSummary: Array<KrePayoutSummary>
+  krePayoutSummary: KrePayoutSummary
   krePayoutSummaryDates: Array<Scalars['String']>
   kreStatList?: Maybe<Array<KreStat>>
   kreSummary: KreSummary
@@ -186,10 +192,24 @@ export type DailySummaryEcosystemDetailsFragment = {
 
 export type KrePayoutSummaryDetailsFragment = {
   __typename?: 'KrePayoutSummary'
-  date: string
-  id: string
+  date?: string | null
+  id?: string | null
   kin?: number | null
-  top10?: any | null
+  usd?: number | null
+  top10?: Array<{
+    __typename?: 'KrePayoutSummaryApp'
+    index?: number | null
+    name?: string | null
+    kin?: number | null
+    usd?: number | null
+  }> | null
+}
+
+export type KrePayoutSummaryAppDetailsFragment = {
+  __typename?: 'KrePayoutSummaryApp'
+  index?: number | null
+  name?: string | null
+  kin?: number | null
   usd?: number | null
 }
 
@@ -255,14 +275,20 @@ export type KrePayoutSummaryQueryVariables = Exact<{ [key: string]: never }>
 
 export type KrePayoutSummaryQuery = {
   __typename?: 'Query'
-  items: Array<{
+  item: {
     __typename?: 'KrePayoutSummary'
-    date: string
-    id: string
+    date?: string | null
+    id?: string | null
     kin?: number | null
-    top10?: any | null
     usd?: number | null
-  }>
+    top10?: Array<{
+      __typename?: 'KrePayoutSummaryApp'
+      index?: number | null
+      name?: string | null
+      kin?: number | null
+      usd?: number | null
+    }> | null
+  }
 }
 
 export type KrePayoutSummaryDatesQueryVariables = Exact<{ [key: string]: never }>
@@ -342,14 +368,25 @@ export const DailySummaryEcosystemDetailsFragmentDoc = gql`
     totalDailyTransactions
   }
 `
+export const KrePayoutSummaryAppDetailsFragmentDoc = gql`
+  fragment KrePayoutSummaryAppDetails on KrePayoutSummaryApp {
+    index
+    name
+    kin
+    usd
+  }
+`
 export const KrePayoutSummaryDetailsFragmentDoc = gql`
   fragment KrePayoutSummaryDetails on KrePayoutSummary {
     date
     id
     kin
-    top10
+    top10 {
+      ...KrePayoutSummaryAppDetails
+    }
     usd
   }
+  ${KrePayoutSummaryAppDetailsFragmentDoc}
 `
 export const KreSummaryDetailsFragmentDoc = gql`
   fragment KreSummaryDetails on KreSummary {
@@ -399,7 +436,7 @@ export function useDailySummaryEcosystemQuery(
 }
 export const KrePayoutSummaryDocument = gql`
   query KrePayoutSummary {
-    items: krePayoutSummary {
+    item: krePayoutSummary {
       ...KrePayoutSummaryDetails
     }
   }
