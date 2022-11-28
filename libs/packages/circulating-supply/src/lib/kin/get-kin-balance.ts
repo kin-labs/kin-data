@@ -1,6 +1,5 @@
-import { Client, quarksToKin } from '@kinecosystem/kin-sdk-v2'
-import { getPublicKey } from './get-public-key'
+import { removeDecimals, Solana } from '@kin-kinetic/solana'
 
-export function getKinBalance(client: Client, publicKey: string): Promise<string> {
-  return client.getBalance(getPublicKey(publicKey)).then((s) => quarksToKin(s))
+export function getKinBalance(solana: Solana, publicKey: string): Promise<string> {
+  return solana.getTokenBalance(publicKey).then((res) => removeDecimals(res.balance, 5))
 }
