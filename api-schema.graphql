@@ -65,7 +65,10 @@ type KreSummary {
   activeApps: Int
   activeCappedUserBalance: Float
   activeUserBalance: Float
+  activeUsers: Int
+  dailyKinPayout: Float
   dailyTransactions: Int
+  dailyUsdPayout: Float
   dailyVolatilityFactor: Float
   date: String
   id: String

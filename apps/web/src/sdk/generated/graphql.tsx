@@ -86,7 +86,10 @@ export type KreSummary = {
   activeApps?: Maybe<Scalars['Int']>
   activeCappedUserBalance?: Maybe<Scalars['Float']>
   activeUserBalance?: Maybe<Scalars['Float']>
+  activeUsers?: Maybe<Scalars['Int']>
+  dailyKinPayout?: Maybe<Scalars['Float']>
   dailyTransactions?: Maybe<Scalars['Int']>
+  dailyUsdPayout?: Maybe<Scalars['Float']>
   dailyVolatilityFactor?: Maybe<Scalars['Float']>
   date?: Maybe<Scalars['String']>
   id?: Maybe<Scalars['String']>
@@ -218,7 +221,10 @@ export type KreSummaryDetailsFragment = {
   activeApps?: number | null
   activeCappedUserBalance?: number | null
   activeUserBalance?: number | null
+  activeUsers?: number | null
+  dailyKinPayout?: number | null
   dailyTransactions?: number | null
+  dailyUsdPayout?: number | null
   dailyVolatilityFactor?: number | null
   date?: string | null
   id?: string | null
@@ -304,7 +310,10 @@ export type KreSummaryQuery = {
     activeApps?: number | null
     activeCappedUserBalance?: number | null
     activeUserBalance?: number | null
+    activeUsers?: number | null
+    dailyKinPayout?: number | null
     dailyTransactions?: number | null
+    dailyUsdPayout?: number | null
     dailyVolatilityFactor?: number | null
     date?: string | null
     id?: string | null
@@ -393,7 +402,10 @@ export const KreSummaryDetailsFragmentDoc = gql`
     activeApps
     activeCappedUserBalance
     activeUserBalance
+    activeUsers
+    dailyKinPayout
     dailyTransactions
+    dailyUsdPayout
     dailyVolatilityFactor
     date
     id

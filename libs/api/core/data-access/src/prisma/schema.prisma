@@ -7,6 +7,81 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model dailyAccountSummaryApp {
+  date            DateTime? @db.Date
+  index           Int?
+  accountsCreated Int?
+  solCost         Float?
+  usdCost         Float?
+  id              Int       @id @default(autoincrement())
+}
+
+model dailyAccountSummaryEcosystem {
+  date            DateTime? @db.Date
+  accountsCreated Int?
+  solCost         Float?
+  usdCost         Float?
+  id              Int       @id @default(autoincrement())
+}
+
+model dailyMarketSummary {
+  date              DateTime? @db.Date
+  price             Float?
+  marketCap         Float?
+  tradeVolume       Float?
+  circulatingSupply Float?
+  id                Int       @id @default(autoincrement())
+}
+
+model dailySummaryApp {
+  date                   DateTime? @db.Date
+  index                  Int?
+  name                   String?
+  totalDailyTransactions Int?
+  totalDailyAmount       Float?
+  totalDailyAmountUsd    Float?
+  dailyEarnTransactions  Int?
+  dailyEarnAmount        Float?
+  dailyEarnAmountUsd     Float?
+  dailySpendTransactions Int?
+  dailySpendAmount       Float?
+  dailySpendAmountUsd    Float?
+  dailyPeerTransactions  Int?
+  dailyPeerAmount        Float?
+  dailyPeerAmountUsd     Float?
+  dailyActiveUsers       Int?
+  dailyActiveEarners     Int?
+  dailyActiveSpenders    Int?
+  monthlyActiveUsers     Int?
+  monthlyActiveEarners   Int?
+  monthlyActiveSpenders  Int?
+  id                     Int       @id @default(autoincrement())
+}
+
+model dailySummaryEcosystem {
+  date                   DateTime? @db.Date
+  monthlyActiveApps      Int?
+  totalDailyTransactions Int?
+  totalDailyAmount       Float?
+  totalDailyAmountUsd    Float?
+  dailyEarnTransactions  Int?
+  dailyEarnAmount        Float?
+  dailyEarnAmountUsd     Float?
+  dailySpendTransactions Int?
+  dailySpendAmount       Float?
+  dailySpendAmountUsd    Float?
+  dailyPeerTransactions  Int?
+  dailyPeerAmount        Float?
+  dailyPeerAmountUsd     Float?
+  dailyActiveUsers       Int?
+  dailyActiveEarners     Int?
+  dailyActiveSpenders    Int?
+  monthlyActiveUsers     Int?
+  monthlyActiveEarners   Int?
+  monthlyActiveSpenders  Int?
+  id                     Int       @id @default(autoincrement())
+}
+
 model krePayoutSummary {
   date  DateTime? @db.Date
   kin   Float?
@@ -22,6 +97,8 @@ model kreSummary {
   activeCappedUserBalance Float?
   activeUsers             Int?
   dailyVolatilityFactor   Float?
+  dailyKinPayout          Float?
+  dailyUsdPayout          Float?
   dailyTransactions       Int?
   monthlyActiveEarners    Int?
   monthlyActiveSpenders   Int?
@@ -29,28 +106,10 @@ model kreSummary {
   id                      Int       @id @default(autoincrement())
 }
 
-model dailySummaryApp {
+model dailySummaryApps {
   date                   DateTime? @db.Date
   index                  Int?
   name                   String?
-  totalDailyTransactions Int?
-  dailyEarnTransactions  Int?
-  dailySpendTransactions Int?
-  dailyPeerTransactions  Int?
-  dailyActiveUsers       Int?
-  dailyActiveEarners     Int?
-  dailyActiveSpenders    Int?
-  monthlyActiveUsers     Int?
-  monthlyActiveEarners   Int?
-  monthlyActiveSpenders  Int?
-  id                     Int       @id @default(autoincrement())
-
-  @@map("dailySummaryApps")
-}
-
-model dailySummaryEcosystem {
-  date                   DateTime? @db.Date
-  monthlyActiveApps      Int?
   totalDailyTransactions Int?
   dailyEarnTransactions  Int?
   dailySpendTransactions Int?

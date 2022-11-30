@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql'
+import { Field, Float, Int, ObjectType } from '@nestjs/graphql'
 
 @ObjectType()
 export class DailySummaryApp {
@@ -24,6 +24,20 @@ export class DailySummaryApp {
   dailyActiveEarners?: number
   @Field(() => Int, { nullable: true })
   dailyActiveSpenders?: number
+  @Field(() => Float, { nullable: true })
+  totalDailyAmount?: number
+  @Field(() => Float, { nullable: true })
+  totalDailyAmountUsd?: number
+  @Field(() => Float, { nullable: true })
+  dailyEarnAmount?: number
+  @Field(() => Float, { nullable: true })
+  dailyEarnAmountUsd?: number
+  @Field(() => Float, { nullable: true })
+  dailySpendAmount?: number
+  @Field(() => Float, { nullable: true })
+  dailySpendAmountUsd?: number
+  @Field(() => Float, { nullable: true })
+  dailyPeerAmount?: number
   @Field(() => Int, { nullable: true })
   monthlyActiveUsers?: number
   @Field(() => Int, { nullable: true })

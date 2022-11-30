@@ -56,7 +56,10 @@ fragment KreSummaryDetails on KreSummary {
   activeApps
   activeCappedUserBalance
   activeUserBalance
+  activeUsers
+  dailyKinPayout
   dailyTransactions
+  dailyUsdPayout
   dailyVolatilityFactor
   date
   id

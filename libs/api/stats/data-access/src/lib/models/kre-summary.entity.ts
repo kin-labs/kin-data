@@ -12,9 +12,14 @@ export class KreSummary {
   activeUserBalance?: number
   @Field(() => Float, { nullable: true })
   activeCappedUserBalance?: number
+  @Field(() => Int, { nullable: true })
   activeUsers?: number
   @Field(() => Float, { nullable: true })
   dailyVolatilityFactor?: number
+  @Field(() => Float, { nullable: true })
+  dailyKinPayout?: number
+  @Field(() => Float, { nullable: true })
+  dailyUsdPayout?: number
   @Field(() => Int, { nullable: true })
   dailyTransactions?: number
   @Field(() => Int, { nullable: true })
