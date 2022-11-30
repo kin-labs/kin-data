@@ -6,6 +6,7 @@ type App {
   data: [Int!]
   hidden: Boolean
   index: Int
+  logoUrl: String
   name: String
   total: Int
 }
@@ -78,6 +79,8 @@ type KreSummary {
 }
 
 type Query {
+  app(index: Int!): App
+  apps: [App!]
   dailySummaryApps(input: StatInput!): DailySummaryAppResult!
   dailySummaryEcosystem(input: StatInput!): [DailySummaryEcosystem!]!
   kreList: [String!]

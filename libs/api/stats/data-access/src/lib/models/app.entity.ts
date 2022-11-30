@@ -6,6 +6,8 @@ export class App {
   index: number
   @Field({ nullable: true })
   name: string
+  @Field({ nullable: true })
+  logoUrl?: string
   @Field(() => [Int], { nullable: true })
   data?: number[]
   @Field(() => Int, { nullable: true })

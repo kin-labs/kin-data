@@ -21,6 +21,7 @@ export type App = {
   data?: Maybe<Array<Scalars['Int']>>
   hidden?: Maybe<Scalars['Boolean']>
   index?: Maybe<Scalars['Int']>
+  logoUrl?: Maybe<Scalars['String']>
   name?: Maybe<Scalars['String']>
   total?: Maybe<Scalars['Int']>
 }
@@ -100,6 +101,8 @@ export type KreSummary = {
 
 export type Query = {
   __typename?: 'Query'
+  app?: Maybe<App>
+  apps?: Maybe<Array<App>>
   dailySummaryApps: DailySummaryAppResult
   dailySummaryEcosystem: Array<DailySummaryEcosystem>
   kreList?: Maybe<Array<Scalars['String']>>
@@ -110,6 +113,10 @@ export type Query = {
   kreSummaryDates: Array<Scalars['String']>
   stats: Array<Stat>
   uptime?: Maybe<Scalars['Float']>
+}
+
+export type QueryAppArgs = {
+  index: Scalars['Int']
 }
 
 export type QueryDailySummaryAppsArgs = {

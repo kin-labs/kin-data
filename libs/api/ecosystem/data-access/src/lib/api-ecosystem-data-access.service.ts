@@ -26,7 +26,9 @@ export class ApiEcosystemDataAccessService {
   async apps() {
     const apps = await this.getApps()
 
-    return apps.filter((app) => app.status === 'Active' && app.discovery)
+    return apps
+      .filter((app) => app.status === 'Active' && app.discovery)
+      .map((app) => ({ ...app, logoUrl: app.imageUrl }))
   }
 
   async sdks() {
