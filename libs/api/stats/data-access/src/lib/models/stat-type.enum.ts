@@ -44,11 +44,7 @@ export const STATS: Stat[] = [
     id: 'DAU',
     type: StatType.dailyActiveUsers,
     name: 'Daily Active Users',
-    description: [
-      'DAU is the number of users with at least one transaction in a day.',
-      'This is different from the definition used for payout calculations.',
-      "Note that for DAU, 'Other' includes accounts outside the app ecosystem",
-    ],
+    description: ['DAU is the number of users with at least one transaction in a day.'],
   },
   {
     id: 'DET',

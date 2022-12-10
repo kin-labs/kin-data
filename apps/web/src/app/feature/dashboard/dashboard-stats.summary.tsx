@@ -16,7 +16,7 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
-export function HomeStatsSummary() {
+export function DashboardStatsSummary() {
   const { classes } = useStyles()
   const [{ data, fetching: loading }] = useKreSummaryQuery()
 
@@ -167,7 +167,7 @@ export function HomeStatsPayoutSummary() {
           <Card>
             {item?.top10?.slice(0, 5).map((app) => {
               return (
-                <Stack spacing={0}>
+                <Stack spacing={0} key={app.index}>
                   <Flex justify="space-between" align="center">
                     <Text size={24}>{`${app.name}`}</Text>
                     <Text size={24} color="dimmed">

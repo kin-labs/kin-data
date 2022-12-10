@@ -1,6 +1,5 @@
 export * from './days/days-index'
 export * from './dev/dev-index'
-export * from './home/home-index'
+export * from './dashboard/dashboard-index'
 export * from './days/days-detail'
 export * from './days/days-list'
-export { HomeStatsSummary } from './home/home-stats.summary'

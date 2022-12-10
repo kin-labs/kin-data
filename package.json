@@ -16,9 +16,6 @@
     "start": "node dist/apps/api/main.js",
     "test": "nx test"
   },
-  "engines": {
-    "node": "16.x"
-  },
   "private": true,
   "dependencies": {
     "@ardatan/aggregate-error": "^0.0.6",
@@ -28,6 +25,8 @@
     "@kurkle/color": "^0.2.1",
     "@mantine/core": "^5.8.3",
     "@mantine/hooks": "^5.8.3",
+    "@mantine/modals": "^5.9.0",
+    "@mantine/notifications": "^5.9.0",
     "@nestjs/apollo": "^10.0.19",
     "@nestjs/common": "9.0.8",
     "@nestjs/config": "^2.2.0",

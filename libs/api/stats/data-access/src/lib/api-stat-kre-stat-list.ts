@@ -13,9 +13,9 @@ export const kreStatList: KreStat[] = [
     dataSetValue: 'payout_kin',
     displayLegend: true,
     description: [
-      `<p>The payouts are calculated proportionally based on <i>Capped Active User Balances</i> for each app with at least one Active User.</p>`,
-      `<p>An Active User (for payment calculations) is a unique user-owned wallet with at least 3 spends in the last 30 days.</p>`,
-      `<p>Payout data is updated once a week on Wednesdays</p>`,
+      `The payouts are calculated proportionally based on <i>Capped Active User Balances</i> for each app with at least one Active User.`,
+      `An Active User (for payment calculations) is a unique user-owned wallet with at least 3 spends in the last 30 days.`,
+      `Payout data is updated once a week on Wednesdays`,
     ].join(''),
   },
   {
@@ -29,7 +29,7 @@ export const kreStatList: KreStat[] = [
     dataSetName: 'digital_service_name',
     dataSetValue: 'payout_usd',
     displayLegend: true,
-    description: `<p>This is the conversion to USD of KIN payed out to apps using the daily price from CoinGecko</p>`,
+    description: `This is the conversion to USD of KIN payed out to apps using the daily price from CoinGecko`,
   },
   {
     name: 'payouts-daily-kin',
@@ -43,9 +43,9 @@ export const kreStatList: KreStat[] = [
     dataSetValue: 'payout_kin',
     displayLegend: true,
     description: [
-      `<p>The payouts are calculated proportionally based on <i>Capped Active User Balances</i> for each app with at least one Active User.</p>`,
-      `<p>An Active User (for payment calculations) is a unique user-owned wallet with at least 3 spends in the last 30 days.</p>`,
-      `<p>Payout data is updated once a week on Wednesdays</p>`,
+      `The payouts are calculated proportionally based on <i>Capped Active User Balances</i> for each app with at least one Active User.`,
+      `An Active User (for payment calculations) is a unique user-owned wallet with at least 3 spends in the last 30 days.`,
+      `Payout data is updated once a week on Wednesdays`,
     ].join(''),
   },
   {
@@ -59,7 +59,7 @@ export const kreStatList: KreStat[] = [
     dataSetName: 'digital_service_name',
     dataSetValue: 'AUB',
     displayLegend: true,
-    description: `<p>Active User Balances are the summed balances of all Active Users in an app at the end of a given day</p>`,
+    description: `Active User Balances are the summed balances of all Active Users in an app at the end of a given day`,
   },
   {
     name: 'AUB-capped',
@@ -72,7 +72,7 @@ export const kreStatList: KreStat[] = [
     dataSetName: 'digital_service_name',
     dataSetValue: 'capped_AUB',
     displayLegend: true,
-    description: `<p>Capped Active User Balances is the lesser of the Active User Balance of the app and 100,000*(the number of Active Users in an app)</p>`,
+    description: `Capped Active User Balances is the lesser of the Active User Balance of the app and 100,000*(the number of Active Users in an app)`,
   },
   {
     name: 'MAS',
@@ -85,7 +85,7 @@ export const kreStatList: KreStat[] = [
     dataSetName: 'digital_service_name',
     dataSetValue: 'MAS',
     displayLegend: true,
-    description: `<p>MAS is the number of users with at least one spend in a month</p>`,
+    description: `MAS is the number of users with at least one spend in a month`,
   },
   {
     name: 'MAE',
@@ -98,7 +98,7 @@ export const kreStatList: KreStat[] = [
     dataSetName: 'digital_service_name',
     dataSetValue: 'MAE',
     displayLegend: true,
-    description: `<p>MAE is the number of users with at least one earn in a month</p>`,
+    description: `MAE is the number of users with at least one earn in a month`,
   },
   {
     name: 'MAU',
@@ -111,7 +111,7 @@ export const kreStatList: KreStat[] = [
     dataSetName: 'digital_service_name',
     dataSetValue: 'MAU',
     displayLegend: true,
-    description: `<p>MAU is the number of users with at least one transaction in a month.</p>`,
+    description: `MAU is the number of users with at least one transaction in a month.`,
   },
   {
     name: 'DAS',
@@ -124,7 +124,7 @@ export const kreStatList: KreStat[] = [
     dataSetName: 'digital_service_name',
     dataSetValue: 'DAS',
     displayLegend: true,
-    description: `<p>DAS is the number of users with at least one spend in a day</p>`,
+    description: `DAS is the number of users with at least one spend in a day`,
   },
   {
     name: 'DAE',
@@ -137,7 +137,7 @@ export const kreStatList: KreStat[] = [
     dataSetName: 'digital_service_name',
     dataSetValue: 'DAE',
     displayLegend: true,
-    description: `<p>DAE is the number of users with at least one earn in a day</p>`,
+    description: `DAE is the number of users with at least one earn in a day`,
   },
   {
     name: 'DAU',
@@ -150,11 +150,7 @@ export const kreStatList: KreStat[] = [
     dataSetName: 'digital_service_name',
     dataSetValue: 'DAU',
     displayLegend: true,
-    description: [
-      `<p>DAU is the number of users with at least one transaction in a day.</p>`,
-      `<p>This is different from the definition used for payout calculations.</p>`,
-      `<p>Note that for DAU, 'Other' includes accounts outside the app ecosystem.</p>`,
-    ].join(''),
+    description: [`DAU is the number of users with at least one transaction in a day.`].join(''),
   },
   {
     name: 'DET',
@@ -167,7 +163,7 @@ export const kreStatList: KreStat[] = [
     dataSetName: 'digital_service_name',
     dataSetValue: 'DET',
     displayLegend: true,
-    description: `<p>DET is the number of apps with at least one earn in a day</p>`,
+    description: `DET is the number of apps with at least one earn in a day`,
   },
   {
     name: 'DST',
@@ -180,7 +176,7 @@ export const kreStatList: KreStat[] = [
     dataSetName: 'digital_service_name',
     dataSetValue: 'DST',
     displayLegend: true,
-    description: `<p>DST is the number of apps with at least one spend in a day</p>`,
+    description: `DST is the number of apps with at least one spend in a day`,
   },
   {
     name: 'TDT',
@@ -193,7 +189,7 @@ export const kreStatList: KreStat[] = [
     dataSetName: 'digital_service_name',
     dataSetValue: 'TDT',
     displayLegend: false,
-    description: `<p>All transactions for Kin on the blockchain. (Account creations, earns, spends, etc)</p>`,
+    description: `All transactions for Kin on the blockchain. (Account creations, earns, spends, etc)`,
   },
   {
     name: 'MAA',
@@ -206,7 +202,7 @@ export const kreStatList: KreStat[] = [
     dataSetName: 'digital_service_name',
     dataSetValue: 'MAA',
     displayLegend: false,
-    description: `<p>MAA is the number of apps that have users earning or spending in the last 30 days</p>`,
+    description: `MAA is the number of apps that have users earning or spending in the last 30 days`,
   },
   {
     name: 'VF',
@@ -220,8 +216,8 @@ export const kreStatList: KreStat[] = [
     dataSetValue: 'VF',
     displayLegend: false,
     description: [
-      `<p>The Volatility factor is the absolute average deviation in the closing price of Kin as listed on CoinGecko`,
-      ` over the last 30 days, divided by the average closing price over the same period.</p>`,
+      `The Volatility factor is the absolute average deviation in the closing price of Kin as listed on CoinGecko`,
+      ` over the last 30 days, divided by the average closing price over the same period.`,
     ].join(''),
   },
 ]

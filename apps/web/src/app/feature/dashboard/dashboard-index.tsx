@@ -1,6 +1,6 @@
 import { Box, Button, Container, createStyles, Stack, Text, Title } from '@mantine/core'
 import { Link } from 'react-router-dom'
-import { HomeStatsPayoutSummary, HomeStatsSummary } from './home-stats.summary'
+import { HomeStatsPayoutSummary, DashboardStatsSummary } from './dashboard-stats.summary'
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -90,7 +90,7 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
-export function HomeIndex() {
+export function DashboardIndex() {
   const { classes } = useStyles()
 
   return (
@@ -127,7 +127,7 @@ export function HomeIndex() {
           </Button>
         </div>
         <Box>
-          <HomeStatsSummary />
+          <DashboardStatsSummary />
           <HomeStatsPayoutSummary />
         </Box>
       </Stack>
