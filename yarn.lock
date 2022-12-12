@@ -7192,6 +7192,11 @@ chart.js@^4.0.1:
   resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-4.0.1.tgz#93d5d50ac222a5b3b6ac7488e82e1553ac031592"
   integrity sha512-5/8/9eBivwBZK81mKvmIwTb2Pmw4D/5h1RK9fBWZLLZ8mCJ+kfYNmV9rMrGoa5Hgy2/wVDBMLSUDudul2/9ihA==
 
+chartjs-adapter-moment@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/chartjs-adapter-moment/-/chartjs-adapter-moment-1.0.1.tgz#0f04c30d330b207c14bfb57dfaae9ce332f09102"
+  integrity sha512-Uz+nTX/GxocuqXpGylxK19YG4R3OSVf8326D+HwSTsNw1LgzyIGRo+Qujwro1wy6X+soNSnfj5t2vZ+r6EaDmA==
+
 chartjs-plugin-autocolors@^0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/chartjs-plugin-autocolors/-/chartjs-plugin-autocolors-0.0.7.tgz#841675e258272481bbc40ee1b2787619c8132f6f"
@@ -12063,6 +12068,11 @@ makeerror@1.0.x:
   integrity sha1-4BpckQnyr3lmDk6LlYd5AYT1qWw=
   dependencies:
     tmpl "1.0.x"
+
+mantine-datatable@^1.7.25:
+  version "1.7.25"
+  resolved "https://registry.yarnpkg.com/mantine-datatable/-/mantine-datatable-1.7.25.tgz#caea0834b9e6779b2ae229c29f8ee78c9de9a441"
+  integrity sha512-GOFCWqRN5ldN+Cqd+1UmCdsfp7lLmx4PKOm4VSPiDx/kGS5QhaBgc7r2N+g9weD/QJb6WVc8wbZ1MDexw0VhKw==
 
 map-cache@^0.2.0:
   version "0.2.2"

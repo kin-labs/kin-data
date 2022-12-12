@@ -4,7 +4,7 @@ import { ModalsProvider } from '@mantine/modals'
 import { NotificationsProvider } from '@mantine/notifications'
 import React, { ReactNode } from 'react'
 
-export function MantineApp({ children }: { children: ReactNode }) {
+export function AppShell({ children }: { children: ReactNode }) {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: 'mantine-color-scheme',
     defaultValue: 'dark',

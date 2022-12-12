@@ -20,11 +20,16 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
-interface FooterSimpleProps {
-  links: { icon: TablerIcon; link: string; label: string }[]
+export interface UiFooterLink {
+  icon: TablerIcon
+  link: string
+  label: string
+}
+export interface UiFooterProps {
+  links: UiFooterLink[]
 }
 
-export function UiFooter({ links }: FooterSimpleProps) {
+export function UiFooter({ links }: UiFooterProps) {
   const { classes } = useStyles()
   const items = links.map(({ icon: Icon, link, label }) => (
     <Anchor color="dimmed" href={link} key={label} target="_blank" size="sm" p={6} px={12}>

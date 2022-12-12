@@ -1,12 +1,15 @@
+import { IconBrandGithub, IconBrandTwitter, IconBug, IconGauge, IconPresentationAnalytics } from '@tabler/icons'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Navigate, Route, Routes } from 'react-router-dom'
+import { AppShell } from './app-shell'
 import { DashboardIndex, DaysIndex, DevIndex } from './feature'
 import { AppsIndex } from './feature/apps/apps-index'
 import { NotFoundIndex } from './feature/not-found/not-found-index'
 import { StatsTypesProvider, useStatsTypes } from './feature/stats/data-access/stats-types.provider'
 import { StatsIndexFeature } from './feature/stats/features/stats-index-feature'
-import { MantineApp } from './mantine-app'
 import { UiLayout } from './ui/layout/ui-layout'
+import { UiNavbarLinkProps } from './ui/layout/ui-layout-links-group'
+import { UiFooterLink } from './ui/layout/ui.footer'
 import { UiLoader } from './ui/loader/ui-loader'
 import { UiError } from './ui/loader/ui.error'
 
@@ -15,13 +18,13 @@ const queryClient = new QueryClient()
 export function App() {
   const { stats, loading, error } = useStatsTypes()
   return (
-    <MantineApp>
+    <AppShell>
       <QueryClientProvider client={queryClient}>
         <StatsTypesProvider>
           <AppRoutes />
         </StatsTypesProvider>
       </QueryClientProvider>
-    </MantineApp>
+    </AppShell>
   )
 }
 
@@ -38,13 +41,36 @@ export function AppRoutes() {
     return <UiError code={400} title="An error occurred" description={error?.toString() ?? 'Unknown error'} />
   }
 
+  const footerLinks: UiFooterLink[] = [
+    {
+      icon: IconBrandGithub,
+      link: 'https://github.com/kin-labs/kinetic',
+      label: 'GitHub',
+    },
+    {
+      icon: IconBrandTwitter,
+      link: 'https://kin.org/developerdiscord',
+      label: 'Discord',
+    },
+  ]
   const statsLinks = stats.map((s) => ({
     label: s.name,
     link: `/stats/${s.type}`,
   }))
 
+  const navLinks: UiNavbarLinkProps[] = [
+    { label: 'Dashboard', icon: IconGauge, link: '/dashboard' },
+    {
+      label: 'Statistics',
+      link: '/stats',
+      icon: IconPresentationAnalytics,
+      links: [...statsLinks],
+    },
+    { label: 'Developer', icon: IconBug, link: '/dev' },
+  ]
+
   return (
-    <UiLayout statsLinks={[...(statsLinks ?? [])]}>
+    <UiLayout footerLinks={footerLinks} navLinks={navLinks}>
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
         <Route path="/apps/*" element={<AppsIndex />} />
