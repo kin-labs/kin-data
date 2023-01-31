@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "yarn build:api && yarn build:web",
+    "build": "yarn build:web && yarn prisma generate && yarn build:api",
     "build:api": "nx build api --prod",
     "build:web": "nx build web --prod",
     "build:web-sdk": "graphql-codegen --config apps/web/src/sdk/codegen.yml",
@@ -13,7 +13,7 @@
     "docker:build": "docker build . -t kin-data/api",
     "docker:push": "docker push kin-data/api",
     "docker:run": "docker run -it -p 8000:4000 kin-data/api",
-    "start": "node dist/apps/api/main.js",
+    "start": "yarn prisma db push && node dist/apps/api/main.js",
     "test": "nx test"
   },
   "engines": {
