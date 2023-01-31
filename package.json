@@ -49,6 +49,8 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "core-js": "^3.21.1",
+    "echarts": "^5.4.1",
+    "echarts-for-react": "^3.0.2",
     "etherscan-ts": "^0.0.5",
     "framer-motion": "^7.0.0",
     "fs-extra": "^10.0.1",

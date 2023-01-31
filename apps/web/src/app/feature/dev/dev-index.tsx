@@ -1,14 +1,18 @@
 import { Button, Group, Stack, Text } from '@mantine/core'
+import { IconApps, IconTransferIn, IconUsers, IconWallet } from '@tabler/icons'
 import { ChartData } from 'chart.js'
 import React, { useState } from 'react'
 import { Link, Navigate, Route, Routes } from 'react-router-dom'
 import { StatRange } from '../../../sdk'
 import { ChartLinePage } from '../../ui/chart/chart-line-page'
+import { DevDashboardStatsRow } from './dev-dashboard-stats.row'
+import { DevDashboardTransactionHistory } from './dev-dashboard-transaction.history'
 
 export function DevIndex() {
   const pages = [
     { label: 'Dev 1', path: 'dev1' },
     { label: 'Dev 2', path: 'dev2' },
+    { label: 'DevDashboard', path: 'dashboard' },
   ]
   return (
     <Stack spacing={16}>
@@ -23,6 +27,7 @@ export function DevIndex() {
         <Route index element={<Navigate to="dev1" replace />} />
         <Route path="dev1" element={<Dev1 />} />
         <Route path="dev2" element={<Dev2 />} />
+        <Route path="dashboard" element={<DevDashboard />} />
       </Routes>
     </Stack>
   )
@@ -226,4 +231,47 @@ function Dev1() {
 
 function Dev2() {
   return <Text>Dev2</Text>
+}
+
+function DevDashboard() {
+  return (
+    <Stack>
+      <DevDashboardStatsRow
+        data={[
+          { title: 'Kin Transactions', icon: IconTransferIn, value: '613 Thousand', subtitle: 'Per day' },
+          { title: 'Wallets Created', icon: IconWallet, value: '20 Thousand', subtitle: 'Per day' },
+          { title: 'Active User Balance', icon: IconUsers, value: '78 Billion', subtitle: 'Per day in Kin' },
+          { title: 'Top Apps Balance', icon: IconApps, value: '76 Billion', subtitle: 'In Kin' },
+        ]}
+      />
+      <DevDashboardTransactionHistory />
+      <DevDashboardActiveUsers />
+      <DevDashboardEcosystem />
+      <DevDashboardEconomy />
+    </Stack>
+  )
+}
+
+function DevDashboardActiveUsers() {
+  return (
+    <Stack>
+      <Text>DevDashboardActiveUsers</Text>
+    </Stack>
+  )
+}
+
+function DevDashboardEcosystem() {
+  return (
+    <Stack>
+      <Text>DevDashboardEcosystem</Text>
+    </Stack>
+  )
+}
+
+function DevDashboardEconomy() {
+  return (
+    <Stack>
+      <Text>DevDashboardEconomy</Text>
+    </Stack>
+  )
 }
