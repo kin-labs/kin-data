@@ -37,6 +37,8 @@ model dailySummaryApp {
   date                   DateTime? @db.Date
   index                  Int?
   name                   String?
+  transactionFees        Float?
+  transactionFeesUsd     Float?
   totalDailyTransactions Int?
   totalDailyAmount       Float?
   totalDailyAmountUsd    Float?
@@ -61,6 +63,8 @@ model dailySummaryApp {
 model dailySummaryEcosystem {
   date                   DateTime? @db.Date
   monthlyActiveApps      Int?
+  transactionFees        Float?
+  transactionFeesUsd     Float?
   totalDailyTransactions Int?
   totalDailyAmount       Float?
   totalDailyAmountUsd    Float?
@@ -104,21 +108,4 @@ model kreSummary {
   monthlyActiveSpenders   Int?
   monthlyActiveUsers      Int?
   id                      Int       @id @default(autoincrement())
-}
-
-model dailySummaryApps {
-  date                   DateTime? @db.Date
-  index                  Int?
-  name                   String?
-  totalDailyTransactions Int?
-  dailyEarnTransactions  Int?
-  dailySpendTransactions Int?
-  dailyPeerTransactions  Int?
-  dailyActiveUsers       Int?
-  dailyActiveEarners     Int?
-  dailyActiveSpenders    Int?
-  monthlyActiveUsers     Int?
-  monthlyActiveEarners   Int?
-  monthlyActiveSpenders  Int?
-  id                     Int       @id @default(autoincrement())
 }
