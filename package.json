@@ -23,7 +23,6 @@
   "dependencies": {
     "@ardatan/aggregate-error": "^0.0.6",
     "@emotion/react": "^11.10.4",
-    "@google-cloud/bigquery": "^5.11.0",
     "@kin-kinetic/solana": "^1.0.0-rc.9",
     "@kurkle/color": "^0.2.1",
     "@mantine/core": "^5.8.3",
