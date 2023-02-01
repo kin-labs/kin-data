@@ -1,5 +1,4 @@
-import { ApiEcosystemDataAccessService } from '@kin-data/api/ecosystem/data-access'
-import { App } from '@kin-data/api/stats/data-access'
+import { ApiEcosystemDataAccessService, App } from '@kin-data/api/ecosystem/data-access'
 import { Args, Int, Query, Resolver } from '@nestjs/graphql'
 
 @Resolver()
